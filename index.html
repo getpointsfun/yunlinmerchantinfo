@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>雲林好食宴 · 在地好店地圖</title>
+<meta name="description" content="2026 風沙退場系列活動－雲林好食宴。逛 6 家、集 6 點，免費吃 Buffet。全縣 46 家合作店家互動地圖。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#5B4470; --plum-d:#42305A; --plum-l:#7A5A96;
+  --teal:#3D93AE; --teal-l:#7FC3D8;
+  --rose:#D9466F; --rose-l:#F2A8BF;
+  --gold:#D49A2C; --gold-l:#F0C244;
+  --terra:#C97B5A; --indigo:#5B6FA8;
+  --blush:#F2DCE0; --paper:#FDF8EE; --mist:#EBE6EE;
+  --ink:#3D2E4A; --soft:#887894; --line:#E0D6E4;
+  --display:"LXGW WenKai TC","Noto Sans TC",system-ui,sans-serif;
+  --ui:"Noto Sans TC",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:var(--ui); color:var(--ink); background:var(--paper);
+  background-image:
+    radial-gradient(ellipse at 6% 2%, #FBEAEE 0 24%, transparent 24.5%),
+    radial-gradient(ellipse at 96% 98%, #E2EFF4 0 20%, transparent 20.5%);
+  background-attachment:fixed; min-height:100vh;
+}
+
+/* ─── header ─── */
+header{
+  background:var(--plum); padding:22px 16px 20px; text-align:center;
+  position:relative; overflow:hidden;
+}
+header::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,
+    rgba(127,195,216,.20) 0 4px, transparent 4px 11px);
+}
+header::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,
+    rgba(242,220,224,.16) 0 3px, transparent 3px 15px);
+  transform:translateX(7px);
+}
+.hd{position:relative;z-index:2;max-width:680px;margin:0 auto}
+.eyebrow{
+  display:inline-block;border:1.5px solid rgba(255,255,255,.42);
+  border-radius:999px;padding:3px 16px;font-size:11.5px;font-weight:700;
+  letter-spacing:.1em;color:rgba(255,255,255,.92);margin-bottom:12px;
+}
+.logo{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sub{
+  margin-top:11px;font-size:14px;color:rgba(255,255,255,.86);
+  font-weight:500;letter-spacing:.03em;font-family:var(--display);
+}
+.sub b{color:var(--gold-l);font-weight:700;font-size:1.12em}
+
+/* ─── filter ─── */
+.legend{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
+  padding:16px 14px 0;max-width:900px;margin:0 auto}
+.chip{
+  cursor:pointer;border:2px solid var(--line);background:#fff;
+  border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700;
+  color:var(--soft);display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--ui);
+  transition:transform .15s,box-shadow .15s,border-color .15s,color .15s;
+}
+.chip:hover{transform:translateY(-2px)}
+.chip:focus-visible{outline:3px solid var(--teal-l);outline-offset:2px}
+.chip .dot{width:9px;height:9px;border-radius:50%;background:currentColor}
+.chip.on{color:#fff;border-color:transparent;box-shadow:0 3px 11px rgba(91,68,112,.22)}
+.chip.on .dot{background:rgba(255,255,255,.88)}
+.chip[data-c="全部"].on{background:var(--plum)}
+.chip[data-c="餐飲美食"].on{background:var(--rose)}
+.chip[data-c="咖啡甜點"].on{background:var(--gold)}
+.chip[data-c="農漁特產"].on{background:var(--teal)}
+.chip[data-c="文創手作"].on{background:var(--plum-l)}
+.chip[data-c="伴手禮"].on{background:var(--terra)}
+.chip[data-c="體驗觀光"].on{background:var(--indigo)}
+.count{font-size:12px;color:var(--soft);text-align:center;padding:9px 0 0}
+
+/* ─── layout ─── */
+.wrap{max-width:1200px;margin:0 auto;padding:10px 16px 42px;
+  display:grid;grid-template-columns:minmax(0,1fr) 348px;gap:22px;align-items:start}
+@media(max-width:900px){.wrap{grid-template-columns:1fr;gap:16px}}
+
+/* ─── map ─── */
+.mapcard{
+  background:#fff;border:3px solid var(--plum);border-radius:24px;
+  padding:12px 8px 6px;box-shadow:0 8px 26px rgba(91,68,112,.13);
+  position:relative;overflow:hidden;
+}
+.mapcard::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:7px;
+  background:repeating-linear-gradient(90deg,
+    var(--plum) 0 7px, var(--teal) 7px 12px, var(--blush) 12px 16px);
+}
+.hint{text-align:center;font-size:12.5px;color:var(--soft);padding:8px 0 2px;
+  font-family:var(--display)}
+svg#map{width:100%;height:auto;display:block;touch-action:manipulation}
+
+.tw{transition:opacity .2s}
+.twlabel{font-size:12.5px;font-weight:700;fill:#7A6A86;pointer-events:none;
+  font-family:var(--display)}
+.twlabel.big{font-size:14.5px;fill:#54406A}
+.twlabel.halo{fill:none;stroke:#fff;stroke-width:3.4px;stroke-linejoin:round}
+.mtitle{font-size:27px;font-weight:700;fill:#5B4470;letter-spacing:.06em;
+  font-family:var(--display)}
+.msub{font-size:14px;font-weight:700;fill:#B07A4A;letter-spacing:.14em;
+  font-family:var(--display)}
+.mnote{font-size:13px;font-weight:700;fill:#A08868;font-family:var(--display)}
+
+.pin{cursor:pointer;transition:opacity .2s}
+.pin .pin-bg,.pin .pin-halo,.pin .pin-emoji,.pin .pin-shadow{
+  transition:transform .18s,opacity .18s;transform-origin:0 15px}
+.pin:hover .pin-bg{transform:scale(1.2)}
+.pin:hover .pin-emoji{transform:scale(1.16)}
+.pin:hover .pin-halo{opacity:.28;transform:scale(1.12)}
+.pin:hover .pin-shadow{transform:scale(1.15)}
+.pin:focus-visible{outline:none}
+.pin:focus-visible .pin-bg{stroke-width:4.4}
+.pin.sel .pin-halo{opacity:.4;transform:scale(1.3)}
+.pin.sel .pin-bg{transform:scale(1.28)}
+.pin.sel .pin-emoji{transform:scale(1.24)}
+.pin.sel .pin-shadow{transform:scale(1.25)}
+.pin.off{opacity:.11;pointer-events:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ─── side ─── */
+.side{display:flex;flex-direction:column;gap:14px;min-width:0}
+
+.howto{
+  background:var(--plum);color:#fff;border-radius:18px;padding:15px 16px;
+  position:relative;overflow:hidden;
+}
+.howto::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,
+    rgba(127,195,216,.15) 0 3px, transparent 3px 12px)}
+.howto h3{position:relative;z-index:1;font-size:14px;font-weight:700;
+  font-family:var(--display);margin-bottom:10px;letter-spacing:.04em}
+.howto ol{position:relative;z-index:1;list-style:none;counter-reset:s}
+.howto li{
+  counter-increment:s;display:flex;gap:9px;align-items:flex-start;
+  font-size:12.5px;line-height:1.6;margin-bottom:8px;
+}
+.howto li:last-child{margin-bottom:0}
+.howto li::before{
+  content:counter(s);flex-shrink:0;width:19px;height:19px;border-radius:50%;
+  background:var(--gold-l);color:var(--plum-d);font-size:11px;font-weight:700;
+  display:grid;place-items:center;margin-top:1px;
+}
+.howto b{color:var(--gold-l)}
+.howto .nb{
+  position:relative;z-index:1;margin-top:11px;padding-top:10px;
+  border-top:1px dashed rgba(255,255,255,.28);
+  font-size:11.5px;color:rgba(255,255,255,.82);line-height:1.65;
+}
+
+/* coin panel */
+.coins{background:#fff;border:2.5px solid var(--gold);border-radius:20px;overflow:hidden}
+.coins h3{background:var(--gold);color:#fff;font-size:13.5px;font-weight:700;
+  padding:10px 16px;font-family:var(--display);letter-spacing:.03em}
+.coins .cb{padding:13px 16px 15px}
+.coins .row{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px}
+.coins .row:last-child{margin-bottom:0}
+.coins .co{flex-shrink:0;width:26px;height:26px;border-radius:50%;
+  background:#FDF3E0;border:1.8px solid var(--gold);color:#A8741A;
+  display:grid;place-items:center;font-size:11px;font-weight:700}
+.coins .co.spend{background:#FBE8EE;border-color:var(--rose);color:var(--rose)}
+.coins .co.event{background:#E6F2F6;border-color:var(--teal);color:var(--teal);font-size:13px}
+.coins .rt{display:block;font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.5}
+.coins .rd{display:block;font-size:11px;color:var(--soft);margin-top:1px;line-height:1.55}
+.coins .sum{margin-top:11px;padding:9px 12px;background:#FDF3E0;border-radius:11px;
+  font-size:11.5px;color:#6B4D14;line-height:1.7;text-align:center}
+.coins .sum b{color:#A8741A}
+
+.detail{background:#fff;border:2.5px solid var(--line);border-radius:20px;
+  overflow:hidden;box-shadow:0 6px 20px rgba(91,68,112,.10)}
+.detail[hidden]{display:none}
+.dhead{padding:16px 18px 12px;position:relative}
+.dtag{display:inline-block;color:#fff;font-size:11px;font-weight:700;
+  padding:3px 11px;border-radius:999px;margin-bottom:8px}
+.dname{font-size:20px;font-weight:700;line-height:1.3;padding-right:34px;
+  font-family:var(--display)}
+.dmeta{font-size:12px;color:var(--soft);margin-top:6px;line-height:1.7}
+.maplink{display:inline-flex;align-items:center;gap:4px;color:var(--teal);
+  font-weight:700;text-decoration:none;border-bottom:1.5px solid transparent}
+.maplink:hover{border-bottom-color:var(--teal)}
+.maplink:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:3px}
+.dclose{position:absolute;top:14px;right:14px;width:28px;height:28px;border:none;
+  border-radius:50%;background:var(--mist);color:var(--soft);cursor:pointer;
+  font-size:15px;line-height:1;display:grid;place-items:center}
+.dclose:hover{background:var(--line)}
+.dbody{padding:0 18px 18px;font-size:13px;line-height:1.75}
+.drow{margin-bottom:9px}
+.dlabel{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:2px}
+.promo{background:#FDF3E0;border:2px dashed var(--gold);border-radius:13px;
+  padding:11px 13px;margin-top:11px}
+.promo .plabel{font-size:11px;font-weight:700;color:#A8741A;margin-bottom:5px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px}
+.promo .cost{background:var(--gold);color:#fff;border-radius:999px;
+  padding:2px 9px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.promo p{font-size:13px;color:#6B4D14;line-height:1.7}
+.promo .howcoin{margin-top:8px;padding-top:8px;border-top:1px dashed #E0C58A;
+  font-size:10.5px;color:#8A6A22;line-height:1.6}
+
+.empty{background:#fff;border:2.5px dashed var(--line);border-radius:20px;
+  padding:24px 18px;text-align:center}
+.empty .em{font-size:38px;line-height:1;margin-bottom:8px}
+.empty h3{font-size:15.5px;font-weight:700;color:var(--plum);font-family:var(--display)}
+.empty p{font-size:12px;color:var(--soft);margin-top:4px}
+
+.listwrap{background:#fff;border:2.5px solid var(--line);border-radius:20px;overflow:hidden}
+.lhead{padding:11px 16px;background:var(--plum);color:#fff;font-size:13.5px;
+  font-weight:700;display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--display);letter-spacing:.03em}
+.lhead span{font-size:11px;color:rgba(255,255,255,.72);font-weight:500;font-family:var(--ui)}
+.list{max-height:480px;overflow-y:auto}
+@media(max-width:900px){.list{max-height:none}}
+.li{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;
+  width:100%;text-align:left;border:none;background:none;font:inherit;
+  border-bottom:1px solid #F2EDF4;transition:background .15s}
+.li:last-child{border-bottom:none}
+.li:hover{background:#FBF7FC}
+.li.sel{background:#F6ECF2}
+.li[hidden]{display:none}
+.li .ic{width:34px;height:34px;border-radius:50%;background:#fff;
+  border:2.2px solid var(--line);display:grid;place-items:center;
+  font-size:16px;flex-shrink:0}
+.li .txt{flex:1;min-width:0}
+.li .n{display:block;font-size:13.5px;font-weight:700;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.li .m{display:block;font-size:11px;color:var(--soft);margin-top:1px}
+.li .gift{font-size:13px;flex-shrink:0}
+.li .ar{color:var(--line);font-size:15px;flex-shrink:0}
+
+footer{text-align:center;font-size:11.5px;color:var(--soft);
+  padding:0 16px 32px;line-height:1.9}
+footer b{color:var(--plum)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <div class="eyebrow">2026 風沙退場系列活動</div>
+
+    <!-- striped display title, echoing the 風沙退場 logo -->
+    <svg class="logo" viewBox="0 0 520 108" xmlns="http://www.w3.org/2000/svg"
+         role="img" aria-label="雲林好食宴 在地好店地圖">
+      <defs>
+        <pattern id="tstripe" width="8" height="10" patternUnits="userSpaceOnUse">
+          <rect width="8" height="10" fill="#FFFFFF"/>
+          <rect width="2.6" height="10" fill="#7FC3D8"/>
+          <rect x="4.4" width="1.7" height="10" fill="#F2DCE0"/>
+        </pattern>
+      </defs>
+      <text x="260" y="58" text-anchor="middle"
+            font-family="LXGW WenKai TC, Noto Sans TC, sans-serif"
+            font-size="60" font-weight="700" letter-spacing="7"
+            fill="url(#tstripe)" stroke="#2E2038" stroke-width="1.6"
+            paint-order="stroke">雲林好食宴</text>
+      <text x="260" y="93" text-anchor="middle"
+            font-family="LXGW WenKai TC, Noto Sans TC, sans-serif"
+            font-size="22" font-weight="700" letter-spacing="9"
+            fill="#F0C244">在地好店地圖</text>
+    </svg>
+
+    <p class="sub">逛 <b>6</b> 家、集 <b>6</b> 點 · 全縣 <b id="total">46</b> 家合作店家等你來</p>
+  </div>
+</header>
+
+<nav class="legend" aria-label="店家類型篩選">
+  <button class="chip on" data-c="全部"><span class="dot"></span>全部</button>
+  <button class="chip" data-c="餐飲美食" style="color:var(--rose)"><span class="dot"></span>餐飲美食</button>
+  <button class="chip" data-c="咖啡甜點" style="color:var(--gold)"><span class="dot"></span>咖啡甜點</button>
+  <button class="chip" data-c="農漁特產" style="color:var(--teal)"><span class="dot"></span>農漁特產</button>
+  <button class="chip" data-c="文創手作" style="color:var(--plum-l)"><span class="dot"></span>文創手作</button>
+  <button class="chip" data-c="伴手禮" style="color:var(--terra)"><span class="dot"></span>伴手禮</button>
+  <button class="chip" data-c="體驗觀光" style="color:var(--indigo)"><span class="dot"></span>體驗觀光</button>
+</nav>
+<p class="count" id="count">顯示全部 46 家店</p>
+
+<div class="wrap">
+
+  <div class="mapcard">
+    <p class="hint">👆 點地圖上的圖釘，看店家資訊與可兌換的優惠</p>
+    <svg id="map" viewBox="0 0 790 560" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="雲林縣在地好店分布地圖">
+      <g id="deco">
+    <path d="M36,206 q9,-6 18,0 t18,0" stroke="#A9D3E2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="M26,244 q9,-6 18,0 t18,0" stroke="#A9D3E2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="M40,292 q9,-6 18,0 t18,0" stroke="#A9D3E2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="M28,338 q9,-6 18,0 t18,0" stroke="#A9D3E2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="M38,384 q9,-6 18,0 t18,0" stroke="#A9D3E2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="M24,424 q9,-6 18,0 t18,0" stroke="#A9D3E2" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+    <g transform="translate(50,158)">
+      <path d="M-13,4 L13,4 L9,11 L-9,11 Z" fill="#EDF3F6" stroke="#8FBDD0" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M0,4 L0,-10 L10,-2 Z" fill="#F2A8BF" stroke="#D9466F" stroke-width="1.6" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <path d="M648,214 L676,172 L704,214 Z" fill="#BFD2C4" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M678,228 L712,178 L746,228 Z" fill="#A9C4B2" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M704,180 L716,180 L712,172 Z" fill="#FFFFFF"/>
+    </g>
+    <g>
+      <path d="M664,470 L692,428 L720,470 Z" fill="#BFD2C4" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M692,482 L726,434 L760,482 Z" fill="#A9C4B2" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(676,286) scale(1)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#9CC095"/><circle cx="-6" cy="4" r="6.5" fill="#9CC095"/><circle cx="6" cy="4" r="6.5" fill="#9CC095"/></g>
+    <g transform="translate(720,318) scale(0.85)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#8FB889"/><circle cx="-6" cy="4" r="6.5" fill="#8FB889"/><circle cx="6" cy="4" r="6.5" fill="#8FB889"/></g>
+    <g transform="translate(736,262) scale(0.9)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#A8CCA0"/><circle cx="-6" cy="4" r="6.5" fill="#A8CCA0"/><circle cx="6" cy="4" r="6.5" fill="#A8CCA0"/></g>
+    <g transform="translate(700,360) scale(0.8)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#9CC095"/><circle cx="-6" cy="4" r="6.5" fill="#9CC095"/><circle cx="6" cy="4" r="6.5" fill="#9CC095"/></g>
+    <g transform="translate(748,352) scale(0.72)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#8FB889"/><circle cx="-6" cy="4" r="6.5" fill="#8FB889"/><circle cx="6" cy="4" r="6.5" fill="#8FB889"/></g>
+    <g transform="translate(660,330) scale(0.7)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#A8CCA0"/><circle cx="-6" cy="4" r="6.5" fill="#A8CCA0"/><circle cx="6" cy="4" r="6.5" fill="#A8CCA0"/></g>
+    <g transform="translate(84,496) scale(0.9)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#9CC095"/><circle cx="-6" cy="4" r="6.5" fill="#9CC095"/><circle cx="6" cy="4" r="6.5" fill="#9CC095"/></g>
+    <g transform="translate(122,510) scale(0.72)"><rect x="-2" y="4" width="4" height="9" rx="1.6" fill="#B08A64"/><circle cx="0" cy="0" r="9" fill="#A8CCA0"/><circle cx="-6" cy="4" r="6.5" fill="#A8CCA0"/><circle cx="6" cy="4" r="6.5" fill="#A8CCA0"/></g>
+    <g transform="translate(694,110) scale(1.0)"><circle cx="-13" cy="2" r="9" fill="#EEF4F8"/><circle cx="0" cy="-3" r="12" fill="#EEF4F8"/><circle cx="13" cy="2" r="9" fill="#EEF4F8"/><rect x="-13" y="2" width="26" height="9" rx="4.5" fill="#EEF4F8"/></g>
+    <g transform="translate(604,74) scale(0.78)"><circle cx="-13" cy="2" r="9" fill="#EEF4F8"/><circle cx="0" cy="-3" r="12" fill="#EEF4F8"/><circle cx="13" cy="2" r="9" fill="#EEF4F8"/><rect x="-13" y="2" width="26" height="9" rx="4.5" fill="#EEF4F8"/></g>
+    <g transform="translate(158,66) scale(0.85)"><circle cx="-13" cy="2" r="9" fill="#EEF4F8"/><circle cx="0" cy="-3" r="12" fill="#EEF4F8"/><circle cx="13" cy="2" r="9" fill="#EEF4F8"/><rect x="-13" y="2" width="26" height="9" rx="4.5" fill="#EEF4F8"/></g>
+    <g transform="translate(276,58) scale(0.66)"><circle cx="-13" cy="2" r="9" fill="#EEF4F8"/><circle cx="0" cy="-3" r="12" fill="#EEF4F8"/><circle cx="13" cy="2" r="9" fill="#EEF4F8"/><rect x="-13" y="2" width="26" height="9" rx="4.5" fill="#EEF4F8"/></g>
+    <g transform="translate(730,78)">
+      <circle r="17" fill="#F9E3A6"/><circle r="11" fill="#F0C244"/>
+    </g>
+    <g transform="translate(112,62)">
+      <path d="M-96,-36 q8,-14 24,-11 q14,-12 32,-5 q20,-11 40,-2 q22,-5 34,10
+               q16,2 14,18 q6,16 -10,24 q2,16 -18,18 q-14,10 -32,4 q-20,9 -40,2
+               q-20,4 -32,-9 q-18,-1 -18,-17 q-8,-14 6,-32 Z"
+            fill="#FBEFD2" stroke="#E8CE90" stroke-width="2.4"/>
+      <text x="0" y="-7" text-anchor="middle" class="mtitle">雲林縣</text>
+      <text x="0" y="16" text-anchor="middle" class="msub">在地好店地圖</text>
+    </g>
+    <g transform="translate(586,516)">
+      <text x="0" y="0" text-anchor="middle" class="mnote">雲林，不只有美景</text>
+      <text x="0" y="19" text-anchor="middle" class="mnote">還有好多好味道 ♥</text>
+    </g>
+    <g transform="translate(52,524)">
+      <circle r="18" fill="#fff" stroke="#E8CE90" stroke-width="2.4"/>
+      <path d="M0,-11 L4.5,2 L0,-1 L-4.5,2 Z" fill="#D9466F"/>
+      <path d="M0,11 L4.5,-2 L0,1 L-4.5,-2 Z" fill="#C8BCD2"/>
+      <text y="-21" text-anchor="middle" class="mnote" font-size="10">N</text>
+    </g>
+    <g>
+      <path d="M 390.0,462.5 C 407.0,462.9 425.2,465.4 438.1,468.9 C 451.1,472.4 462.5,477.9 467.6,483.2 C 472.6,488.5 472.7,495.2 468.5,500.9 C 464.3,506.6 455.7,514.0 442.7,517.3 C 429.6,520.6 407.0,521.0 390.0,520.8 C 373.0,520.6 354.4,519.0 340.4,515.8 C 326.4,512.6 311.2,507.1 305.8,501.5 C 300.3,496.0 302.7,488.6 307.7,482.7 C 312.7,476.8 322.2,469.4 335.9,466.0 C 349.6,462.7 373.0,462.0 390.0,462.5 Z" fill="#F7E4EC"
+            stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+      <text x="336" y="497" text-anchor="middle" class="twlabel big halo">無店面</text>
+      <text x="336" y="497" text-anchor="middle" class="twlabel big" fill="#B33456">無店面</text>
+    </g>
+      </g>
+      <g id="towns">
+    <path class="tw" d="M 142.0,109.1 C 154.5,108.7 171.5,110.5 181.0,116.4 C 190.5,122.2 196.7,134.4 199.1,144.3 C 201.5,154.2 201.3,166.9 195.4,175.6 C 189.4,184.3 175.1,194.2 163.2,196.6 C 151.3,199.1 134.9,194.4 123.8,190.3 C 112.7,186.3 104.3,179.9 96.6,172.1 C 88.9,164.3 76.2,152.2 77.7,143.3 C 79.3,134.5 95.1,124.7 105.8,119.0 C 116.6,113.3 129.5,109.6 142.0,109.1 Z" fill="#AFD2E6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 252.0,103.3 C 261.8,103.4 273.3,107.9 281.0,112.9 C 288.7,118.0 296.9,126.3 298.2,133.6 C 299.5,140.9 293.7,149.5 288.8,156.6 C 283.9,163.8 278.0,173.2 269.0,176.6 C 260.0,179.9 244.7,179.7 234.9,176.7 C 225.2,173.7 214.6,165.8 210.6,158.7 C 206.5,151.7 208.8,142.0 210.7,134.3 C 212.7,126.6 215.4,117.4 222.3,112.3 C 229.2,107.1 242.2,103.2 252.0,103.3 Z" fill="#DCD2EA" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 332.0,98.8 C 340.8,98.0 353.4,100.2 361.1,104.7 C 368.9,109.2 377.4,118.4 378.3,125.6 C 379.2,132.7 371.5,141.0 366.4,147.6 C 361.2,154.2 355.6,162.3 347.4,165.2 C 339.1,168.0 325.7,167.3 316.9,164.7 C 308.0,162.0 297.8,155.5 294.1,149.2 C 290.4,142.9 292.5,133.4 294.8,126.9 C 297.2,120.3 302.1,114.5 308.3,109.8 C 314.5,105.2 323.2,99.7 332.0,98.8 Z" fill="#D6E2C8" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 418.0,93.5 C 430.4,92.4 449.8,96.8 458.6,103.6 C 467.3,110.5 467.7,123.9 470.4,134.7 C 473.1,145.4 480.4,160.1 474.7,168.0 C 469.0,175.8 449.2,178.6 436.3,181.8 C 423.4,185.0 407.8,190.4 397.3,187.1 C 386.8,183.9 379.8,171.5 373.1,162.6 C 366.4,153.6 355.2,142.2 357.1,133.5 C 358.9,124.7 373.9,116.6 384.1,110.0 C 394.3,103.3 405.6,94.5 418.0,93.5 Z" fill="#B6DCCE" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 508.0,119.2 C 516.1,119.2 525.6,121.4 532.3,125.3 C 539.0,129.1 545.9,135.8 548.2,142.4 C 550.5,149.1 550.6,159.7 546.1,165.3 C 541.6,170.9 529.5,174.3 521.0,176.1 C 512.5,177.9 502.9,178.0 495.1,175.9 C 487.3,173.8 479.4,169.0 474.2,163.3 C 469.0,157.7 462.3,148.3 463.9,141.9 C 465.4,135.5 476.1,128.8 483.5,125.0 C 490.8,121.3 499.9,119.1 508.0,119.2 Z" fill="#E2E4C6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 586.0,142.8 C 594.7,142.7 605.2,147.6 612.5,152.4 C 619.8,157.3 628.8,165.0 629.8,171.8 C 630.7,178.5 623.0,186.4 618.3,193.1 C 613.5,199.7 608.8,209.0 601.1,211.6 C 593.4,214.2 580.9,211.6 572.1,208.9 C 563.4,206.2 552.6,201.5 548.6,195.5 C 544.6,189.4 546.3,179.7 548.2,172.6 C 550.1,165.5 553.8,158.0 560.1,153.0 C 566.4,148.0 577.3,142.9 586.0,142.8 Z" fill="#C8DCC8" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 108.0,212.5 C 118.0,212.2 131.7,214.4 138.8,219.9 C 145.8,225.4 148.6,236.8 150.1,245.5 C 151.6,254.2 152.4,265.2 147.8,272.1 C 143.2,279.0 131.6,284.7 122.6,287.1 C 113.6,289.5 102.6,289.0 93.7,286.4 C 84.7,283.9 73.5,278.7 68.8,271.8 C 64.1,265.0 63.8,253.8 65.4,245.4 C 67.1,237.0 71.6,226.9 78.7,221.4 C 85.8,215.9 98.0,212.7 108.0,212.5 Z" fill="#E8DCC6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 192.0,192.0 C 200.6,193.0 207.8,201.3 214.7,206.3 C 221.7,211.3 231.7,215.8 233.7,222.1 C 235.7,228.4 230.9,237.4 226.5,243.9 C 222.1,250.5 215.2,259.3 207.3,261.5 C 199.3,263.8 187.6,260.0 178.7,257.3 C 169.7,254.7 157.3,251.5 153.6,245.7 C 149.8,240.0 154.5,230.5 156.1,222.9 C 157.7,215.4 157.0,205.5 163.0,200.3 C 169.0,195.2 183.4,191.0 192.0,192.0 Z" fill="#DEE2D6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 268.0,186.3 C 277.4,186.2 289.3,184.8 296.6,188.7 C 303.9,192.6 311.7,202.9 312.0,209.8 C 312.2,216.7 303.2,223.5 298.3,230.0 C 293.5,236.5 290.4,245.8 282.9,248.8 C 275.5,251.7 262.1,250.4 253.6,247.7 C 245.0,245.1 235.1,238.8 231.7,232.7 C 228.4,226.6 232.2,218.4 233.6,211.2 C 235.0,203.9 234.4,193.5 240.1,189.4 C 245.8,185.3 258.6,186.4 268.0,186.3 Z" fill="#EDD2E0" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 372.0,205.1 C 390.4,206.2 411.2,206.1 423.8,213.8 C 436.4,221.6 444.4,238.3 447.4,251.6 C 450.5,264.9 450.2,282.4 442.0,293.5 C 433.8,304.7 415.0,312.6 398.3,318.3 C 381.5,324.0 357.7,331.8 341.3,327.8 C 324.9,323.8 309.1,307.4 299.9,294.5 C 290.7,281.6 283.9,264.7 286.1,250.2 C 288.4,235.7 299.1,215.0 313.4,207.5 C 327.8,200.0 353.6,204.1 372.0,205.1 Z" fill="#F5DCA6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 516.0,205.0 C 529.0,204.3 546.5,207.5 557.2,214.1 C 567.8,220.8 577.8,233.9 580.1,244.8 C 582.4,255.8 577.8,269.9 570.9,279.7 C 563.9,289.6 551.2,300.1 538.4,304.0 C 525.6,307.8 507.2,306.7 494.2,302.7 C 481.2,298.7 466.4,289.6 460.3,280.1 C 454.3,270.6 454.7,256.0 457.9,245.7 C 461.0,235.3 469.3,225.0 479.0,218.2 C 488.7,211.4 503.0,205.7 516.0,205.0 Z" fill="#F4CEDA" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 592.0,284.0 C 601.4,284.4 612.0,285.4 619.3,289.7 C 626.6,294.0 633.4,302.2 635.6,309.8 C 637.8,317.3 637.7,328.8 632.7,335.0 C 627.8,341.2 615.1,344.7 605.9,346.9 C 596.7,349.1 585.7,350.6 577.5,348.2 C 569.3,345.8 561.4,338.8 556.8,332.4 C 552.2,326.1 549.1,317.5 550.1,310.0 C 551.1,302.6 555.6,292.0 562.6,287.6 C 569.6,283.3 582.6,283.7 592.0,284.0 Z" fill="#D2E2C6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 100.0,309.7 C 109.7,310.4 119.0,313.0 127.2,317.8 C 135.4,322.6 147.1,330.4 149.3,338.4 C 151.5,346.5 146.0,359.0 140.3,366.2 C 134.5,373.4 124.1,378.8 114.8,381.4 C 105.6,384.1 94.1,384.5 84.9,382.0 C 75.8,379.4 64.4,373.3 59.7,366.2 C 55.0,359.1 55.2,348.1 56.7,339.4 C 58.2,330.6 61.6,318.6 68.8,313.7 C 76.0,308.7 90.3,309.0 100.0,309.7 Z" fill="#CEE0C4" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 186.0,288.6 C 195.4,289.4 204.7,294.9 211.5,299.8 C 218.3,304.8 224.9,311.4 226.9,318.3 C 228.8,325.2 228.0,335.4 223.4,341.2 C 218.8,346.9 207.9,350.1 199.2,352.8 C 190.4,355.4 180.2,358.4 171.0,356.9 C 161.7,355.3 148.0,350.0 143.4,343.6 C 138.8,337.1 141.5,326.2 143.5,318.0 C 145.4,309.9 148.2,299.8 155.3,294.9 C 162.3,289.9 176.6,287.7 186.0,288.6 Z" fill="#D8E0C6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 266.0,302.2 C 275.2,302.3 284.8,308.8 293.2,313.9 C 301.7,319.0 313.9,325.0 316.8,332.8 C 319.6,340.6 316.1,353.6 310.2,360.5 C 304.4,367.5 291.7,371.9 281.6,374.5 C 271.5,377.1 258.3,379.1 249.6,376.2 C 240.9,373.4 233.4,364.2 229.1,357.1 C 224.8,350.1 222.5,341.4 224.0,334.0 C 225.5,326.7 231.1,318.5 238.1,313.2 C 245.1,307.9 256.8,302.1 266.0,302.2 Z" fill="#F0DCC2" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 452.0,318.2 C 464.0,317.3 480.8,316.3 491.0,321.5 C 501.1,326.8 511.3,340.0 512.6,349.6 C 514.0,359.2 506.1,371.5 499.0,379.3 C 492.0,387.2 480.8,394.2 470.0,396.9 C 459.3,399.7 444.6,399.3 434.4,396.1 C 424.2,392.9 414.4,385.1 408.8,377.6 C 403.2,370.1 399.3,359.4 400.9,350.9 C 402.6,342.5 410.3,332.4 418.8,326.9 C 427.3,321.5 440.0,319.1 452.0,318.2 Z" fill="#F0CEB0" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 598.0,344.4 C 611.4,345.2 626.4,357.4 635.9,365.9 C 645.3,374.4 652.7,385.2 654.7,395.6 C 656.7,406.0 653.4,417.9 647.8,428.3 C 642.3,438.7 633.6,452.9 621.3,458.1 C 609.0,463.3 588.4,463.4 574.1,459.5 C 559.8,455.5 542.5,445.3 535.5,434.4 C 528.5,423.6 528.7,406.4 532.0,394.2 C 535.4,382.0 544.4,369.4 555.4,361.1 C 566.4,352.8 584.6,343.6 598.0,344.4 Z" fill="#CCE0C2" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 96.0,395.9 C 106.7,396.1 120.2,399.0 127.6,404.6 C 135.1,410.2 138.4,420.5 140.8,429.4 C 143.3,438.4 146.8,450.5 142.2,458.2 C 137.6,466.0 124.0,472.8 113.4,475.8 C 102.8,478.8 88.2,479.5 78.5,476.1 C 68.7,472.8 60.5,463.7 54.9,455.8 C 49.2,447.8 43.2,437.2 44.6,428.4 C 46.0,419.7 54.7,408.9 63.3,403.5 C 71.8,398.1 85.3,395.7 96.0,395.9 Z" fill="#BEDCD8" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 182.0,386.2 C 192.6,386.2 206.6,388.3 213.7,393.6 C 220.8,398.9 222.6,409.5 224.6,418.0 C 226.6,426.4 230.0,437.0 225.8,444.3 C 221.6,451.7 209.6,459.2 199.3,462.3 C 189.1,465.4 174.2,466.1 164.4,462.9 C 154.7,459.7 145.1,450.6 140.8,443.1 C 136.5,435.6 137.2,426.2 138.7,417.9 C 140.2,409.6 142.8,398.6 150.0,393.3 C 157.2,388.0 171.4,386.1 182.0,386.2 Z" fill="#E4D8C6" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <path class="tw" d="M 266.0,397.3 C 276.5,397.8 288.4,401.1 295.8,406.2 C 303.2,411.3 308.4,420.0 310.5,427.9 C 312.6,435.7 313.4,446.7 308.6,453.2 C 303.7,459.8 290.9,465.2 281.4,467.1 C 271.9,469.1 261.2,467.1 251.7,464.7 C 242.3,462.2 229.0,458.7 224.7,452.6 C 220.5,446.6 224.7,436.8 226.0,428.5 C 227.4,420.2 226.0,408.1 232.6,402.9 C 239.3,397.7 255.5,396.7 266.0,397.3 Z" fill="#C8DEE2" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+      </g>
+      <g id="labels">
+    <text class="twlabel big halo" x="142" y="122" text-anchor="middle">麥寮</text>
+    <text class="twlabel big" x="142" y="122" text-anchor="middle">麥寮</text>
+    <text class="twlabel big halo" x="252" y="120" text-anchor="middle">崙背</text>
+    <text class="twlabel big" x="252" y="120" text-anchor="middle">崙背</text>
+    <text class="twlabel big halo" x="332" y="115" text-anchor="middle">二崙</text>
+    <text class="twlabel big" x="332" y="115" text-anchor="middle">二崙</text>
+    <text class="twlabel big halo" x="418" y="112" text-anchor="middle">西螺</text>
+    <text class="twlabel big" x="418" y="112" text-anchor="middle">西螺</text>
+    <text class="twlabel halo" x="508" y="131" text-anchor="middle">莿桐</text>
+    <text class="twlabel" x="508" y="131" text-anchor="middle">莿桐</text>
+    <text class="twlabel big halo" x="586" y="160" text-anchor="middle">林內</text>
+    <text class="twlabel big" x="586" y="160" text-anchor="middle">林內</text>
+    <text class="twlabel halo" x="108" y="226" text-anchor="middle">台西</text>
+    <text class="twlabel" x="108" y="226" text-anchor="middle">台西</text>
+    <text class="twlabel halo" x="192" y="212" text-anchor="middle">東勢</text>
+    <text class="twlabel" x="192" y="212" text-anchor="middle">東勢</text>
+    <text class="twlabel big halo" x="268" y="200" text-anchor="middle">褒忠</text>
+    <text class="twlabel big" x="268" y="200" text-anchor="middle">褒忠</text>
+    <text class="twlabel big halo" x="372" y="214" text-anchor="middle">虎尾</text>
+    <text class="twlabel big" x="372" y="214" text-anchor="middle">虎尾</text>
+    <text class="twlabel big halo" x="516" y="218" text-anchor="middle">斗六</text>
+    <text class="twlabel big" x="516" y="218" text-anchor="middle">斗六</text>
+    <text class="twlabel big halo" x="592" y="298" text-anchor="middle">大埤</text>
+    <text class="twlabel big" x="592" y="298" text-anchor="middle">大埤</text>
+    <text class="twlabel halo" x="100" y="322" text-anchor="middle">四湖</text>
+    <text class="twlabel" x="100" y="322" text-anchor="middle">四湖</text>
+    <text class="twlabel halo" x="186" y="305" text-anchor="middle">元長</text>
+    <text class="twlabel" x="186" y="305" text-anchor="middle">元長</text>
+    <text class="twlabel big halo" x="266" y="319" text-anchor="middle">土庫</text>
+    <text class="twlabel big" x="266" y="319" text-anchor="middle">土庫</text>
+    <text class="twlabel big halo" x="452" y="330" text-anchor="middle">斗南</text>
+    <text class="twlabel big" x="452" y="330" text-anchor="middle">斗南</text>
+    <text class="twlabel big halo" x="598" y="366" text-anchor="middle">古坑</text>
+    <text class="twlabel big" x="598" y="366" text-anchor="middle">古坑</text>
+    <text class="twlabel big halo" x="96" y="412" text-anchor="middle">口湖</text>
+    <text class="twlabel big" x="96" y="412" text-anchor="middle">口湖</text>
+    <text class="twlabel big halo" x="182" y="403" text-anchor="middle">水林</text>
+    <text class="twlabel big" x="182" y="403" text-anchor="middle">水林</text>
+    <text class="twlabel big halo" x="266" y="414" text-anchor="middle">北港</text>
+    <text class="twlabel big" x="266" y="414" text-anchor="middle">北港</text>
+      </g>
+      <g id="pins">
+  <g class="pin" data-i="0" data-cat="咖啡甜點" transform="translate(372,268)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D49A2C" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D49A2C" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">☕</text>
+  </g>
+  <g class="pin" data-i="1" data-cat="伴手禮" transform="translate(372,247)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🐼</text>
+  </g>
+  <g class="pin" data-i="2" data-cat="餐飲美食" transform="translate(398,262)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🥟</text>
+  </g>
+  <g class="pin" data-i="3" data-cat="咖啡甜點" transform="translate(388,285)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D49A2C" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D49A2C" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">☕</text>
+  </g>
+  <g class="pin" data-i="4" data-cat="伴手禮" transform="translate(356,285)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍓</text>
+  </g>
+  <g class="pin" data-i="5" data-cat="農漁特產" transform="translate(346,262)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🐖</text>
+  </g>
+  <g class="pin" data-i="6" data-cat="餐飲美食" transform="translate(391,235)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍜</text>
+  </g>
+  <g class="pin" data-i="7" data-cat="文創手作" transform="translate(420,271)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#7A5A96" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#7A5A96" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">💍</text>
+  </g>
+  <g class="pin" data-i="8" data-cat="餐飲美食" transform="translate(383,303)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🥗</text>
+  </g>
+  <g class="pin" data-i="9" data-cat="文創手作" transform="translate(331,287)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#7A5A96" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#7A5A96" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🧵</text>
+  </g>
+  <g class="pin" data-i="10" data-cat="餐飲美食" transform="translate(336,244)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍕</text>
+  </g>
+  <g class="pin" data-i="11" data-cat="體驗觀光" transform="translate(249,348)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#5B6FA8" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#5B6FA8" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍫</text>
+  </g>
+  <g class="pin" data-i="12" data-cat="伴手禮" transform="translate(283,348)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍝</text>
+  </g>
+  <g class="pin" data-i="13" data-cat="農漁特產" transform="translate(598,429)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🌻</text>
+  </g>
+  <g class="pin" data-i="14" data-cat="文創手作" transform="translate(573,410)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#7A5A96" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#7A5A96" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🧸</text>
+  </g>
+  <g class="pin" data-i="15" data-cat="體驗觀光" transform="translate(598,391)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#5B6FA8" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#5B6FA8" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍶</text>
+  </g>
+  <g class="pin" data-i="16" data-cat="餐飲美食" transform="translate(623,410)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🧁</text>
+  </g>
+  <g class="pin" data-i="17" data-cat="餐飲美食" transform="translate(452,383)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🦆</text>
+  </g>
+  <g class="pin" data-i="18" data-cat="伴手禮" transform="translate(428,370)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍲</text>
+  </g>
+  <g class="pin" data-i="19" data-cat="咖啡甜點" transform="translate(437,349)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D49A2C" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D49A2C" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🟢</text>
+  </g>
+  <g class="pin" data-i="20" data-cat="餐飲美食" transform="translate(467,349)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍰</text>
+  </g>
+  <g class="pin" data-i="21" data-cat="伴手禮" transform="translate(476,370)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🌾</text>
+  </g>
+  <g class="pin" data-i="22" data-cat="農漁特產" transform="translate(252,148)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍯</text>
+  </g>
+  <g class="pin" data-i="23" data-cat="體驗觀光" transform="translate(516,279)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#5B6FA8" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#5B6FA8" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🥬</text>
+  </g>
+  <g class="pin" data-i="24" data-cat="文創手作" transform="translate(494,270)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#7A5A96" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#7A5A96" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🌿</text>
+  </g>
+  <g class="pin" data-i="25" data-cat="體驗觀光" transform="translate(494,251)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#5B6FA8" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#5B6FA8" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🎂</text>
+  </g>
+  <g class="pin" data-i="26" data-cat="咖啡甜點" transform="translate(516,241)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D49A2C" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D49A2C" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">☕</text>
+  </g>
+  <g class="pin" data-i="27" data-cat="餐飲美食" transform="translate(538,250)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🦑</text>
+  </g>
+  <g class="pin" data-i="28" data-cat="餐飲美食" transform="translate(538,270)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍵</text>
+  </g>
+  <g class="pin" data-i="29" data-cat="伴手禮" transform="translate(418,167)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🥚</text>
+  </g>
+  <g class="pin" data-i="30" data-cat="餐飲美食" transform="translate(394,154)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🥟</text>
+  </g>
+  <g class="pin" data-i="31" data-cat="咖啡甜點" transform="translate(403,133)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D49A2C" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D49A2C" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🧋</text>
+  </g>
+  <g class="pin" data-i="32" data-cat="伴手禮" transform="translate(433,133)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍡</text>
+  </g>
+  <g class="pin" data-i="33" data-cat="體驗觀光" transform="translate(442,154)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#5B6FA8" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#5B6FA8" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">⛩️</text>
+  </g>
+  <g class="pin" data-i="34" data-cat="伴手禮" transform="translate(165,432)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🥮</text>
+  </g>
+  <g class="pin" data-i="35" data-cat="伴手禮" transform="translate(199,432)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍠</text>
+  </g>
+  <g class="pin" data-i="36" data-cat="餐飲美食" transform="translate(74,440)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🐟</text>
+  </g>
+  <g class="pin" data-i="37" data-cat="農漁特產" transform="translate(96,450)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🦐</text>
+  </g>
+  <g class="pin" data-i="38" data-cat="農漁特產" transform="translate(118,440)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🦆</text>
+  </g>
+  <g class="pin" data-i="39" data-cat="農漁特產" transform="translate(332,140)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍄</text>
+  </g>
+  <g class="pin" data-i="40" data-cat="農漁特產" transform="translate(592,324)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🌱</text>
+  </g>
+  <g class="pin" data-i="41" data-cat="餐飲美食" transform="translate(400,478)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#D9466F" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#D9466F" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍱</text>
+  </g>
+  <g class="pin" data-i="42" data-cat="文創手作" transform="translate(268,224)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#7A5A96" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#7A5A96" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🍬</text>
+  </g>
+  <g class="pin" data-i="43" data-cat="伴手禮" transform="translate(266,442)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#C97B5A" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#C97B5A" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🎁</text>
+  </g>
+  <g class="pin" data-i="44" data-cat="文創手作" transform="translate(586,186)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#7A5A96" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#7A5A96" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🎨</text>
+  </g>
+  <g class="pin" data-i="45" data-cat="農漁特產" transform="translate(142,160)">
+    <ellipse class="pin-shadow" cx="0" cy="15" rx="9" ry="3" fill="#7A6A86" opacity=".18"/>
+    <circle class="pin-halo" cy="-2" r="18" fill="#3D93AE" opacity="0"/>
+    <path class="pin-bg" d="M0,15 C-3,9 -14,5 -14,-3 A14,14 0 1,1 14,-3 C14,5 3,9 0,15 Z"
+          fill="#fff" stroke="#3D93AE" stroke-width="2.8" stroke-linejoin="round"/>
+    <text class="pin-emoji" y="-3" font-size="14" text-anchor="middle" dominant-baseline="central">🌾</text>
+  </g>
+      </g>
+    </svg>
+  </div>
+
+  <aside class="side">
+
+    <div class="howto">
+      <h3>🎟️ 怎麼拿到好食宴門票？</h3>
+      <ol>
+        <li><span>直接到合作店家消費，<b>不用先報名</b></span></li>
+        <li><span>單筆滿 <b>200 元</b>，掃店內 QR Code 加入集點樂會員並集 1 點</span></li>
+        <li><span>同一家限 1 點，逛 <b>6 家</b>不同店家集滿 <b>6 點</b></span></li>
+        <li><span>於平台完成活動報名，前 <b>250 名</b>取得門票</span></li>
+      </ol>
+      <p class="nb">集點期間 9/20（日）– 10/15（四），額滿提前截止。</p>
+    </div>
+
+    <div class="coins">
+      <h3>🪙 金幣怎麼來？優惠怎麼換？</h3>
+      <div class="cb">
+        <div class="row">
+          <span class="co">+1</span>
+          <span><span class="rt">註冊集點樂會員</span>
+            <span class="rd">完成會員註冊，獲得 1 枚金幣</span></span>
+        </div>
+        <div class="row">
+          <span class="co">+1</span>
+          <span><span class="rt">集滿 6 點完成活動報名</span>
+            <span class="rd">走完整個集點報名流程，再獲得 1 枚金幣</span></span>
+        </div>
+        <div class="row">
+          <span class="co event">🎪</span>
+          <span><span class="rt">10/26 現場市集活動</span>
+            <span class="rd">好食宴當天市集另有金幣收集活動，詳情見現場公告</span></span>
+        </div>
+        <div class="row">
+          <span class="co spend">−2</span>
+          <span><span class="rt">兌換店家優惠</span>
+            <span class="rd">於平台花費 2 枚金幣兌換，兌換後至店家出示使用</span></span>
+        </div>
+        <p class="sum">
+          金幣屬於<b>會員本人</b>，需本人於平台操作兌換。<br>
+          清單中標有 <b>🎁</b> 的店家，代表該店有可兌換的優惠。
+        </p>
+      </div>
+    </div>
+
+    <div class="detail" id="detail" hidden>
+      <div class="dhead" id="dhead">
+        <span class="dtag" id="dtag"></span>
+        <div class="dname" id="dname"></div>
+        <div class="dmeta" id="dmeta"></div>
+        <button class="dclose" id="dclose" aria-label="關閉店家資訊">✕</button>
+      </div>
+      <div class="dbody">
+        <div class="drow" id="drow-main" hidden>
+          <div class="dlabel">主要商品</div><div id="dmain"></div>
+        </div>
+        <div class="drow" id="drow-hours" hidden>
+          <div class="dlabel">營業時間</div><div id="dhours"></div>
+        </div>
+        <div class="promo" id="dpromo" hidden>
+          <div class="plabel">
+            <span>🎁 集點樂會員兌換優惠</span>
+            <span class="cost">🪙 需 2 金幣</span>
+          </div>
+          <p id="dpromotext"></p>
+          <div class="howcoin">於「集點樂」平台以會員本人的金幣兌換，兌換後至店家出示。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty" id="empty">
+      <div class="em">🗺️</div>
+      <h3>點地圖上的圖釘</h3>
+      <p>就能看到店家資訊、地址與可兌換的優惠</p>
+    </div>
+
+    <div class="listwrap">
+      <div class="lhead">合作店家清單 <span id="lcount"></span></div>
+      <div class="list" id="list"></div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <b>好食宴暨現場市集</b>　10/26（一）16:00–21:00　西螺森活武樹園區<br>
+  主辦單位：雲林縣政府、雲林縣環境保護局　｜　執行單位：活動情報有限公司
+</footer>
+
+<script>
+const STORES = [{"disp": "AJ CAFE", "town": "虎尾鎮", "addr": "虎尾鎮民主路18之7號一樓", "cat2": "咖啡甜點", "emoji": "☕", "promo": "活動期間：購買咖啡豆享9折優惠、內用手沖咖啡續杯半價", "hours": "AM10 :00～PM6:30", "main": "咖啡豆、濾掛咖啡、手作甜點、創意飲品", "tags": "雲林100碗  AJ CFE  虎尾咖啡"}, {"disp": "饅享受", "town": "虎尾鎮", "addr": "虎尾鎮延平里中南17-15號", "cat2": "伴手禮", "emoji": "🐼", "promo": "購買造型饅頭10顆再送1顆", "hours": "8:00-18:00", "main": "12款雲林意象饅頭、各式療癒人心造型饅頭、客製饅頭教學體驗課程、學校午餐供應", "tags": "雲林100碗、療癒饅頭、造型饅頭"}, {"disp": "媽祖埔豆腐張", "town": "虎尾鎮", "addr": "虎尾鎮林森路二段471號", "cat2": "餐飲美食", "emoji": "🥟", "promo": "", "hours": "1630-2230", "main": "鹹酥臭豆腐，麻辣臭豆腐，麻辣鴨血", "tags": ""}, {"disp": "怪咖咖啡", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83之6號", "cat2": "咖啡甜點", "emoji": "☕", "promo": "外帶咖啡同品項第二杯半價", "hours": "", "main": "咖啡、昭和布丁、咖啡汽水", "tags": "雲林100碗、建國眷村、咖啡汽水、昭和布丁、咖啡攤車"}, {"disp": "草莓小護士手作の屋", "town": "虎尾鎮", "addr": "虎尾鎮正義路74號", "cat2": "伴手禮", "emoji": "🍓", "promo": "鐵蛋、鳥蛋、豆干、米血、甜點…櫃上消費滿200、贈手工Q餅", "hours": "採預定制", "main": "🍰提拉米蘇|層層堆疊的療癒 🍪手工餅乾 | 像日常關心一樣不張揚 🧁小蛋糕 | 替平凡日子加點甜 🍬牛軋糖|慢慢咀嚼的幸福帶 🥮Q餅 | 扎實又安心的存在  每一份甜點， 都像護理交班時的叮嚀 只希望你吃得安心、甜得剛好。|", "tags": "草莓小護士手作屋、虎尾伴手禮"}, {"disp": "雲饗豬", "town": "虎尾鎮", "addr": "虎尾鎮延平里下南100號", "cat2": "農漁特產", "emoji": "🐖", "promo": "", "hours": "週一~週五10:00-17:00、週六10:00-16:00", "main": "豬肉鬆、肉乾、肉絲、肉角、冷凍生鮮及調理商品", "tags": ""}, {"disp": "中華麵そば", "town": "虎尾鎮", "addr": "虎尾鎮西平路64號", "cat2": "餐飲美食", "emoji": "🍜", "promo": "消費滿999元送豬排一份", "hours": "平日11:00-14:00 17:00-21:00 假日11:00-14:30 17:00-21:00", "main": "特濃豚骨 昆布 味噌 麻辣豚骨 養生素食", "tags": "雲林100碗、中華拉麵、必吃美食"}, {"disp": "庭口金工", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83-7號 丁棟", "cat2": "文創手作", "emoji": "💍", "promo": "", "hours": "10:30-18:30", "main": "金工DIY體驗、飾品與婚戒訂製、眷村麵食", "tags": ""}, {"disp": "生機廚房", "town": "虎尾鎮", "addr": "虎尾鎮民主路1號", "cat2": "餐飲美食", "emoji": "🥗", "promo": "", "hours": "10:：00-18:30", "main": "1.有機蔬食餐廳 2.全米麵包、全米饅頭 3食農教育實踐及推廣者", "tags": ""}, {"disp": "有點小物工作室", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83-5號", "cat2": "文創手作", "emoji": "🧵", "promo": "小物限定寫生租借服務-【幸福的提筆畫室】免費體驗乙次 #預約制 #無現場教學 #自由寫生 #畫具租借 請於報名表單上備註「集點樂兌換」", "hours": "平日 12:00-18:00，假日 10:00-18:00", "main": "文創商品、海外選物、寫生租借、不定期辦理英語活動", "tags": "療癒選物、文創商品、在地小店"}, {"disp": "披薩老爹虎篤店", "town": "虎尾鎮", "addr": "虎尾鎮立德路129號", "cat2": "餐飲美食", "emoji": "🍕", "promo": "", "hours": "週三-週五 17:00-21:00 週六,週日 11:00-14:00 17:00-21:00", "main": "瑪格麗特披薩/任性小孩披薩/主廚特製披薩/培根蛋黃麵/提拉米蘇", "tags": ""}, {"disp": "土庫驛可可莊園", "town": "土庫鎮", "addr": "土庫鎮大同路1之2號", "cat2": "體驗觀光", "emoji": "🍫", "promo": "生巧克力第二件8折。", "hours": "9:00~17:30", "main": "1.黑巧克力Bar片、2.生巧克力、3.義式冰淇淋、4.可可食農體驗、5.可可粉、可可茶等巧克力產品", "tags": "巧克力、雲林100碗、莊園"}, {"disp": "萬源製麵舖", "town": "土庫鎮", "addr": "633土庫鎮光明路167號", "cat2": "伴手禮", "emoji": "🍝", "promo": "全產品95折 ※本優惠方案上架期間為：與活動同步（115年9月15日 至 115年10月17日），活動結束後將自動於平台下架，恕不另行通知。", "hours": "每天早上8：30～下午17：30 (每週一公休)", "main": "彩色蔬果麵、伴手禮、拌麵", "tags": "雲林良品、伴手禮、彩色蔬果麵"}, {"disp": "糧莘庇護農場", "town": "古坑鄉", "addr": "古坑鄉永興路166-1號1樓", "cat2": "農漁特產", "emoji": "🌻", "promo": "", "hours": "9:00~16:30", "main": "1.台灣紅藜 2.黑金紅藜茶 3.紅藜香鬆 4.彩虹藜麵 5.從農場到餐桌的食農體驗", "tags": ""}, {"disp": "童趣手作", "town": "古坑鄉", "addr": "古坑鄉永光村大湖口56號", "cat2": "文創手作", "emoji": "🧸", "promo": "", "hours": "", "main": "木竹組裝玩具：組裝玩具步槍 ，玩具摩天輪，玩具音樂盒，竹製小玩具", "tags": "手作玩具，DIY手作，童玩"}, {"disp": "福祿壽酒廠", "town": "古坑鄉", "addr": "64650古坑鄉中山路11號", "cat2": "體驗觀光", "emoji": "🍶", "promo": "", "hours": "展售中心／門市：週二至週日 08:30 – 17:00（週一休館）", "main": "福牌高粱酒、好樂達咖啡香甜酒、米酒料酒、酒類再製品、伴手禮", "tags": "雲林良品、免費試喝、釀酒"}, {"disp": "東和泡芙", "town": "古坑鄉", "addr": "古坑鄉東和村文化路118號", "cat2": "餐飲美食", "emoji": "🧁", "promo": "單筆消費結帳金額滿200元，贈送手工泡芙一顆(供應之口味，視現場情況而定)", "hours": "每日15:00～18:00", "main": "泡芙、蛋塔、蛋黃酥", "tags": "雲林100碗、排隊名店、國際競賽三金得主、全國比賽冠軍、所有的東西都能做成泡芙"}, {"disp": "阿國師雲蒸薑母鴨", "town": "斗南鎮", "addr": "斗南鎮義德路2號", "cat2": "餐飲美食", "emoji": "🦆", "promo": "甕蒸薑母鴨/菌菇九尾雞（即食包）原價249元 第二件半價", "hours": "16:00-21:00", "main": "甕蒸薑母鴨/菌菇九尾雞  /烏骨九尾雞", "tags": "雲林良品、雲林100碗、甕蒸薑母鴨、"}, {"disp": "國柱食作所", "town": "斗南鎮", "addr": "斗南鎮六合街75號", "cat2": "伴手禮", "emoji": "🍲", "promo": "", "hours": "採預約方式取貨", "main": "1. 燻茶鵝、燻茶鴨     精選優質鵝、鴨肉，結合傳統燻製工法與茶香風味，呈現肉質鮮嫩、香氣醇厚的特色熟食。 2.脆皮蔥油雞     以優質雞肉搭配特製蔥油調味，保留雞肉鮮甜，方便加熱即食，是家庭餐桌及節慶聚餐的特色料理。 3. 特色香腸系列     包含紹興香腸、烏魚子香腸等，以優質豬肉搭配特色風味食材製作，結合傳統香腸工法與創新口味。 4. 傳統特色調理食品     包含筍干元蹄、薑母鴨及人參燉烏骨雞湯等，將傳統家常料理製作成方便保存及加熱的冷凍調理食品。 5. 生鮮及冷凍肉品     提供雞、鴨、鵝、豬等生鮮及冷凍肉品，重視食材品質與保存管理，滿足家庭料理及餐飲使用需求。", "tags": ""}, {"disp": "小輝俠手工愛玉", "town": "斗南鎮", "addr": "斗南鎮延平路二段161號", "cat2": "咖啡甜點", "emoji": "🟢", "promo": "參與DIY洗愛玉者，將贈送免費新鮮果汁調味（例如：檸檬汁、百香果汁、鳳梨汁……等）", "hours": "早上九點到晚上十點", "main": "1、野生愛玉子，2、DIY互動教學，3、單品手充沖咖啡", "tags": "台灣野生愛玉子"}, {"disp": "HUNGHUNG 甜點工作室", "town": "斗南鎮", "addr": "斗南鎮中山路120號", "cat2": "餐飲美食", "emoji": "🍰", "promo": "消費巴斯克一顆送常溫小蛋糕1入", "hours": "", "main": "1. 雲林100碗・巴斯克乳酪蛋糕 2. 法式手工餅乾與常溫甜點 3. 節慶限定伴手禮盒 4. 可麗露、費南雪等法式點心 5. 客製化蛋糕與企業送禮", "tags": "雲林100碗 法式甜點 巴斯克蛋糕"}, {"disp": "玉山碾米", "town": "斗南鎮", "addr": "斗南鎮新興街33號", "cat2": "伴手禮", "emoji": "🌾", "promo": "指定商品買五送一", "hours": "08:00～18:00", "main": "粉好糠、醬好糠禮盒、寶寶米餅、溫度米2.0、三麗鷗禮盒", "tags": "雲林良品、寶寶米餅、雲林伴手禮"}, {"disp": "臺一養蜂園蜜茶站", "town": "崙背鄉", "addr": "崙背鄉南陽村建國路18號", "cat2": "農漁特產", "emoji": "🍯", "promo": "", "hours": "上午8:00-晚上20:00", "main": "蜂蜜、花粉、蜂王乳、蛋糕", "tags": ""}, {"disp": "古坑綠隧合作社", "town": "斗六市", "addr": "640斗六市社口里大學路二段303巷12號", "cat2": "體驗觀光", "emoji": "🥬", "promo": "", "hours": "8:00-12:00/13:00-17:00", "main": "尋仙找茶245ML-6入10入24入/960ml/尋仙找凍", "tags": ""}, {"disp": "森活手作日和", "town": "斗六市", "addr": "斗六市久安東路", "cat2": "文創手作", "emoji": "🌿", "promo": "攤位消費滿 300 元，即隨機贈送精美手作毛根小吊飾乙個（數量有限，送完為止）。", "hours": "", "main": "1. 扭扭棒手作花束 2. 扭扭棒療癒小盆栽 3. 節慶主題手作商品 4. 手作吊飾及髮飾 5. DIY手作體驗活動", "tags": "毛根手作、雲林手作、客製禮品、扭扭棒花束"}, {"disp": "塔吉特千層蛋糕大使館", "town": "斗六市", "addr": "斗六市工業路118號", "cat2": "體驗觀光", "emoji": "🎂", "promo": "", "hours": "09:30-17:30", "main": "千層蛋糕、年輪蛋糕、果凍布丁類商品、手作DIY課程", "tags": "雲林良品、在地品牌、千層蛋糕專賣"}, {"disp": "愛思咖啡", "town": "斗六市", "addr": "斗六市永安路71號", "cat2": "咖啡甜點", "emoji": "☕", "promo": "愛思咖啡響應活動，活動期間憑相關參與證明，購買精品濾掛咖啡或浸泡式咖啡享 95折優惠；單筆消費滿 500 元，加贈精選濾掛咖啡 1 包。邀請大家用一杯好咖啡，支持台灣在地烘焙品牌。", "hours": "08:00~17:00", "main": "手沖咖啡 50-250元 咖啡豆 400-1500元 手工餅乾 100-200元 手工馬林糖 30-200  元 手工歐式麵包 50-200 元", "tags": "愛思咖啡 咖啡豆 濾掛咖啡 手沖咖啡"}, {"disp": "魷魚興魷魚嘴焿", "town": "斗六市", "addr": "斗六市中正路56號", "cat2": "餐飲美食", "emoji": "🦑", "promo": "", "hours": "08：30-18：30", "main": "魷魚嘴焿/ 魷魚羹/ 肉羹/ 肉燥飯/ 肉燥乾麵", "tags": "雲林美食 雲林100碗  斗六小吃"}, {"disp": "干嘛喝茶", "town": "斗六市", "addr": "週六:斗六觀光夜市 週日:斗六觀光夜市", "cat2": "餐飲美食", "emoji": "🍵", "promo": "仙草干茶與原味茶飲系列第二杯半價", "hours": "16:00-23:00", "main": "仙草干茶  仙干奶茶   牛奶嫩仙草........", "tags": "自創文創仙草飲品"}, {"disp": "安記鐵蛋", "town": "西螺鎮", "addr": "西螺鎮中正路47號", "cat2": "伴手禮", "emoji": "🥚", "promo": "全店同價位品項買十送一", "hours": "09:00-21:00", "main": "香鐵蛋,滷蛋,豆干", "tags": "雲林良品、雲林100碗、雲林禮讚獎店家"}, {"disp": "北京王餡餅", "town": "西螺鎮", "addr": "西螺鎮延平路149號", "cat2": "餐飲美食", "emoji": "🥟", "promo": "餡餅滿200送20，冷凍餡餅滿500送保冷袋。", "hours": "14:00-18:00", "main": "牛肉餡餅、豬肉餡餅、韭菜餡餅、紅豆餡餅", "tags": "雲林百大美食，雲林老店，排隊美食"}, {"disp": "金燕子奶茶西螺店", "town": "西螺鎮", "addr": "西螺鎮福來路42號 （果菜市場正對面）", "cat2": "咖啡甜點", "emoji": "🧋", "promo": "", "hours": "9:00-7:30", "main": "招牌奶茶 經典紅茶 高山青茶  芋香奶茶 冬瓜茶 冬瓜檸檬  金燕子飲品主打 手工熬煮 用最天然的砂糖 蔗糖 冬瓜 新鮮的檸檬汁 不加任何的果糖 喝的也放心！", "tags": ""}, {"disp": "來呷粿", "town": "西螺鎮", "addr": "西螺鎮建興路260號", "cat2": "伴手禮", "emoji": "🍡", "promo": "消費滿百送古早味蘿蔔糕（小份）1份", "hours": "05:00-13:30", "main": "原味蘿蔔糕/芋頭蘿蔔糕/港式蘿蔔糕/各式早午餐（滷肉飯/麵）/炸年糕", "tags": "雲林小吃、在地老店、評價最高、雲林伴手禮、早午餐、蘿蔔糕"}, {"disp": "佛美神仙故事館", "town": "西螺鎮", "addr": "648西螺鎮新豐里福來路8巷19號", "cat2": "體驗觀光", "emoji": "⛩️", "promo": "", "hours": "星期一 / 星期三 ~ 星期日 (星期二公休)", "main": "1. 神仙故事館導覽 2.蔬食好食堂 3.佛美牛蒡茶 4.佛美罐頭禮盒 5.宗教文物", "tags": ""}, {"disp": "水林祥美餅舖", "town": "水林鄉", "addr": "水林鄉水林路221號", "cat2": "伴手禮", "emoji": "🥮", "promo": "", "hours": "7-17.", "main": "🏮【那抹剛出爐的餅香，是我們最想留給您的溫暖】  天剛濛濛亮，祥美餅舖的廚房裡早已熱氣騰騰。裊裊升起的白煙裡，拌著剛蒸好糯米的油飯香，包裹著糯米花生餡的令人垂涎紅龜粿，軟糯Q彈；還有烤爐裡慢慢烘烤出金黃色澤的蛋黃酥、滷肉豆沙餅香氣。  看著大家冒著晨風前來，只為了帶一份剛出爐的傳統滋  無論是榮獲雲林100碗推薦的【古法油飯】、香酥不黏牙的【不老農花生糖】、象徵福氣的【紅龜、壽桃、發糕、鳳片糕、鹼粽、豬羊三牲】， 或是假期團聚少不了的【冬瓜肉餅、滷肉豆沙餅、紅豆麻糬、鳳梨餅、蛋黃酥】。 每一份點心，都是我們手工限量現做。提前預訂，讓我們能提早為您備好最完美的滋味，也讓您的期待，能百分之百地被滿足。  下次出發前，不妨先動動手指或撥個電話，把您想要的美味鎖定下來。 看見您接過餅時滿足的笑容，才是祥美餅舖最美的風景。❤️  👉【祥美餅舖 預訂資訊】 💬 歡迎私訊粉絲專頁預訂 📞 預訂專線：（請填入電話） 📍 店址：（請填入地址） （建議提前 2-3 天預訂，讓我們能用心準備喔！）", "tags": ""}, {"disp": "阿德的家地瓜瑞士捲", "town": "水林鄉", "addr": "水林鄉山腳村尖山腳45-18號", "cat2": "伴手禮", "emoji": "🍠", "promo": "", "hours": "週一-週五：10:00-12:00，14:00-18:00  週六（日）10:00-18:00", "main": "採用在地台農57號地瓜，一直以來堅持，無任何添加防腐劑，天然健康  *阿德的產品特色 地瓜瑞士捲完全不添加防腐劑、香精，卡士達瑞士捲的醬也是全程手工熬煮，給消費者天然健康的口感滋味", "tags": ""}, {"disp": "第一鰻波", "town": "口湖鄉", "addr": "口湖鄉浦南村1-3號", "cat2": "餐飲美食", "emoji": "🐟", "promo": "第一鰻波-胭脂鰻(125gx6)1700元，送限量摺疊袋一只", "hours": "買伴手禮09:00-17:00，吃鰻魚飯11:00-14:30（假日限定）", "main": "主要商品1.胭脂鰻、2.台灣胭脂鰻、3.白燒鰻、4.烏涮嘴一口吃烏魚子，服務:鰻遊趣食農教育", "tags": "雲林100碗、雲林良品、雲林100景"}, {"disp": "渲益（漁產）", "town": "口湖鄉", "addr": "口湖鄉埔南村外埔72-88號（養殖場域地點）", "cat2": "農漁特產", "emoji": "🦐", "promo": "蒲燒鰻魚3片/1公斤+鮮鰻片1片/330克$1500", "hours": "平日週一至週五8:00-17:00，假日可預約", "main": "蒲燒鰻魚、鮮鰻魚", "tags": "送禮最佳選擇 、最強懶人料理 、產地直送餐桌"}, {"disp": "坔田渡鳥文化工作室", "town": "口湖鄉", "addr": "口湖鄉成龍村82號", "cat2": "農漁特產", "emoji": "🦆", "promo": "來店消費一份飲品加點心，送成龍溼地鑰匙圈一個", "hours": "例假日10:30-18:00", "main": "成龍溼地環境教育／生態旅遊／在地特色手作茶點／友善環境農漁產", "tags": "成龍溼地、烏魚子司康、洛神花冰沙"}, {"disp": "吉品杏鮑菇", "town": "二崙鄉", "addr": "二崙鄉隆興路1-9號", "cat2": "農漁特產", "emoji": "🍄", "promo": "", "hours": "上午8:00-下午5:00", "main": "新鮮各式菇類、有機黑木耳露、杏鮑菇虱目魚丸、黃金杏鮑菇", "tags": ""}, {"disp": "勻凱農場", "town": "大埤鄉", "addr": "大埤鄉尚義村尚義7號", "cat2": "農漁特產", "emoji": "🌱", "promo": "黑米買5送1，買5包送一包同包裝的", "hours": "", "main": "黑糙米、雙色胚芽米、白米、爆米香", "tags": "沒有"}, {"disp": "芳如小舖", "town": "無店面", "addr": "無", "cat2": "餐飲美食", "emoji": "🍱", "promo": "", "hours": "無", "main": "魯味·油飯.茶葉蛋.红茶", "tags": ""}, {"disp": "食伍手作", "town": "褒忠鄉", "addr": "褒忠", "cat2": "文創手作", "emoji": "🍬", "promo": "明星商品買一送一、民眾參與相關活動即可換馬路糖罐", "hours": "", "main": "造型馬林糖/蛋塔/布朗尼/餅乾", "tags": "#雲林食伍手作 #雲林手作馬林糖 #雲林造型馬林糖"}, {"disp": "傳發之家", "town": "北港鎮", "addr": "北港鎮公民路12號", "cat2": "伴手禮", "emoji": "🎁", "promo": "", "hours": "8:30-20:30", "main": "糯米麥芽膏、麥芽花生糖、麥芽芝麻糖、糯米麥芽餅", "tags": ""}, {"disp": "鄭凱元手作", "town": "林內鄉", "addr": "林內鄉林中村中正路202號", "cat2": "文創手作", "emoji": "🎨", "promo": "", "hours": "早上10點~晚上8點(週一公休)", "main": "Tree to Bar台灣可可巧克力 雲林風土特色巧克力 可可茶 巧克力食農教育與DIY體驗 企業客製巧克力與地方特色禮贈", "tags": ""}, {"disp": "月光下友善農場", "town": "麥寮鄉", "addr": "麥寮鄉西濱路三段80號", "cat2": "農漁特產", "emoji": "🌾", "promo": "活動期間所有品項九五折", "hours": "", "main": "小麥粒、小麥餅乾、小麥茶、小麥酒", "tags": "台灣小麥、食農教育、地產地銷"}];
+
+const CATCOLOR={'餐飲美食':'#D9466F','咖啡甜點':'#D49A2C','農漁特產':'#3D93AE',
+  '文創手作':'#7A5A96','伴手禮':'#C97B5A','體驗觀光':'#5B6FA8'};
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const listEl=$('#list'), detail=$('#detail'), empty=$('#empty');
+let filter='全部';
+
+STORES.forEach((s,i)=>{
+  const li=document.createElement('button');
+  li.className='li'; li.type='button'; li.dataset.i=i; li.dataset.cat=s.cat2;
+  li.innerHTML=`
+    <span class="ic" style="border-color:${CATCOLOR[s.cat2]}">${s.emoji}</span>
+    <span class="txt">
+      <span class="n">${s.disp}</span>
+      <span class="m">📍 ${s.town} · <b style="color:${CATCOLOR[s.cat2]}">${s.cat2}</b></span>
+    </span>
+    ${s.promo?'<span class="gift" title="有可兌換的優惠（需 2 金幣）">🎁</span>':''}
+    <span class="ar">›</span>`;
+  li.onclick=()=>select(i);
+  listEl.appendChild(li);
+});
+
+$$('.pin').forEach(p=>{
+  p.setAttribute('tabindex','0'); p.setAttribute('role','button');
+  const i=+p.dataset.i;
+  p.setAttribute('aria-label',STORES[i].disp);
+  p.onclick=()=>select(i);
+  p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(i);}};
+});
+
+function mapsUrl(s){
+  if(!s.addr || s.addr.indexOf('無')===0) return null;
+  const a = s.addr.indexOf('雲林縣')===0 ? s.addr : '雲林縣'+s.addr;
+  return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.disp+' '+a);
+}
+
+function select(i){
+  const s=STORES[i], c=CATCOLOR[s.cat2];
+  detail.hidden=false; empty.hidden=true;
+  $('#dhead').style.background=c+'1C';
+  const tag=$('#dtag'); tag.textContent=s.cat2; tag.style.background=c;
+  $('#dname').textContent=s.emoji+' '+s.disp;
+
+  const url=mapsUrl(s);
+  const addr = url
+    ? `<a class="maplink" href="${url}" target="_blank" rel="noopener noreferrer">${s.addr} <span aria-hidden="true">↗</span></a>`
+    : '無實體店面';
+  $('#dmeta').innerHTML='📍 '+s.town+'　'+addr+(s.tags?'<br>🏷️ '+s.tags:'');
+
+  const mr=$('#drow-main');
+  if(s.main){mr.hidden=false;$('#dmain').textContent=s.main;} else mr.hidden=true;
+  const hr=$('#drow-hours');
+  if(s.hours){hr.hidden=false;$('#dhours').textContent=s.hours;} else hr.hidden=true;
+  const pr=$('#dpromo');
+  if(s.promo){pr.hidden=false;$('#dpromotext').textContent=s.promo;} else pr.hidden=true;
+
+  $$('.pin').forEach(p=>p.classList.toggle('sel',+p.dataset.i===i));
+  $$('.li').forEach(l=>l.classList.toggle('sel',+l.dataset.i===i));
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+$('#dclose').onclick=()=>{
+  detail.hidden=true; empty.hidden=false;
+  $$('.pin').forEach(p=>p.classList.remove('sel'));
+  $$('.li').forEach(l=>l.classList.remove('sel'));
+};
+
+$$('.chip').forEach(ch=>{
+  ch.onclick=()=>{
+    $$('.chip').forEach(c=>c.classList.remove('on'));
+    ch.classList.add('on'); filter=ch.dataset.c; apply();
+  };
+});
+
+function apply(){
+  let n=0;
+  $$('.pin').forEach(p=>p.classList.toggle('off',!(filter==='全部'||p.dataset.cat===filter)));
+  $$('.li').forEach(l=>{
+    const ok = filter==='全部' || l.dataset.cat===filter;
+    l.hidden=!ok; if(ok)n++;
+  });
+  $('#count').textContent = filter==='全部' ? `顯示全部 ${n} 家店` : `${filter} · 共 ${n} 家店`;
+  $('#lcount').textContent = n+' 家';
+  $('#dclose').click();
+}
+apply();
+</script>
+</body>
+</html>
