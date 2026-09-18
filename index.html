@@ -123,9 +123,12 @@ header{
 .backbtn:hover{background:var(--plum-d)}
 svg#map{width:100%;height:auto;display:block;touch-action:manipulation}
 
-.tw{transition:opacity .35s}
+.tw{transition:opacity .35s,filter .15s;cursor:pointer}
+.tw:hover{filter:brightness(1.06)}
+.tw:focus-visible{outline:3px solid var(--plum);outline-offset:-3px}
 .tw.dim{opacity:.22}
 .tw.active{filter:drop-shadow(0 0 0 var(--plum))}
+.count.empty-town{color:var(--rose);font-weight:700}
 .twlabel{font-size:16px;font-weight:700;fill:#7A6A86;pointer-events:none;
   font-family:var(--display);transition:opacity .3s}
 .twlabel.big{font-size:18.5px;fill:#54406A}
@@ -341,28 +344,12 @@ footer b{color:var(--plum)}
     <p class="townnav-label">📍 點選鄉鎮，放大看該地區的店家</p>
     <nav class="townnav" id="townnav" aria-label="鄉鎮篩選">
       <button class="tchip on reset" data-t="全部">🗺️ 全縣</button>
-    <button class="tchip" data-t="虎尾鎮">虎尾鎮 <span class="n">11</span></button>
-    <button class="tchip" data-t="斗六市">斗六市 <span class="n">6</span></button>
-    <button class="tchip" data-t="斗南鎮">斗南鎮 <span class="n">5</span></button>
-    <button class="tchip" data-t="西螺鎮">西螺鎮 <span class="n">5</span></button>
-    <button class="tchip" data-t="古坑鄉">古坑鄉 <span class="n">4</span></button>
-    <button class="tchip" data-t="口湖鄉">口湖鄉 <span class="n">3</span></button>
-    <button class="tchip" data-t="土庫鎮">土庫鎮 <span class="n">2</span></button>
-    <button class="tchip" data-t="水林鄉">水林鄉 <span class="n">2</span></button>
-    <button class="tchip" data-t="崙背鄉">崙背鄉 <span class="n">1</span></button>
-    <button class="tchip" data-t="二崙鄉">二崙鄉 <span class="n">1</span></button>
-    <button class="tchip" data-t="大埤鄉">大埤鄉 <span class="n">1</span></button>
-    <button class="tchip" data-t="褒忠鄉">褒忠鄉 <span class="n">1</span></button>
-    <button class="tchip" data-t="北港鎮">北港鎮 <span class="n">1</span></button>
-    <button class="tchip" data-t="林內鄉">林內鄉 <span class="n">1</span></button>
-    <button class="tchip" data-t="麥寮鄉">麥寮鄉 <span class="n">1</span></button>
-    <button class="tchip" data-t="無店面">無店面 <span class="n">1</span></button>
     </nav>
   </div>
 
   <div class="mapcard">
     <p class="hint">
-      <span id="hint-text">👆 點地圖上的圖釘，看店家資訊與可兌換的優惠</span>
+      <span id="hint-text">👆 點地圖上的鄉鎮或圖釘，看店家資訊與可兌換的優惠</span>
       <button class="backbtn" id="backbtn">← 返回全縣地圖</button>
     </p>
     <svg id="map" viewBox="0 0 900 730" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -456,370 +443,8 @@ footer b{color:var(--plum)}
     <path class="tw" data-town="口湖鄉" d="M 184.0,494.3 L 185.5,493.2 L 186.6,498.1 L 189.1,499.0 L 183.5,509.9 L 178.4,511.5 L 184.2,514.7 L 177.9,514.8 L 176.3,513.6 L 178.1,510.2 L 176.8,509.0 L 178.7,507.6 L 178.1,505.3 L 180.1,504.6 L 177.4,503.2 L 177.6,500.9 L 179.8,499.0 L 177.2,498.8 L 176.8,497.5 L 180.7,497.5 L 181.5,494.7 L 180.3,493.9 L 181.8,492.5 L 183.5,492.5 L 184.0,494.3 Z" fill="#BEDCD8" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
       </g>
       <g id="labels">
-    <text class="twlabel big halo" data-town="麥寮鄉" x="320.0" y="233.0" text-anchor="middle">麥寮</text>
-    <text class="twlabel big" data-town="麥寮鄉" x="320.0" y="233.0" text-anchor="middle">麥寮</text>
-    <text class="twlabel big halo" data-town="斗六市" x="676.5" y="248.4" text-anchor="middle">斗六</text>
-    <text class="twlabel big" data-town="斗六市" x="676.5" y="248.4" text-anchor="middle">斗六</text>
-    <text class="twlabel big halo" data-town="斗南鎮" x="578.8" y="296.2" text-anchor="middle">斗南</text>
-    <text class="twlabel big" data-town="斗南鎮" x="578.8" y="296.2" text-anchor="middle">斗南</text>
-    <text class="twlabel big halo" data-town="虎尾鎮" x="520.5" y="237.0" text-anchor="middle">虎尾</text>
-    <text class="twlabel big" data-town="虎尾鎮" x="520.5" y="237.0" text-anchor="middle">虎尾</text>
-    <text class="twlabel big halo" data-town="西螺鎮" x="552.7" y="151.7" text-anchor="middle">西螺</text>
-    <text class="twlabel big" data-town="西螺鎮" x="552.7" y="151.7" text-anchor="middle">西螺</text>
-    <text class="twlabel big halo" data-town="土庫鎮" x="477.4" y="314.0" text-anchor="middle">土庫</text>
-    <text class="twlabel big" data-town="土庫鎮" x="477.4" y="314.0" text-anchor="middle">土庫</text>
-    <text class="twlabel big halo" data-town="北港鎮" x="381.1" y="447.2" text-anchor="middle">北港</text>
-    <text class="twlabel big" data-town="北港鎮" x="381.1" y="447.2" text-anchor="middle">北港</text>
-    <text class="twlabel big halo" data-town="古坑鄉" x="693.0" y="305.4" text-anchor="middle">古坑</text>
-    <text class="twlabel big" data-town="古坑鄉" x="693.0" y="305.4" text-anchor="middle">古坑</text>
-    <text class="twlabel big halo" data-town="大埤鄉" x="560.2" y="371.3" text-anchor="middle">大埤</text>
-    <text class="twlabel big" data-town="大埤鄉" x="560.2" y="371.3" text-anchor="middle">大埤</text>
-    <text class="twlabel halo" data-town="莿桐鄉" x="634.7" y="217.6" text-anchor="middle">莿桐</text>
-    <text class="twlabel" data-town="莿桐鄉" x="634.7" y="217.6" text-anchor="middle">莿桐</text>
-    <text class="twlabel big halo" data-town="林內鄉" x="732.9" y="214.9" text-anchor="middle">林內</text>
-    <text class="twlabel big" data-town="林內鄉" x="732.9" y="214.9" text-anchor="middle">林內</text>
-    <text class="twlabel big halo" data-town="二崙鄉" x="449.3" y="189.3" text-anchor="middle">二崙</text>
-    <text class="twlabel big" data-town="二崙鄉" x="449.3" y="189.3" text-anchor="middle">二崙</text>
-    <text class="twlabel big halo" data-town="崙背鄉" x="435.6" y="211.3" text-anchor="middle">崙背</text>
-    <text class="twlabel big" data-town="崙背鄉" x="435.6" y="211.3" text-anchor="middle">崙背</text>
-    <text class="twlabel halo" data-town="東勢鄉" x="324.9" y="308.9" text-anchor="middle">東勢</text>
-    <text class="twlabel" data-town="東勢鄉" x="324.9" y="308.9" text-anchor="middle">東勢</text>
-    <text class="twlabel big halo" data-town="褒忠鄉" x="387.6" y="264.0" text-anchor="middle">褒忠</text>
-    <text class="twlabel big" data-town="褒忠鄉" x="387.6" y="264.0" text-anchor="middle">褒忠</text>
-    <text class="twlabel halo" data-town="元長鄉" x="406.2" y="375.5" text-anchor="middle">元長</text>
-    <text class="twlabel" data-town="元長鄉" x="406.2" y="375.5" text-anchor="middle">元長</text>
-    <text class="twlabel big halo" data-town="水林鄉" x="304.2" y="441.1" text-anchor="middle">水林</text>
-    <text class="twlabel big" data-town="水林鄉" x="304.2" y="441.1" text-anchor="middle">水林</text>
-    <text class="twlabel halo" data-town="臺西鄉" x="260.5" y="283.4" text-anchor="middle">臺西</text>
-    <text class="twlabel" data-town="臺西鄉" x="260.5" y="283.4" text-anchor="middle">臺西</text>
-    <text class="twlabel halo" data-town="四湖鄉" x="253.8" y="370.7" text-anchor="middle">四湖</text>
-    <text class="twlabel" data-town="四湖鄉" x="253.8" y="370.7" text-anchor="middle">四湖</text>
-    <text class="twlabel big halo" data-town="口湖鄉" x="230.9" y="411.5" text-anchor="middle">口湖</text>
-    <text class="twlabel big" data-town="口湖鄉" x="230.9" y="411.5" text-anchor="middle">口湖</text>
       </g>
       <g id="pins">
-  <g class="pin" data-i="0" data-cat="咖啡甜點" transform="translate(558.3,307.1)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D49A2C" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D49A2C" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">☕</text>
-  </g>
-  <g class="pin" data-i="1" data-cat="伴手禮" transform="translate(484.8,306.8)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🐼</text>
-  </g>
-  <g class="pin" data-i="2" data-cat="餐飲美食" transform="translate(532.5,317.2)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🥟</text>
-  </g>
-  <g class="pin" data-i="3" data-cat="咖啡甜點" transform="translate(482.6,280.8)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D49A2C" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D49A2C" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">☕</text>
-  </g>
-  <g class="pin" data-i="4" data-cat="農漁特產" transform="translate(505.9,328.8)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🐖</text>
-  </g>
-  <g class="pin" data-i="5" data-cat="餐飲美食" transform="translate(552.4,270.6)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍜</text>
-  </g>
-  <g class="pin" data-i="6" data-cat="文創手作" transform="translate(496.4,258.6)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#7A5A96" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#7A5A96" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">💍</text>
-  </g>
-  <g class="pin" data-i="7" data-cat="餐飲美食" transform="translate(536.8,291.5)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🥗</text>
-  </g>
-  <g class="pin" data-i="8" data-cat="文創手作" transform="translate(514.2,277.4)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#7A5A96" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#7A5A96" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🧵</text>
-  </g>
-  <g class="pin" data-i="9" data-cat="餐飲美食" transform="translate(510.6,303.2)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍕</text>
-  </g>
-  <g class="pin" data-i="10" data-cat="伴手禮" transform="translate(530.3,257.0)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍓</text>
-  </g>
-  <g class="pin" data-i="11" data-cat="體驗觀光" transform="translate(488.3,347.9)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#5B6FA8" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#5B6FA8" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍫</text>
-  </g>
-  <g class="pin" data-i="12" data-cat="伴手禮" transform="translate(466.4,334.0)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍝</text>
-  </g>
-  <g class="pin" data-i="13" data-cat="農漁特產" transform="translate(657.4,399.5)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🌻</text>
-  </g>
-  <g class="pin" data-i="14" data-cat="體驗觀光" transform="translate(670.5,377.0)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#5B6FA8" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#5B6FA8" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍶</text>
-  </g>
-  <g class="pin" data-i="15" data-cat="餐飲美食" transform="translate(679.2,325.4)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🧁</text>
-  </g>
-  <g class="pin" data-i="16" data-cat="文創手作" transform="translate(728.6,396.5)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#7A5A96" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#7A5A96" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🧸</text>
-  </g>
-  <g class="pin" data-i="17" data-cat="餐飲美食" transform="translate(602.5,333.4)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🦆</text>
-  </g>
-  <g class="pin" data-i="18" data-cat="伴手禮" transform="translate(555.0,332.9)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍲</text>
-  </g>
-  <g class="pin" data-i="19" data-cat="咖啡甜點" transform="translate(582.6,316.2)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D49A2C" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D49A2C" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🟢</text>
-  </g>
-  <g class="pin" data-i="20" data-cat="伴手禮" transform="translate(578.7,343.7)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🌾</text>
-  </g>
-  <g class="pin" data-i="21" data-cat="餐飲美食" transform="translate(574.1,369.3)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍰</text>
-  </g>
-  <g class="pin" data-i="22" data-cat="農漁特產" transform="translate(435.6,231.3)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍯</text>
-  </g>
-  <g class="pin" data-i="23" data-cat="體驗觀光" transform="translate(712.4,276.2)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#5B6FA8" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#5B6FA8" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🎂</text>
-  </g>
-  <g class="pin" data-i="24" data-cat="咖啡甜點" transform="translate(666.5,293.2)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D49A2C" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D49A2C" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">☕</text>
-  </g>
-  <g class="pin" data-i="25" data-cat="餐飲美食" transform="translate(640.6,291.5)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🦑</text>
-  </g>
-  <g class="pin" data-i="26" data-cat="體驗觀光" transform="translate(674.2,268.4)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#5B6FA8" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#5B6FA8" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🥬</text>
-  </g>
-  <g class="pin" data-i="27" data-cat="文創手作" transform="translate(691.0,302.0)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#7A5A96" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#7A5A96" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🌿</text>
-  </g>
-  <g class="pin" data-i="28" data-cat="餐飲美食" transform="translate(650.8,316.9)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍵</text>
-  </g>
-  <g class="pin" data-i="29" data-cat="伴手禮" transform="translate(570.6,184.4)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🥚</text>
-  </g>
-  <g class="pin" data-i="30" data-cat="咖啡甜點" transform="translate(534.8,194.1)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D49A2C" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D49A2C" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🧋</text>
-  </g>
-  <g class="pin" data-i="31" data-cat="伴手禮" transform="translate(547.9,171.7)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍡</text>
-  </g>
-  <g class="pin" data-i="32" data-cat="體驗觀光" transform="translate(542.6,218.9)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#5B6FA8" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#5B6FA8" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">⛩️</text>
-  </g>
-  <g class="pin" data-i="33" data-cat="餐飲美食" transform="translate(567.1,210.1)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🥟</text>
-  </g>
-  <g class="pin" data-i="34" data-cat="伴手禮" transform="translate(312.2,461.1)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🥮</text>
-  </g>
-  <g class="pin" data-i="35" data-cat="伴手禮" transform="translate(296.2,481.7)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍠</text>
-  </g>
-  <g class="pin" data-i="36" data-cat="餐飲美食" transform="translate(249.6,431.5)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🐟</text>
-  </g>
-  <g class="pin" data-i="37" data-cat="農漁特產" transform="translate(212.2,461.1)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🦐</text>
-  </g>
-  <g class="pin" data-i="38" data-cat="農漁特產" transform="translate(244.2,461.1)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🦆</text>
-  </g>
-  <g class="pin" data-i="39" data-cat="農漁特產" transform="translate(449.3,209.3)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍄</text>
-  </g>
-  <g class="pin" data-i="40" data-cat="農漁特產" transform="translate(560.2,391.3)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🌱</text>
-  </g>
-  <g class="pin" data-i="41" data-cat="餐飲美食" transform="translate(460.0,660.0)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#D9466F" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#D9466F" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍱</text>
-  </g>
-  <g class="pin" data-i="42" data-cat="文創手作" transform="translate(387.6,284.0)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#7A5A96" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#7A5A96" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🍬</text>
-  </g>
-  <g class="pin" data-i="43" data-cat="伴手禮" transform="translate(381.1,467.2)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#C97B5A" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#C97B5A" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🎁</text>
-  </g>
-  <g class="pin" data-i="44" data-cat="文創手作" transform="translate(732.9,234.9)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#7A5A96" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#7A5A96" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🎨</text>
-  </g>
-  <g class="pin" data-i="45" data-cat="農漁特產" transform="translate(320.0,253.0)">
-    <ellipse class="pin-shadow" cx="0" cy="13" rx="7.5" ry="2.6" fill="#7A6A86" opacity=".18"/>
-    <circle class="pin-halo" cy="-1.7" r="15.5" fill="#3D93AE" opacity="0"/>
-    <path class="pin-bg" d="M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z"
-          fill="#fff" stroke="#3D93AE" stroke-width="2.4" stroke-linejoin="round"/>
-    <text class="pin-emoji" y="-2.6" font-size="12" text-anchor="middle" dominant-baseline="central">🌾</text>
-  </g>
       </g>
     </svg>
   </div>
@@ -920,42 +545,296 @@ footer b{color:var(--plum)}
 </footer>
 
 <script>
-const TOWN_BBOX = {"麥寮鄉": [211.6, 382.1, 98.0, 262.4], "斗六市": [596.4, 770.1, 230.4, 365.4], "斗南鎮": [507.1, 646.7, 273.2, 391.6], "虎尾鎮": [453.8, 605.5, 245.9, 343.1], "西螺鎮": [506.9, 616.9, 154.4, 256.8], "土庫鎮": [408.1, 496.4, 244.2, 373.8], "北港鎮": [331.8, 415.6, 385.5, 497.9], "古坑鄉": [608.4, 870.0, 307.8, 466.6], "大埤鄉": [450.0, 572.7, 329.6, 418.9], "莿桐鄉": [575.6, 708.2, 178.4, 267.8], "林內鄉": [682.1, 778.7, 191.1, 287.6], "二崙鄉": [430.1, 541.8, 142.5, 249.5], "崙背鄉": [366.8, 476.4, 152.5, 253.4], "東勢鄉": [281.7, 381.7, 249.1, 361.7], "褒忠鄉": [339.6, 434.6, 246.6, 324.2], "元長鄉": [345.5, 474.0, 309.9, 438.3], "水林鄉": [240.9, 349.1, 387.2, 546.9], "臺西鄉": [193.8, 309.6, 225.9, 356.3], "四湖鄉": [163.6, 354.1, 302.0, 444.8], "口湖鄉": [30.1, 277.8, 382.6, 632.0], "無店面": [420, 500, 630, 690]};
-const STORES = [{"disp": "AJ CAFE", "town": "虎尾鎮", "addr": "虎尾鎮民主路18之7號一樓", "cat2": "咖啡甜點", "emoji": "☕", "promo": "活動期間：購買咖啡豆享9折優惠、內用手沖咖啡續杯半價", "hours": "AM10 :00～PM6:30", "main": "咖啡豆、濾掛咖啡、手作甜點、創意飲品", "tags": "雲林100碗  AJ CFE  虎尾咖啡", "photos": []}, {"disp": "饅享受", "town": "虎尾鎮", "addr": "虎尾鎮延平里中南17-15號", "cat2": "伴手禮", "emoji": "🐼", "promo": "購買造型饅頭10顆再送1顆", "hours": "8:00-18:00", "main": "12款雲林意象饅頭、各式療癒人心造型饅頭、客製饅頭教學體驗課程、學校午餐供應", "tags": "雲林100碗、療癒饅頭、造型饅頭", "photos": []}, {"disp": "媽祖埔豆腐張", "town": "虎尾鎮", "addr": "虎尾鎮林森路二段471號", "cat2": "餐飲美食", "emoji": "🥟", "promo": "", "hours": "1630-2230", "main": "鹹酥臭豆腐，麻辣臭豆腐，麻辣鴨血", "tags": "", "photos": []}, {"disp": "怪咖咖啡", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83之6號", "cat2": "咖啡甜點", "emoji": "☕", "promo": "外帶咖啡同品項第二杯半價", "hours": "", "main": "咖啡、昭和布丁、咖啡汽水", "tags": "雲林100碗、建國眷村、咖啡汽水、昭和布丁、咖啡攤車", "photos": []}, {"disp": "雲饗豬", "town": "虎尾鎮", "addr": "虎尾鎮延平里下南100號", "cat2": "農漁特產", "emoji": "🐖", "promo": "", "hours": "週一~週五10:00-17:00、週六10:00-16:00", "main": "豬肉鬆、肉乾、肉絲、肉角、冷凍生鮮及調理商品", "tags": "", "photos": []}, {"disp": "中華麵そば", "town": "虎尾鎮", "addr": "虎尾鎮西平路64號", "cat2": "餐飲美食", "emoji": "🍜", "promo": "消費滿999元送豬排一份", "hours": "平日11:00-14:00 17:00-21:00 假日11:00-14:30 17:00-21:00", "main": "特濃豚骨 昆布 味噌 麻辣豚骨 養生素食", "tags": "雲林100碗、中華拉麵、必吃美食", "photos": []}, {"disp": "庭口金工", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83-7號 丁棟", "cat2": "文創手作", "emoji": "💍", "promo": "", "hours": "10:30-18:30", "main": "金工DIY體驗、飾品與婚戒訂製、眷村麵食", "tags": "", "photos": []}, {"disp": "生機廚房", "town": "虎尾鎮", "addr": "虎尾鎮民主路1號", "cat2": "餐飲美食", "emoji": "🥗", "promo": "", "hours": "10:：00-18:30", "main": "1.有機蔬食餐廳 2.全米麵包、全米饅頭 3食農教育實踐及推廣者", "tags": "", "photos": []}, {"disp": "有點小物工作室", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83-5號", "cat2": "文創手作", "emoji": "🧵", "promo": "小物限定寫生租借服務-【幸福的提筆畫室】免費體驗乙次 #預約制 #無現場教學 #自由寫生 #畫具租借 請於報名表單上備註「集點樂兌換」", "hours": "平日 12:00-18:00，假日 10:00-18:00", "main": "文創商品、海外選物、寫生租借、不定期辦理英語活動", "tags": "療癒選物、文創商品、在地小店", "photos": []}, {"disp": "披薩老爹虎篤店", "town": "虎尾鎮", "addr": "虎尾鎮立德路129號", "cat2": "餐飲美食", "emoji": "🍕", "promo": "", "hours": "週三-週五 17:00-21:00 週六,週日 11:00-14:00 17:00-21:00", "main": "瑪格麗特披薩/任性小孩披薩/主廚特製披薩/培根蛋黃麵/提拉米蘇", "tags": "", "photos": []}, {"disp": "草莓小護士手作の屋", "town": "虎尾鎮", "addr": "虎尾鎮正義路74號", "cat2": "伴手禮", "emoji": "🍓", "promo": "鐵蛋、鳥蛋、豆干、米血、甜點…櫃上消費滿200、贈手工Q餅", "hours": "採預定制", "main": "🍰提拉米蘇|層層堆疊的療癒 🍪手工餅乾 | 像日常關心一樣不張揚 🧁小蛋糕 | 替平凡日子加點甜 🍬牛軋糖|慢慢咀嚼的幸福帶 🥮Q餅 | 扎實又安心的存在  每一份甜點， 都像護理交班時的叮嚀 只希望你吃得安心、甜得剛好。|", "tags": "草莓小護士手作屋、虎尾伴手禮", "photos": []}, {"disp": "土庫驛可可莊園", "town": "土庫鎮", "addr": "土庫鎮大同路1之2號", "cat2": "體驗觀光", "emoji": "🍫", "promo": "生巧克力第二件8折。", "hours": "9:00~17:30", "main": "1.黑巧克力Bar片、2.生巧克力、3.義式冰淇淋、4.可可食農體驗、5.可可粉、可可茶等巧克力產品", "tags": "巧克力、雲林100碗、莊園", "photos": []}, {"disp": "萬源製麵舖", "town": "土庫鎮", "addr": "633土庫鎮光明路167號", "cat2": "伴手禮", "emoji": "🍝", "promo": "全產品95折 ※本優惠方案上架期間為：與活動同步（115年9月15日 至 115年10月17日），活動結束後將自動於平台下架，恕不另行通知。", "hours": "每天早上8：30～下午17：30 (每週一公休)", "main": "彩色蔬果麵、伴手禮、拌麵", "tags": "雲林良品、伴手禮、彩色蔬果麵", "photos": []}, {"disp": "糧莘庇護農場", "town": "古坑鄉", "addr": "古坑鄉永興路166-1號1樓", "cat2": "農漁特產", "emoji": "🌻", "promo": "", "hours": "9:00~16:30", "main": "1.台灣紅藜 2.黑金紅藜茶 3.紅藜香鬆 4.彩虹藜麵 5.從農場到餐桌的食農體驗", "tags": "", "photos": []}, {"disp": "福祿壽酒廠", "town": "古坑鄉", "addr": "64650古坑鄉中山路11號", "cat2": "體驗觀光", "emoji": "🍶", "promo": "", "hours": "展售中心／門市：週二至週日 08:30 – 17:00（週一休館）", "main": "福牌高粱酒、好樂達咖啡香甜酒、米酒料酒、酒類再製品、伴手禮", "tags": "雲林良品、免費試喝、釀酒", "photos": []}, {"disp": "東和泡芙", "town": "古坑鄉", "addr": "古坑鄉東和村文化路118號", "cat2": "餐飲美食", "emoji": "🧁", "promo": "單筆消費結帳金額滿200元，贈送手工泡芙一顆(供應之口味，視現場情況而定)", "hours": "每日15:00～18:00", "main": "泡芙、蛋塔、蛋黃酥", "tags": "雲林100碗、排隊名店、國際競賽三金得主、全國比賽冠軍、所有的東西都能做成泡芙", "photos": []}, {"disp": "童趣手作", "town": "古坑鄉", "addr": "古坑鄉永光村大湖口56號", "cat2": "文創手作", "emoji": "🧸", "promo": "", "hours": "", "main": "木竹組裝玩具：組裝玩具步槍 ，玩具摩天輪，玩具音樂盒，竹製小玩具", "tags": "手作玩具，DIY手作，童玩", "photos": []}, {"disp": "阿國師雲蒸薑母鴨", "town": "斗南鎮", "addr": "斗南鎮義德路2號", "cat2": "餐飲美食", "emoji": "🦆", "promo": "甕蒸薑母鴨/菌菇九尾雞（即食包）原價249元 第二件半價", "hours": "16:00-21:00", "main": "甕蒸薑母鴨/菌菇九尾雞  /烏骨九尾雞", "tags": "雲林良品、雲林100碗、甕蒸薑母鴨、", "photos": []}, {"disp": "國柱食作所", "town": "斗南鎮", "addr": "斗南鎮六合街75號", "cat2": "伴手禮", "emoji": "🍲", "promo": "", "hours": "採預約方式取貨", "main": "1. 燻茶鵝、燻茶鴨     精選優質鵝、鴨肉，結合傳統燻製工法與茶香風味，呈現肉質鮮嫩、香氣醇厚的特色熟食。 2.脆皮蔥油雞     以優質雞肉搭配特製蔥油調味，保留雞肉鮮甜，方便加熱即食，是家庭餐桌及節慶聚餐的特色料理。 3. 特色香腸系列     包含紹興香腸、烏魚子香腸等，以優質豬肉搭配特色風味食材製作，結合傳統香腸工法與創新口味。 4. 傳統特色調理食品     包含筍干元蹄、薑母鴨及人參燉烏骨雞湯等，將傳統家常料理製作成方便保存及加熱的冷凍調理食品。 5. 生鮮及冷凍肉品     提供雞、鴨、鵝、豬等生鮮及冷凍肉品，重視食材品質與保存管理，滿足家庭料理及餐飲使用需求。", "tags": "", "photos": []}, {"disp": "小輝俠手工愛玉", "town": "斗南鎮", "addr": "斗南鎮延平路二段161號", "cat2": "咖啡甜點", "emoji": "🟢", "promo": "參與DIY洗愛玉者，將贈送免費新鮮果汁調味（例如：檸檬汁、百香果汁、鳳梨汁……等）", "hours": "早上九點到晚上十點", "main": "1、野生愛玉子，2、DIY互動教學，3、單品手充沖咖啡", "tags": "台灣野生愛玉子", "photos": []}, {"disp": "玉山碾米", "town": "斗南鎮", "addr": "斗南鎮新興街33號", "cat2": "伴手禮", "emoji": "🌾", "promo": "指定商品買五送一", "hours": "08:00～18:00", "main": "粉好糠、醬好糠禮盒、寶寶米餅、溫度米2.0、三麗鷗禮盒", "tags": "雲林良品、寶寶米餅、雲林伴手禮", "photos": []}, {"disp": "HUNGHUNG 甜點工作室", "town": "斗南鎮", "addr": "斗南鎮中山路120號", "cat2": "餐飲美食", "emoji": "🍰", "promo": "消費巴斯克一顆送常溫小蛋糕1入", "hours": "", "main": "1. 雲林100碗・巴斯克乳酪蛋糕 2. 法式手工餅乾與常溫甜點 3. 節慶限定伴手禮盒 4. 可麗露、費南雪等法式點心 5. 客製化蛋糕與企業送禮", "tags": "雲林100碗 法式甜點 巴斯克蛋糕", "photos": []}, {"disp": "臺一養蜂園蜜茶站", "town": "崙背鄉", "addr": "崙背鄉南陽村建國路18號", "cat2": "農漁特產", "emoji": "🍯", "promo": "", "hours": "上午8:00-晚上20:00", "main": "蜂蜜、花粉、蜂王乳、蛋糕", "tags": "", "photos": []}, {"disp": "塔吉特千層蛋糕大使館", "town": "斗六市", "addr": "斗六市工業路118號", "cat2": "體驗觀光", "emoji": "🎂", "promo": "", "hours": "09:30-17:30", "main": "千層蛋糕、年輪蛋糕、果凍布丁類商品、手作DIY課程", "tags": "雲林良品、在地品牌、千層蛋糕專賣", "photos": []}, {"disp": "愛思咖啡", "town": "斗六市", "addr": "斗六市永安路71號", "cat2": "咖啡甜點", "emoji": "☕", "promo": "愛思咖啡響應活動，活動期間憑相關參與證明，購買精品濾掛咖啡或浸泡式咖啡享 95折優惠；單筆消費滿 500 元，加贈精選濾掛咖啡 1 包。邀請大家用一杯好咖啡，支持台灣在地烘焙品牌。", "hours": "08:00~17:00", "main": "手沖咖啡 50-250元 咖啡豆 400-1500元 手工餅乾 100-200元 手工馬林糖 30-200  元 手工歐式麵包 50-200 元", "tags": "愛思咖啡 咖啡豆 濾掛咖啡 手沖咖啡", "photos": []}, {"disp": "魷魚興魷魚嘴焿", "town": "斗六市", "addr": "斗六市中正路56號", "cat2": "餐飲美食", "emoji": "🦑", "promo": "", "hours": "08：30-18：30", "main": "魷魚嘴焿/ 魷魚羹/ 肉羹/ 肉燥飯/ 肉燥乾麵", "tags": "雲林美食 雲林100碗  斗六小吃", "photos": []}, {"disp": "古坑綠隧合作社", "town": "斗六市", "addr": "640斗六市社口里大學路二段303巷12號", "cat2": "體驗觀光", "emoji": "🥬", "promo": "", "hours": "8:00-12:00/13:00-17:00", "main": "尋仙找茶245ML-6入10入24入/960ml/尋仙找凍", "tags": "", "photos": []}, {"disp": "森活手作日和", "town": "斗六市", "addr": "斗六市久安東路", "cat2": "文創手作", "emoji": "🌿", "promo": "攤位消費滿 300 元，即隨機贈送精美手作毛根小吊飾乙個（數量有限，送完為止）。", "hours": "", "main": "1. 扭扭棒手作花束 2. 扭扭棒療癒小盆栽 3. 節慶主題手作商品 4. 手作吊飾及髮飾 5. DIY手作體驗活動", "tags": "毛根手作、雲林手作、客製禮品、扭扭棒花束", "photos": []}, {"disp": "干嘛喝茶", "town": "斗六市", "addr": "週六:斗六觀光夜市 週日:斗六觀光夜市", "cat2": "餐飲美食", "emoji": "🍵", "promo": "仙草干茶與原味茶飲系列第二杯半價", "hours": "16:00-23:00", "main": "仙草干茶  仙干奶茶   牛奶嫩仙草........", "tags": "自創文創仙草飲品", "photos": []}, {"disp": "安記鐵蛋", "town": "西螺鎮", "addr": "西螺鎮中正路47號", "cat2": "伴手禮", "emoji": "🥚", "promo": "全店同價位品項買十送一", "hours": "09:00-21:00", "main": "香鐵蛋,滷蛋,豆干", "tags": "雲林良品、雲林100碗、雲林禮讚獎店家", "photos": []}, {"disp": "金燕子奶茶西螺店", "town": "西螺鎮", "addr": "西螺鎮福來路42號 （果菜市場正對面）", "cat2": "咖啡甜點", "emoji": "🧋", "promo": "", "hours": "9:00-7:30", "main": "招牌奶茶 經典紅茶 高山青茶  芋香奶茶 冬瓜茶 冬瓜檸檬  金燕子飲品主打 手工熬煮 用最天然的砂糖 蔗糖 冬瓜 新鮮的檸檬汁 不加任何的果糖 喝的也放心！", "tags": "", "photos": []}, {"disp": "來呷粿", "town": "西螺鎮", "addr": "西螺鎮建興路260號", "cat2": "伴手禮", "emoji": "🍡", "promo": "消費滿百送古早味蘿蔔糕（小份）1份", "hours": "05:00-13:30", "main": "原味蘿蔔糕/芋頭蘿蔔糕/港式蘿蔔糕/各式早午餐（滷肉飯/麵）/炸年糕", "tags": "雲林小吃、在地老店、評價最高、雲林伴手禮、早午餐、蘿蔔糕", "photos": []}, {"disp": "佛美神仙故事館", "town": "西螺鎮", "addr": "648西螺鎮新豐里福來路8巷19號", "cat2": "體驗觀光", "emoji": "⛩️", "promo": "", "hours": "星期一 / 星期三 ~ 星期日 (星期二公休)", "main": "1. 神仙故事館導覽 2.蔬食好食堂 3.佛美牛蒡茶 4.佛美罐頭禮盒 5.宗教文物", "tags": "", "photos": []}, {"disp": "北京王餡餅", "town": "西螺鎮", "addr": "西螺鎮延平路149號", "cat2": "餐飲美食", "emoji": "🥟", "promo": "餡餅滿200送20，冷凍餡餅滿500送保冷袋。", "hours": "14:00-18:00", "main": "牛肉餡餅、豬肉餡餅、韭菜餡餅、紅豆餡餅", "tags": "雲林百大美食，雲林老店，排隊美食", "photos": []}, {"disp": "水林祥美餅舖", "town": "水林鄉", "addr": "水林鄉水林路221號", "cat2": "伴手禮", "emoji": "🥮", "promo": "", "hours": "7-17.", "main": "🏮【那抹剛出爐的餅香，是我們最想留給您的溫暖】  天剛濛濛亮，祥美餅舖的廚房裡早已熱氣騰騰。裊裊升起的白煙裡，拌著剛蒸好糯米的油飯香，包裹著糯米花生餡的令人垂涎紅龜粿，軟糯Q彈；還有烤爐裡慢慢烘烤出金黃色澤的蛋黃酥、滷肉豆沙餅香氣。  看著大家冒著晨風前來，只為了帶一份剛出爐的傳統滋  無論是榮獲雲林100碗推薦的【古法油飯】、香酥不黏牙的【不老農花生糖】、象徵福氣的【紅龜、壽桃、發糕、鳳片糕、鹼粽、豬羊三牲】， 或是假期團聚少不了的【冬瓜肉餅、滷肉豆沙餅、紅豆麻糬、鳳梨餅、蛋黃酥】。 每一份點心，都是我們手工限量現做。提前預訂，讓我們能提早為您備好最完美的滋味，也讓您的期待，能百分之百地被滿足。  下次出發前，不妨先動動手指或撥個電話，把您想要的美味鎖定下來。 看見您接過餅時滿足的笑容，才是祥美餅舖最美的風景。❤️  👉【祥美餅舖 預訂資訊】 💬 歡迎私訊粉絲專頁預訂 📞 預訂專線：（請填入電話） 📍 店址：（請填入地址） （建議提前 2-3 天預訂，讓我們能用心準備喔！）", "tags": "", "photos": []}, {"disp": "阿德的家地瓜瑞士捲", "town": "水林鄉", "addr": "水林鄉山腳村尖山腳45-18號", "cat2": "伴手禮", "emoji": "🍠", "promo": "", "hours": "週一-週五：10:00-12:00，14:00-18:00  週六（日）10:00-18:00", "main": "採用在地台農57號地瓜，一直以來堅持，無任何添加防腐劑，天然健康  *阿德的產品特色 地瓜瑞士捲完全不添加防腐劑、香精，卡士達瑞士捲的醬也是全程手工熬煮，給消費者天然健康的口感滋味", "tags": "", "photos": []}, {"disp": "第一鰻波", "town": "口湖鄉", "addr": "口湖鄉浦南村1-3號", "cat2": "餐飲美食", "emoji": "🐟", "promo": "第一鰻波-胭脂鰻(125gx6)1700元，送限量摺疊袋一只", "hours": "買伴手禮09:00-17:00，吃鰻魚飯11:00-14:30（假日限定）", "main": "主要商品1.胭脂鰻、2.台灣胭脂鰻、3.白燒鰻、4.烏涮嘴一口吃烏魚子，服務:鰻遊趣食農教育", "tags": "雲林100碗、雲林良品、雲林100景", "photos": []}, {"disp": "渲益（漁產）", "town": "口湖鄉", "addr": "口湖鄉埔南村外埔72-88號（養殖場域地點）", "cat2": "農漁特產", "emoji": "🦐", "promo": "蒲燒鰻魚3片/1公斤+鮮鰻片1片/330克$1500", "hours": "平日週一至週五8:00-17:00，假日可預約", "main": "蒲燒鰻魚、鮮鰻魚", "tags": "送禮最佳選擇 、最強懶人料理 、產地直送餐桌", "photos": []}, {"disp": "坔田渡鳥文化工作室", "town": "口湖鄉", "addr": "口湖鄉成龍村82號", "cat2": "農漁特產", "emoji": "🦆", "promo": "來店消費一份飲品加點心，送成龍溼地鑰匙圈一個", "hours": "例假日10:30-18:00", "main": "成龍溼地環境教育／生態旅遊／在地特色手作茶點／友善環境農漁產", "tags": "成龍溼地、烏魚子司康、洛神花冰沙", "photos": []}, {"disp": "吉品杏鮑菇", "town": "二崙鄉", "addr": "二崙鄉隆興路1-9號", "cat2": "農漁特產", "emoji": "🍄", "promo": "", "hours": "上午8:00-下午5:00", "main": "新鮮各式菇類、有機黑木耳露、杏鮑菇虱目魚丸、黃金杏鮑菇", "tags": "", "photos": []}, {"disp": "勻凱農場", "town": "大埤鄉", "addr": "大埤鄉尚義村尚義7號", "cat2": "農漁特產", "emoji": "🌱", "promo": "黑米買5送1，買5包送一包同包裝的", "hours": "", "main": "黑糙米、雙色胚芽米、白米、爆米香", "tags": "沒有", "photos": []}, {"disp": "芳如小舖", "town": "無店面", "addr": "無", "cat2": "餐飲美食", "emoji": "🍱", "promo": "", "hours": "無", "main": "魯味·油飯.茶葉蛋.红茶", "tags": "", "photos": []}, {"disp": "食伍手作", "town": "褒忠鄉", "addr": "褒忠", "cat2": "文創手作", "emoji": "🍬", "promo": "明星商品買一送一、民眾參與相關活動即可換馬路糖罐", "hours": "", "main": "造型馬林糖/蛋塔/布朗尼/餅乾", "tags": "#雲林食伍手作 #雲林手作馬林糖 #雲林造型馬林糖", "photos": []}, {"disp": "傳發之家", "town": "北港鎮", "addr": "北港鎮公民路12號", "cat2": "伴手禮", "emoji": "🎁", "promo": "", "hours": "8:30-20:30", "main": "糯米麥芽膏、麥芽花生糖、麥芽芝麻糖、糯米麥芽餅", "tags": "", "photos": []}, {"disp": "鄭凱元手作", "town": "林內鄉", "addr": "林內鄉林中村中正路202號", "cat2": "文創手作", "emoji": "🎨", "promo": "", "hours": "早上10點~晚上8點(週一公休)", "main": "Tree to Bar台灣可可巧克力 雲林風土特色巧克力 可可茶 巧克力食農教育與DIY體驗 企業客製巧克力與地方特色禮贈", "tags": "", "photos": []}, {"disp": "月光下友善農場", "town": "麥寮鄉", "addr": "麥寮鄉西濱路三段80號", "cat2": "農漁特產", "emoji": "🌾", "promo": "活動期間所有品項九五折", "hours": "", "main": "小麥粒、小麥餅乾、小麥茶、小麥酒", "tags": "台灣小麥、食農教育、地產地銷", "photos": []}];
 
-const CATCOLOR={'餐飲美食':'#D9466F','咖啡甜點':'#D49A2C','農漁特產':'#3D93AE',
+// ══════════════════════════════════════════════════════════
+//  設定：把下面這行換成你發布後的 Google Sheet CSV 連結
+//  怎麼拿到這個連結？看檔案最上方的說明註解，或參考說明文件。
+// ══════════════════════════════════════════════════════════
+const CSV_URL = "PASTE_YOUR_PUBLISHED_GOOGLE_SHEET_CSV_URL_HERE";
+
+// ── 固定資料：雲林縣地圖的投影參數與 20 個鄉鎮的邊界／中心點 ──
+// 這些是地圖本身的幾何資料，不會因為店家增減而改變，所以直接寫死在這裡。
+const PROJ = {"minx": 119.9969041600001, "maxy": 23.866219431000047, "coslat": 0.9160062744697682, "scale": 1240.4718860582677, "offx": 30.000000000000057, "offy": 97.97926750180147};
+const TOWN_GEO = {"W": 900, "H": 730, "polys": {"麥寮鄉": [[376.7, 160.0], [376.6, 172.3], [375.1, 174.3], [371.0, 174.1], [366.8, 189.1], [370.0, 195.9], [368.3, 204.8], [371.4, 208.2], [377.9, 206.8], [381.1, 209.3], [382.1, 225.9], [367.9, 225.2], [368.7, 226.9], [366.8, 229.1], [371.9, 229.9], [371.9, 234.0], [375.2, 237.3], [372.6, 244.4], [373.3, 253.4], [355.6, 253.0], [350.8, 259.3], [344.0, 261.8], [333.9, 262.4], [326.0, 259.6], [318.9, 259.6], [315.4, 257.6], [307.5, 247.0], [304.9, 240.2], [298.8, 234.1], [292.3, 232.2], [286.2, 226.6], [279.4, 225.9], [269.6, 227.5], [262.1, 233.8], [224.2, 233.5], [225.8, 231.1], [218.6, 214.3], [218.6, 205.3], [211.6, 199.3], [215.5, 196.6], [221.1, 187.0], [232.9, 176.2], [233.1, 174.6], [227.0, 173.3], [227.2, 171.9], [232.4, 172.9], [235.8, 168.9], [239.3, 168.0], [240.9, 160.0], [251.3, 157.5], [262.5, 144.9], [267.6, 137.6], [270.3, 130.2], [270.3, 128.1], [265.9, 124.4], [266.0, 121.0], [277.1, 117.2], [282.6, 107.6], [283.9, 98.0], [300.4, 119.1], [316.7, 133.6], [324.5, 138.2], [376.7, 153.0], [376.7, 160.0]], "斗六市": [[683.5, 242.2], [686.8, 250.1], [690.8, 251.6], [695.2, 255.4], [695.1, 256.9], [698.2, 258.2], [702.3, 251.4], [708.4, 264.8], [712.8, 267.3], [717.0, 266.9], [716.7, 273.1], [724.1, 271.3], [728.0, 277.2], [736.2, 280.1], [740.2, 283.7], [745.0, 283.5], [750.7, 287.6], [761.5, 286.5], [759.6, 291.1], [762.3, 297.2], [767.2, 300.2], [764.6, 304.5], [768.2, 313.1], [767.0, 316.5], [767.2, 320.0], [768.7, 320.8], [767.8, 323.1], [770.1, 325.4], [767.6, 332.5], [768.6, 338.0], [766.4, 339.3], [765.0, 344.1], [760.7, 343.3], [756.2, 337.7], [751.9, 337.5], [752.5, 333.4], [747.8, 326.2], [749.2, 323.1], [746.9, 323.4], [742.9, 320.8], [736.1, 309.2], [733.8, 307.6], [726.2, 307.6], [715.8, 309.2], [713.6, 311.7], [703.5, 308.7], [700.9, 309.7], [699.4, 308.5], [695.2, 311.0], [690.1, 309.6], [691.5, 318.2], [683.1, 322.2], [679.6, 314.2], [674.4, 314.9], [669.8, 318.8], [666.9, 318.7], [668.9, 323.9], [674.3, 325.6], [675.9, 331.0], [673.7, 330.6], [669.5, 337.7], [669.7, 339.8], [666.7, 340.4], [659.4, 337.9], [647.9, 337.3], [644.5, 335.1], [643.4, 342.9], [645.5, 347.3], [647.3, 347.8], [648.1, 354.7], [643.5, 361.4], [643.0, 365.4], [635.6, 363.0], [635.7, 361.3], [632.8, 360.2], [628.5, 360.5], [619.0, 354.2], [617.6, 349.5], [612.8, 348.8], [611.4, 345.9], [612.1, 341.3], [608.6, 339.0], [608.5, 336.0], [610.2, 334.6], [603.5, 328.8], [600.9, 321.1], [605.3, 316.7], [603.6, 310.4], [599.1, 308.3], [596.4, 298.2], [598.9, 294.4], [597.9, 294.1], [599.9, 293.5], [598.6, 289.7], [601.5, 288.7], [598.6, 283.2], [599.2, 281.1], [596.7, 279.1], [599.6, 273.4], [601.6, 275.5], [605.5, 267.8], [608.8, 267.7], [610.7, 265.5], [614.4, 266.0], [622.0, 262.1], [628.3, 263.2], [629.3, 260.6], [635.9, 257.6], [635.8, 254.2], [640.1, 248.5], [654.5, 242.5], [662.5, 241.3], [669.1, 233.1], [682.7, 230.4], [686.5, 236.2], [683.5, 242.2]], "斗南鎮": [[597.7, 277.1], [596.7, 279.1], [599.2, 281.1], [598.6, 283.2], [601.5, 288.7], [598.6, 289.7], [599.9, 293.5], [597.9, 294.1], [598.9, 294.4], [596.4, 298.2], [599.1, 308.3], [603.6, 310.4], [605.3, 316.7], [600.9, 321.1], [603.5, 328.8], [610.2, 334.6], [608.5, 336.0], [608.6, 339.0], [612.1, 341.3], [612.6, 348.4], [617.6, 349.5], [619.0, 354.2], [628.5, 360.5], [632.8, 360.2], [635.7, 361.3], [635.6, 363.0], [643.0, 365.4], [642.6, 370.7], [646.7, 377.0], [635.5, 374.7], [631.9, 379.4], [633.0, 380.3], [623.0, 380.4], [621.1, 383.0], [615.9, 382.0], [619.5, 384.7], [619.8, 386.9], [616.8, 386.0], [612.1, 388.0], [609.8, 384.9], [608.4, 386.3], [605.7, 384.5], [593.9, 387.1], [589.1, 383.7], [587.1, 385.8], [587.9, 390.1], [578.1, 387.3], [575.5, 391.6], [572.1, 389.7], [565.9, 390.7], [572.6, 350.8], [569.4, 349.5], [568.1, 346.1], [563.9, 344.5], [563.1, 347.8], [560.7, 346.8], [554.5, 347.8], [555.1, 343.5], [546.0, 336.3], [543.5, 336.7], [544.2, 341.8], [541.8, 342.9], [539.7, 336.7], [538.7, 340.8], [536.9, 341.6], [534.0, 339.1], [529.0, 338.7], [521.7, 340.4], [520.4, 336.3], [513.0, 336.9], [507.1, 329.6], [514.3, 316.6], [518.5, 318.3], [537.0, 319.1], [538.0, 320.9], [545.0, 319.6], [547.4, 321.5], [548.5, 315.8], [553.7, 315.4], [552.4, 314.3], [553.6, 312.7], [560.2, 317.3], [561.5, 316.6], [559.9, 312.9], [560.9, 311.4], [558.6, 309.7], [560.3, 305.2], [565.1, 304.1], [571.4, 298.2], [579.2, 297.5], [582.1, 293.6], [577.9, 283.7], [580.6, 279.1], [585.2, 277.2], [593.5, 276.7], [599.4, 273.2], [597.7, 277.1]], "虎尾鎮": [[463.4, 245.9], [473.5, 247.1], [482.1, 246.0], [488.6, 248.4], [503.3, 248.5], [513.2, 250.4], [517.5, 254.6], [532.2, 256.7], [553.1, 256.8], [552.3, 250.7], [566.1, 251.2], [567.1, 247.4], [571.5, 247.6], [574.0, 249.8], [586.7, 247.7], [596.2, 248.3], [593.7, 256.1], [603.6, 264.3], [605.5, 267.8], [601.5, 275.6], [599.4, 273.2], [593.5, 276.7], [585.2, 277.2], [580.6, 279.1], [577.9, 283.7], [582.1, 293.6], [579.2, 297.5], [571.4, 298.2], [565.1, 304.1], [560.3, 305.2], [558.6, 309.7], [560.9, 311.4], [559.9, 312.9], [561.5, 316.6], [560.2, 317.3], [553.6, 312.7], [552.4, 314.3], [553.7, 315.4], [548.5, 315.8], [547.4, 321.5], [545.0, 319.6], [538.0, 320.9], [537.0, 319.1], [518.5, 318.3], [514.3, 316.6], [501.6, 339.3], [496.4, 343.1], [491.6, 330.7], [492.5, 328.0], [484.6, 329.6], [482.0, 324.8], [479.3, 326.6], [481.6, 319.2], [487.6, 308.6], [470.0, 307.6], [470.4, 311.6], [463.0, 311.2], [461.6, 313.4], [460.6, 311.3], [460.1, 300.5], [461.1, 301.0], [463.4, 296.5], [463.9, 287.5], [453.8, 286.8], [454.1, 273.6], [454.7, 266.2], [457.2, 261.6], [462.8, 265.7], [466.5, 265.0], [467.7, 262.6], [467.6, 260.1], [461.8, 252.9], [459.9, 246.8], [463.4, 245.9]], "西螺鎮": [[545.7, 157.1], [582.5, 172.0], [616.9, 180.1], [602.1, 202.2], [599.7, 199.7], [584.8, 200.1], [585.2, 202.1], [575.8, 204.3], [575.6, 207.0], [579.2, 214.2], [584.1, 218.8], [579.8, 220.2], [579.5, 222.0], [578.5, 239.3], [579.6, 248.9], [574.0, 249.8], [571.5, 247.6], [567.1, 247.4], [566.1, 251.2], [552.3, 250.7], [553.1, 256.8], [532.2, 256.7], [517.5, 254.6], [513.3, 250.4], [507.6, 249.5], [506.9, 242.6], [511.1, 246.1], [513.2, 243.9], [519.2, 243.3], [518.4, 236.4], [525.5, 236.1], [527.0, 233.6], [517.0, 229.3], [523.4, 225.7], [525.6, 220.6], [523.8, 214.6], [514.2, 210.4], [513.3, 207.1], [521.2, 197.1], [520.2, 181.2], [521.8, 180.7], [522.3, 169.6], [520.8, 169.3], [520.9, 167.1], [522.3, 167.2], [522.6, 162.4], [526.7, 163.4], [530.9, 158.0], [541.8, 154.4], [545.7, 157.1]], "土庫鎮": [[419.2, 244.2], [429.3, 248.2], [432.0, 251.2], [437.0, 249.6], [441.1, 251.4], [446.9, 250.8], [459.8, 246.6], [461.8, 252.9], [467.7, 260.3], [466.4, 265.0], [462.8, 265.7], [457.3, 261.6], [454.7, 266.3], [453.8, 286.8], [463.9, 287.5], [463.4, 296.5], [461.1, 301.0], [460.1, 300.5], [460.6, 311.3], [461.6, 313.4], [463.0, 311.2], [470.4, 311.6], [470.0, 307.6], [487.6, 308.6], [481.6, 319.2], [479.3, 326.6], [482.0, 324.8], [484.6, 329.6], [492.5, 328.0], [491.6, 330.7], [496.4, 343.1], [486.4, 350.1], [474.0, 364.4], [467.9, 361.9], [459.8, 361.8], [437.5, 369.8], [432.9, 369.8], [426.2, 372.4], [423.7, 371.0], [421.0, 373.8], [422.7, 362.1], [421.2, 361.8], [421.6, 358.1], [424.2, 350.7], [422.1, 346.8], [423.6, 339.9], [420.9, 340.0], [420.8, 332.9], [417.7, 332.9], [417.6, 329.3], [418.7, 325.7], [421.8, 326.3], [423.4, 321.9], [412.6, 309.2], [414.1, 299.1], [420.6, 300.4], [416.6, 291.0], [423.1, 291.7], [425.0, 278.5], [429.3, 278.1], [428.9, 269.0], [434.6, 267.8], [432.4, 256.8], [428.4, 257.4], [427.4, 259.5], [418.7, 257.2], [408.1, 247.8], [410.0, 244.5], [419.2, 244.2]], "北港鎮": [[346.9, 385.7], [365.3, 388.1], [365.1, 389.7], [372.3, 390.9], [372.8, 394.3], [370.3, 402.7], [376.5, 402.7], [376.6, 407.7], [380.1, 409.4], [376.2, 412.8], [383.1, 414.1], [382.9, 415.1], [389.0, 415.1], [388.9, 419.0], [396.6, 419.4], [397.0, 422.3], [407.1, 422.9], [405.5, 424.6], [411.0, 423.4], [411.1, 426.4], [415.4, 426.4], [415.6, 432.4], [412.6, 438.4], [412.0, 454.0], [410.3, 456.2], [404.5, 460.6], [398.2, 462.4], [387.5, 459.2], [382.9, 459.7], [381.8, 462.9], [386.0, 468.9], [386.4, 472.3], [381.8, 474.3], [370.3, 472.1], [364.9, 473.6], [362.0, 477.9], [363.9, 489.6], [357.0, 494.1], [345.4, 497.9], [343.5, 491.0], [344.5, 486.4], [341.6, 485.8], [341.6, 481.2], [343.8, 473.3], [346.7, 474.4], [347.3, 468.0], [349.1, 465.3], [343.0, 463.5], [344.0, 461.9], [341.2, 458.1], [337.9, 456.8], [334.9, 457.9], [334.6, 453.3], [331.8, 452.6], [332.0, 446.2], [334.8, 446.3], [334.4, 444.0], [337.5, 444.9], [337.7, 440.0], [341.0, 438.3], [338.1, 432.0], [342.3, 416.9], [337.6, 416.1], [338.0, 411.2], [335.2, 410.4], [333.7, 406.4], [334.5, 400.2], [337.4, 390.8], [338.7, 391.9], [343.5, 391.1], [343.8, 385.5], [346.9, 385.7]], "古坑鄉": [[734.2, 307.8], [743.1, 321.0], [746.9, 323.4], [749.2, 323.1], [747.8, 326.2], [752.5, 333.4], [751.9, 337.5], [756.3, 337.8], [761.6, 343.7], [765.9, 343.8], [762.3, 346.8], [760.8, 352.6], [757.2, 357.5], [755.0, 364.2], [756.6, 368.4], [754.8, 369.9], [755.3, 375.0], [751.4, 378.4], [748.3, 384.6], [749.6, 387.7], [747.9, 391.0], [750.6, 401.3], [753.6, 404.5], [755.5, 403.6], [759.3, 397.5], [765.1, 393.2], [766.6, 389.8], [775.5, 391.6], [773.7, 408.2], [781.6, 411.1], [784.8, 415.2], [788.6, 414.4], [793.8, 416.6], [810.4, 414.6], [812.4, 412.3], [813.1, 405.6], [819.0, 403.0], [825.3, 403.4], [831.5, 406.6], [840.6, 404.4], [844.9, 402.1], [843.8, 393.6], [850.1, 391.1], [855.1, 400.3], [863.9, 405.8], [864.2, 414.5], [856.8, 423.5], [860.5, 426.5], [861.6, 429.5], [866.1, 431.7], [862.9, 436.1], [865.9, 441.0], [867.5, 447.8], [865.5, 456.6], [868.9, 459.2], [870.0, 464.9], [860.6, 465.0], [856.7, 463.1], [849.3, 466.6], [847.2, 464.1], [840.3, 464.0], [839.0, 458.4], [834.2, 459.3], [821.8, 457.4], [801.9, 464.5], [794.8, 454.5], [784.2, 457.6], [779.7, 462.4], [772.9, 462.4], [769.1, 457.2], [764.7, 458.3], [764.7, 455.2], [769.0, 452.5], [771.2, 448.7], [771.3, 446.0], [769.1, 445.8], [768.8, 443.7], [771.1, 437.6], [767.1, 436.2], [750.3, 440.7], [743.4, 440.0], [736.9, 447.9], [732.9, 446.4], [726.9, 449.8], [722.7, 447.8], [715.6, 449.1], [709.4, 446.3], [703.6, 445.9], [699.3, 449.8], [692.9, 450.2], [682.0, 443.1], [677.9, 443.4], [675.5, 441.2], [667.7, 441.8], [665.7, 437.0], [643.6, 434.8], [622.2, 415.2], [610.4, 399.7], [608.9, 395.8], [610.2, 389.7], [608.4, 386.3], [609.8, 384.9], [612.2, 388.0], [616.8, 386.0], [619.8, 386.9], [619.5, 384.7], [615.9, 382.0], [621.1, 383.0], [623.0, 380.4], [633.0, 380.3], [631.9, 379.4], [635.5, 374.7], [646.7, 377.0], [642.2, 369.1], [643.5, 361.4], [648.1, 354.7], [647.3, 347.8], [645.5, 347.3], [643.4, 342.9], [644.5, 335.1], [651.4, 338.1], [669.7, 339.9], [672.3, 332.5], [676.3, 329.9], [674.2, 328.5], [673.5, 324.7], [668.9, 323.9], [668.7, 320.9], [666.1, 319.6], [669.8, 318.8], [674.4, 314.9], [679.7, 314.2], [683.1, 322.2], [691.5, 318.2], [690.1, 309.6], [695.2, 311.0], [699.4, 308.5], [700.9, 309.7], [703.5, 308.7], [713.6, 311.7], [715.8, 309.2], [734.2, 307.8]], "大埤鄉": [[513.6, 337.2], [519.5, 335.9], [521.7, 340.4], [529.0, 338.7], [534.0, 339.1], [536.9, 341.6], [538.7, 340.8], [539.7, 336.7], [541.1, 337.7], [540.4, 341.6], [541.6, 343.0], [544.2, 341.8], [543.5, 336.7], [545.9, 336.3], [555.1, 343.5], [554.5, 347.8], [560.7, 346.8], [563.1, 347.8], [563.9, 344.5], [568.1, 346.2], [569.4, 349.5], [572.7, 350.9], [565.9, 390.7], [556.7, 391.8], [549.4, 395.6], [546.0, 394.6], [549.4, 391.7], [548.3, 390.1], [544.8, 391.7], [538.6, 390.3], [534.8, 396.0], [531.1, 395.3], [528.1, 396.6], [530.1, 401.0], [526.2, 399.9], [522.5, 405.3], [519.1, 404.3], [516.9, 405.9], [513.1, 404.3], [511.6, 397.0], [506.0, 401.7], [502.8, 398.5], [495.6, 397.0], [495.3, 387.8], [493.3, 385.8], [489.0, 388.3], [491.0, 394.8], [472.2, 402.5], [468.5, 410.1], [469.1, 412.2], [466.1, 413.7], [465.3, 415.8], [455.2, 416.5], [451.8, 418.9], [450.0, 418.5], [452.8, 410.1], [455.9, 408.0], [467.4, 385.3], [474.4, 363.7], [486.4, 350.1], [501.6, 339.3], [507.1, 329.6], [513.6, 337.2]], "莿桐鄉": [[654.9, 178.4], [708.2, 191.2], [699.3, 206.0], [691.1, 210.6], [688.3, 216.6], [682.3, 219.5], [682.1, 230.1], [669.0, 233.2], [662.5, 241.3], [643.5, 246.2], [635.9, 254.1], [635.9, 257.6], [629.3, 260.6], [628.3, 263.2], [621.9, 262.1], [614.4, 266.0], [610.7, 265.5], [608.8, 267.7], [605.5, 267.8], [603.6, 264.3], [593.7, 256.1], [596.2, 248.3], [579.6, 248.9], [578.5, 239.3], [579.5, 222.0], [579.8, 220.2], [584.1, 218.8], [579.2, 214.2], [575.6, 207.0], [575.8, 204.3], [585.2, 202.1], [584.8, 200.1], [599.7, 199.7], [602.1, 202.2], [616.9, 180.1], [633.5, 181.3], [641.3, 178.6], [654.9, 178.4]], "林內鄉": [[733.8, 191.1], [749.7, 192.8], [755.1, 196.5], [761.2, 197.4], [770.4, 213.3], [778.6, 235.9], [777.1, 252.1], [778.7, 260.8], [765.8, 258.8], [763.1, 266.2], [761.0, 266.1], [760.4, 271.7], [762.6, 276.5], [759.9, 287.1], [750.7, 287.6], [745.0, 283.5], [740.2, 283.7], [736.2, 280.1], [726.6, 276.2], [724.1, 271.3], [716.7, 273.1], [717.0, 266.9], [712.8, 267.3], [708.4, 264.8], [702.3, 251.5], [698.2, 258.2], [695.1, 256.9], [695.2, 255.4], [690.8, 251.6], [686.8, 250.1], [682.9, 241.2], [686.5, 236.2], [682.1, 230.1], [682.2, 219.6], [688.3, 216.6], [691.1, 210.6], [699.3, 206.0], [708.2, 191.2], [733.8, 191.1]], "二崙鄉": [[533.4, 147.2], [537.3, 152.0], [541.8, 154.4], [530.7, 158.0], [526.7, 163.4], [522.6, 162.5], [520.8, 169.3], [522.3, 169.6], [521.8, 180.6], [520.2, 181.2], [521.2, 197.1], [513.3, 207.1], [514.2, 210.4], [523.8, 214.6], [525.6, 220.6], [523.5, 225.5], [517.0, 229.3], [527.0, 233.6], [526.1, 235.2], [518.4, 236.4], [519.2, 243.3], [513.2, 243.9], [511.1, 246.1], [506.9, 242.6], [507.6, 249.5], [497.2, 247.9], [488.6, 248.4], [482.2, 246.0], [473.7, 247.0], [476.3, 225.5], [470.4, 225.1], [468.9, 222.0], [439.8, 213.4], [442.1, 202.4], [448.2, 205.9], [451.1, 200.4], [444.8, 193.3], [432.4, 190.3], [434.8, 175.6], [430.1, 171.1], [432.7, 162.4], [431.9, 152.5], [442.7, 151.3], [454.3, 144.7], [499.8, 147.4], [508.4, 146.8], [516.4, 142.7], [521.3, 142.5], [526.5, 143.0], [533.4, 147.2]], "崙背鄉": [[416.5, 152.6], [431.9, 152.5], [432.7, 162.4], [430.1, 171.1], [434.8, 175.6], [432.4, 190.3], [444.8, 193.3], [451.1, 200.4], [448.2, 205.9], [442.1, 202.4], [439.9, 213.6], [468.9, 222.0], [470.4, 225.1], [476.4, 225.5], [473.7, 247.0], [463.3, 245.9], [446.9, 250.8], [441.1, 251.4], [437.0, 249.6], [432.0, 251.2], [429.8, 248.5], [422.4, 245.2], [410.2, 244.5], [408.1, 247.8], [402.4, 248.3], [398.4, 246.3], [392.4, 247.0], [387.6, 248.8], [386.0, 251.6], [373.3, 253.4], [372.6, 244.4], [375.2, 237.3], [371.9, 234.0], [371.9, 229.9], [366.8, 229.0], [368.7, 226.9], [368.0, 225.2], [382.1, 225.9], [381.1, 209.4], [377.9, 206.8], [371.4, 208.2], [368.3, 204.8], [370.0, 195.9], [366.8, 189.1], [371.0, 174.1], [375.1, 174.3], [376.6, 172.3], [376.7, 153.0], [393.0, 155.2], [416.5, 152.6]], "東勢鄉": [[319.1, 259.6], [326.0, 259.6], [334.0, 262.4], [343.1, 261.9], [350.8, 259.3], [355.0, 253.3], [362.5, 252.7], [362.2, 268.7], [359.7, 273.0], [359.8, 280.0], [355.0, 282.0], [354.4, 286.2], [351.9, 287.0], [350.1, 300.3], [346.1, 299.3], [345.4, 301.4], [341.7, 300.8], [339.1, 312.2], [343.1, 315.1], [348.6, 315.5], [349.0, 311.8], [359.3, 314.8], [360.7, 322.0], [373.2, 316.3], [371.6, 320.4], [379.8, 319.9], [381.7, 324.2], [376.3, 330.7], [365.7, 333.7], [358.1, 329.3], [355.6, 329.6], [350.3, 338.7], [342.0, 338.6], [335.5, 347.7], [329.0, 351.8], [324.9, 357.9], [316.2, 356.2], [304.8, 361.7], [290.9, 356.0], [281.7, 356.3], [286.2, 339.8], [283.9, 336.8], [285.5, 329.9], [292.9, 330.5], [298.7, 309.3], [289.2, 301.6], [289.4, 299.6], [291.9, 299.8], [293.7, 291.6], [296.5, 290.9], [298.7, 282.5], [303.2, 283.1], [303.9, 280.1], [306.3, 280.5], [307.3, 275.7], [309.0, 275.3], [309.2, 270.0], [307.3, 268.2], [309.2, 263.4], [303.4, 257.1], [303.5, 255.5], [309.3, 249.1], [314.4, 256.8], [319.1, 259.6]], "褒忠鄉": [[400.0, 246.6], [402.4, 248.3], [408.3, 247.9], [419.1, 257.4], [427.3, 259.5], [431.1, 256.4], [433.5, 257.9], [434.6, 267.8], [428.9, 269.0], [429.3, 278.1], [425.0, 278.5], [423.1, 291.7], [416.6, 291.0], [420.6, 300.4], [414.1, 299.1], [412.6, 309.3], [414.0, 311.8], [406.9, 309.2], [399.8, 310.2], [390.6, 314.8], [381.7, 324.2], [379.8, 319.9], [371.6, 320.4], [373.2, 316.3], [360.7, 322.0], [359.3, 314.8], [349.0, 311.8], [348.5, 315.5], [339.6, 313.3], [341.7, 300.8], [345.4, 301.4], [346.1, 299.3], [350.1, 300.3], [351.9, 287.0], [354.4, 286.2], [355.0, 282.0], [359.8, 280.0], [359.7, 273.0], [362.2, 268.7], [362.5, 252.7], [377.3, 253.1], [386.0, 251.6], [387.6, 248.8], [392.2, 247.0], [400.0, 246.6]], "元長鄉": [[410.4, 309.9], [413.0, 310.8], [423.4, 321.9], [421.8, 326.3], [418.7, 325.7], [417.6, 329.3], [417.7, 332.9], [420.8, 332.9], [420.9, 340.0], [423.6, 339.9], [422.1, 346.8], [424.2, 350.7], [421.6, 358.2], [421.2, 361.8], [422.7, 362.1], [421.0, 373.9], [423.7, 371.0], [426.2, 372.4], [432.9, 369.8], [437.5, 369.8], [459.8, 361.8], [467.9, 361.9], [474.0, 364.4], [465.7, 389.0], [455.9, 408.0], [452.6, 410.5], [449.1, 425.1], [441.8, 434.2], [434.0, 436.8], [422.3, 438.3], [414.8, 437.1], [415.4, 426.4], [411.1, 426.4], [411.0, 423.4], [405.5, 424.6], [407.1, 422.9], [397.0, 422.3], [396.6, 419.4], [388.9, 419.0], [389.0, 415.1], [382.9, 415.1], [383.1, 414.1], [376.2, 412.8], [380.1, 409.4], [376.6, 407.7], [376.5, 402.7], [370.3, 402.7], [372.8, 394.3], [372.3, 390.9], [353.7, 386.2], [354.1, 381.6], [351.2, 380.9], [352.4, 368.7], [348.7, 368.9], [349.9, 362.5], [346.7, 362.6], [345.5, 352.8], [348.5, 347.4], [348.9, 339.3], [355.1, 330.0], [358.1, 329.3], [365.1, 333.8], [375.5, 331.0], [390.9, 314.6], [400.8, 310.0], [410.4, 309.9]], "水林鄉": [[329.6, 387.2], [337.4, 390.8], [333.7, 406.4], [335.2, 410.4], [338.0, 411.2], [337.7, 416.2], [342.3, 416.7], [338.1, 432.0], [341.0, 438.3], [337.7, 440.0], [337.5, 444.9], [334.4, 444.0], [334.8, 446.3], [332.0, 446.2], [331.8, 453.2], [334.6, 453.3], [334.9, 457.9], [337.9, 456.8], [341.2, 458.1], [344.0, 461.9], [343.0, 463.5], [349.1, 465.3], [347.3, 468.0], [346.7, 474.4], [343.8, 473.3], [341.6, 481.2], [341.6, 485.8], [344.5, 486.4], [343.5, 491.0], [345.2, 497.8], [348.3, 497.6], [343.2, 513.4], [338.5, 514.7], [332.9, 510.7], [324.5, 495.1], [316.3, 495.5], [311.2, 497.3], [308.6, 500.7], [314.3, 533.3], [311.7, 537.8], [306.8, 541.8], [287.0, 546.9], [268.4, 539.1], [268.5, 537.9], [261.9, 538.1], [262.2, 536.8], [259.1, 536.1], [249.3, 539.8], [240.9, 540.1], [243.3, 527.9], [249.7, 520.1], [250.4, 516.3], [259.7, 517.9], [259.6, 514.7], [261.3, 514.7], [261.4, 499.9], [264.2, 499.5], [264.9, 493.8], [258.3, 495.5], [259.2, 485.5], [262.6, 482.7], [267.6, 469.6], [266.7, 467.7], [259.1, 464.0], [261.0, 459.3], [259.8, 456.6], [263.9, 453.9], [270.5, 454.7], [274.2, 450.1], [277.7, 449.6], [278.0, 440.6], [281.7, 428.0], [290.6, 424.3], [293.4, 417.8], [298.8, 417.4], [310.3, 407.3], [314.8, 405.7], [319.6, 397.3], [321.3, 387.3], [329.6, 387.2]], "臺西鄉": [[287.8, 227.2], [292.3, 232.2], [299.4, 234.6], [306.1, 241.8], [309.3, 249.1], [303.3, 256.9], [309.2, 263.4], [307.3, 268.2], [308.6, 268.3], [309.6, 272.7], [306.3, 280.5], [303.9, 280.1], [303.2, 283.1], [298.7, 282.5], [296.5, 290.9], [293.7, 291.6], [291.9, 299.8], [289.4, 299.6], [289.2, 301.6], [298.7, 309.3], [292.9, 330.5], [285.5, 329.9], [283.9, 336.8], [286.2, 339.8], [281.7, 356.3], [265.4, 352.3], [250.3, 341.8], [236.7, 326.7], [235.7, 323.4], [245.4, 305.0], [241.6, 302.0], [227.3, 302.1], [216.9, 304.5], [205.9, 310.1], [193.8, 319.6], [199.5, 313.2], [199.0, 304.3], [200.8, 301.9], [200.5, 295.8], [211.0, 285.0], [210.6, 280.1], [221.9, 252.2], [224.2, 233.5], [262.1, 233.8], [269.6, 227.5], [279.5, 225.9], [287.8, 227.2]], "四湖鄉": [[241.6, 302.0], [245.4, 305.0], [238.4, 316.7], [236.0, 325.6], [250.3, 341.8], [265.8, 352.5], [277.5, 355.8], [290.9, 356.0], [305.5, 361.7], [316.2, 356.2], [325.0, 357.8], [329.0, 351.8], [335.5, 347.7], [342.0, 338.6], [349.4, 340.4], [348.5, 347.4], [345.5, 352.8], [346.7, 362.6], [349.9, 362.5], [348.7, 368.9], [352.4, 368.7], [351.2, 380.9], [354.1, 381.6], [353.7, 386.2], [343.8, 385.5], [343.5, 391.1], [338.7, 391.9], [328.1, 386.7], [321.3, 387.3], [319.6, 397.3], [316.0, 404.4], [310.3, 407.3], [298.8, 417.4], [293.4, 417.8], [289.9, 424.8], [282.0, 427.8], [278.0, 440.6], [278.5, 443.1], [276.2, 444.8], [271.6, 444.2], [272.1, 440.4], [264.6, 439.0], [259.0, 433.9], [260.7, 429.9], [259.7, 425.9], [264.3, 422.3], [264.2, 417.6], [260.2, 415.1], [262.8, 407.0], [244.0, 401.1], [235.4, 401.0], [237.4, 394.2], [229.5, 395.6], [221.4, 393.3], [223.5, 384.6], [214.8, 383.2], [210.3, 388.1], [210.0, 393.9], [201.2, 399.4], [198.7, 403.4], [189.4, 402.6], [190.7, 388.8], [189.3, 383.4], [187.0, 384.2], [182.6, 398.0], [177.8, 401.5], [173.0, 400.3], [168.0, 395.2], [163.6, 387.5], [164.1, 383.3], [174.4, 374.6], [176.1, 371.5], [187.2, 344.9], [193.8, 319.6], [205.9, 310.1], [216.9, 304.5], [227.3, 302.1], [241.6, 302.0]], "口湖鄉": [[229.4, 395.5], [237.4, 394.2], [235.4, 401.0], [244.0, 401.1], [262.8, 407.0], [260.2, 415.1], [264.2, 417.6], [264.3, 422.3], [259.7, 425.9], [260.7, 429.9], [259.0, 433.9], [264.6, 439.0], [272.1, 440.4], [271.6, 444.2], [277.2, 444.3], [277.8, 449.1], [274.2, 450.1], [270.5, 454.7], [263.9, 453.9], [259.7, 456.8], [261.0, 459.3], [259.1, 464.0], [266.7, 467.7], [267.6, 469.6], [262.6, 482.7], [259.2, 485.5], [258.3, 495.5], [264.9, 493.8], [264.2, 499.5], [261.4, 499.9], [261.3, 514.7], [259.6, 514.7], [259.7, 517.9], [250.4, 516.3], [249.7, 520.1], [243.3, 527.9], [240.9, 540.1], [222.8, 530.9], [220.5, 532.6], [213.2, 532.5], [199.2, 526.4], [198.7, 519.4], [204.3, 512.6], [202.4, 506.5], [198.8, 503.9], [193.9, 496.0], [191.9, 490.8], [192.7, 479.3], [190.0, 475.4], [194.3, 474.1], [196.1, 468.4], [196.5, 463.0], [194.2, 463.0], [193.2, 461.0], [193.5, 448.2], [194.3, 438.3], [197.6, 435.5], [198.1, 431.6], [194.7, 430.5], [194.3, 426.3], [192.7, 431.7], [192.2, 430.1], [192.6, 410.8], [184.7, 408.8], [185.2, 404.0], [186.8, 403.0], [198.8, 403.4], [201.2, 399.4], [210.0, 393.9], [210.3, 388.0], [216.4, 382.6], [223.6, 384.6], [221.1, 393.1], [229.4, 395.5]]}, "centroids": {"麥寮鄉": [304.0, 190.8], "斗六市": [669.9, 296.0], "斗南鎮": [581.9, 340.4], "虎尾鎮": [521.3, 283.4], "西螺鎮": [554.0, 205.5], "土庫鎮": [447.9, 315.1], "北港鎮": [367.6, 437.8], "古坑鄉": [728.6, 396.5], "大埤鄉": [517.1, 371.5], "莿桐鄉": [634.7, 217.6], "林內鄉": [732.9, 234.9], "二崙鄉": [484.0, 189.2], "崙背鄉": [413.0, 206.7], "東勢鄉": [324.9, 308.9], "褒忠鄉": [387.6, 284.0], "元長鄉": [406.2, 375.5], "水林鄉": [300.9, 475.7], "臺西鄉": [260.5, 283.4], "四湖鄉": [253.8, 370.7], "口湖鄉": [228.2, 461.1], "無店面": [460, 660]}};
+
+const CATCOLOR = {'餐飲美食':'#D9466F','咖啡甜點':'#D49A2C','農漁特產':'#3D93AE',
   '文創手作':'#7A5A96','伴手禮':'#C97B5A','體驗觀光':'#5B6FA8'};
+const CAT_EMOJI = {'餐飲美食':'🍜','咖啡甜點':'☕','農漁特產':'🌾',
+  '文創手作':'🎨','伴手禮':'🎁','體驗觀光':'✨'};
+
+// ── 內建備援資料：抓不到 Google Sheet 時，顯示這份「最後已知」清單 ──
+// 這是建立地圖當時（46 家店）的資料，供離線／連線失敗時使用。
+const FALLBACK_ROWS = [{"name": "AJ CAFE", "town": "虎尾鎮", "addr": "虎尾鎮民主路18之7號一樓", "cat2": "咖啡甜點", "emoji": "☕", "main": "咖啡豆、濾掛咖啡、手作甜點、創意飲品", "hours": "AM10 :00～PM6:30", "promo": "活動期間：購買咖啡豆享9折優惠、內用手沖咖啡續杯半價", "tags": "雲林100碗  AJ CFE  虎尾咖啡", "lat": 23.7036026, "lng": 120.4348377}, {"name": "土庫驛可可莊園", "town": "土庫鎮", "addr": "土庫鎮大同路1之2號", "cat2": "體驗觀光", "emoji": "🍫", "main": "1.黑巧克力Bar片、2.生巧克力、3.義式冰淇淋、4.可可食農體驗、5.可可粉、可可茶等巧克力產品", "hours": "9:00~17:30", "promo": "生巧克力第二件8折。", "tags": "巧克力、雲林100碗、莊園", "lat": 23.6751641, "lng": 120.3986474}, {"name": "糧莘庇護農場", "town": "古坑鄉", "addr": "古坑鄉永興路166-1號1樓", "cat2": "農漁特產", "emoji": "🌻", "main": "1.台灣紅藜 2.黑金紅藜茶 3.紅藜香鬆 4.彩虹藜麵 5.從農場到餐桌的食農體驗", "hours": "9:00~16:30", "promo": "", "tags": "", "lat": 23.6240483, "lng": 120.5495919}, {"name": "饅享受", "town": "虎尾鎮", "addr": "虎尾鎮延平里中南17-15號", "cat2": "伴手禮", "emoji": "🐼", "main": "12款雲林意象饅頭、各式療癒人心造型饅頭、客製饅頭教學體驗課程、學校午餐供應", "hours": "8:00-18:00", "promo": "購買造型饅頭10顆再送1顆", "tags": "雲林100碗、療癒饅頭、造型饅頭", "lat": 23.6870105, "lng": 120.4129571}, {"name": "阿國師雲蒸薑母鴨", "town": "斗南鎮", "addr": "斗南鎮義德路2號", "cat2": "餐飲美食", "emoji": "🦆", "main": "甕蒸薑母鴨/菌菇九尾雞  /烏骨九尾雞", "hours": "16:00-21:00", "promo": "甕蒸薑母鴨/菌菇九尾雞（即食包）原價249元 第二件半價", "tags": "雲林良品、雲林100碗、甕蒸薑母鴨、", "lat": 23.6778889, "lng": 120.4818653}, {"name": "媽祖埔豆腐張", "town": "虎尾鎮", "addr": "虎尾鎮林森路二段471號", "cat2": "餐飲美食", "emoji": "🥟", "main": "鹹酥臭豆腐，麻辣臭豆腐，麻辣鴨血", "hours": "1630-2230", "promo": "", "tags": "", "lat": 23.6988156, "lng": 120.4247853}, {"name": "怪咖咖啡", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83之6號", "cat2": "咖啡甜點", "emoji": "☕", "main": "咖啡、昭和布丁、咖啡汽水", "hours": "", "promo": "外帶咖啡同品項第二杯半價", "tags": "雲林100碗、建國眷村、咖啡汽水、昭和布丁、咖啡攤車", "lat": 23.7134911, "lng": 120.4217985}, {"name": "臺一養蜂園蜜茶站", "town": "崙背鄉", "addr": "崙背鄉南陽村建國路18號", "cat2": "農漁特產", "emoji": "🍯", "main": "蜂蜜、花粉、蜂王乳、蛋糕", "hours": "上午8:00-晚上20:00", "promo": "", "tags": "", "lat": 23.7593488, "lng": 120.3542662}, {"name": "古坑綠隧合作社", "town": "斗六市", "addr": "640斗六市社口里大學路二段303巷12號", "cat2": "體驗觀光", "emoji": "🥬", "main": "尋仙找茶245ML-6入10入24入/960ml/尋仙找凍", "hours": "8:00-12:00/13:00-17:00", "promo": "", "tags": "", "lat": null, "lng": null}, {"name": "萬源製麵舖", "town": "土庫鎮", "addr": "633土庫鎮光明路167號", "cat2": "伴手禮", "emoji": "🍝", "main": "彩色蔬果麵、伴手禮、拌麵", "hours": "每天早上8：30～下午17：30 (每週一公休)", "promo": "全產品95折 ※本優惠方案上架期間為：與活動同步（115年9月15日 至 115年10月17日），活動結束後將自動於平台下架，恕不另行通知。", "tags": "雲林良品、伴手禮、彩色蔬果麵", "lat": 23.6754056, "lng": 120.3915078}, {"name": "安記鐵蛋", "town": "西螺鎮", "addr": "西螺鎮中正路47號", "cat2": "伴手禮", "emoji": "🥚", "main": "香鐵蛋,滷蛋,豆干", "hours": "09:00-21:00", "promo": "全店同價位品項買十送一", "tags": "雲林良品、雲林100碗、雲林禮讚獎店家", "lat": 23.7989275, "lng": 120.4640664}, {"name": "水林祥美餅舖", "town": "水林鄉", "addr": "水林鄉水林路221號", "cat2": "伴手禮", "emoji": "🥮", "main": "🏮【那抹剛出爐的餅香，是我們最想留給您的溫暖】  天剛濛濛亮，祥美餅舖的廚房裡早已熱氣騰騰。裊裊升起的白煙裡，拌著剛蒸好糯米的油飯香，包裹著糯米花生餡的令人垂涎紅龜粿，軟糯Q彈；還有烤爐裡慢慢烘烤出金黃色澤的蛋黃酥、滷肉豆沙餅香氣。  看著大家冒著晨風前來，只為了帶一份剛出爐的傳統滋  無論是榮獲雲林100碗推薦的【古法油飯】、香酥不黏牙的【不老農花生糖】、象徵福氣的【紅龜、壽桃、發糕、鳳片糕、鹼粽、豬羊三牲】， 或是假期團聚少不了的【冬瓜肉餅、滷肉豆沙餅、紅豆麻糬、鳳梨餅、蛋黃酥】。 每一份點心，都是我們手工限量現做。提前預訂，讓我們能提早為您備好最完美的滋味，也讓您的期待，能百分之百地被滿足。  下次出發前，不妨先動動手指或撥個電話，把您想要的美味鎖定下來。 看見您接過餅時滿足的笑容，才是祥美餅舖最美的風景。❤️  👉【祥美餅舖 預訂資訊】 💬 歡迎私訊粉絲專頁預訂 📞 預訂專線：（請填入電話） 📍 店址：（請填入地址） （建議提前 2-3 天預訂，讓我們能用心準備喔！）", "hours": "7-17.", "promo": "", "tags": "", "lat": 23.5720716, "lng": 120.244037}, {"name": "第一鰻波", "town": "口湖鄉", "addr": "口湖鄉浦南村1-3號", "cat2": "餐飲美食", "emoji": "🐟", "main": "主要商品1.胭脂鰻、2.台灣胭脂鰻、3.白燒鰻、4.烏涮嘴一口吃烏魚子，服務:鰻遊趣食農教育", "hours": "買伴手禮09:00-17:00，吃鰻魚飯11:00-14:30（假日限定）", "promo": "第一鰻波-胭脂鰻(125gx6)1700元，送限量摺疊袋一只", "tags": "雲林100碗、雲林良品、雲林100景", "lat": 23.5973651, "lng": 120.190128}, {"name": "國柱食作所", "town": "斗南鎮", "addr": "斗南鎮六合街75號", "cat2": "伴手禮", "emoji": "🍲", "main": "1. 燻茶鵝、燻茶鴨     精選優質鵝、鴨肉，結合傳統燻製工法與茶香風味，呈現肉質鮮嫩、香氣醇厚的特色熟食。 2.脆皮蔥油雞     以優質雞肉搭配特製蔥油調味，保留雞肉鮮甜，方便加熱即食，是家庭餐桌及節慶聚餐的特色料理。 3. 特色香腸系列     包含紹興香腸、烏魚子香腸等，以優質豬肉搭配特色風味食材製作，結合傳統香腸工法與創新口味。 4. 傳統特色調理食品     包含筍干元蹄、薑母鴨及人參燉烏骨雞湯等，將傳統家常料理製作成方便保存及加熱的冷凍調理食品。 5. 生鮮及冷凍肉品     提供雞、鴨、鵝、豬等生鮮及冷凍肉品，重視食材品質與保存管理，滿足家庭料理及餐飲使用需求。", "hours": "採預約方式取貨", "promo": "", "tags": "", "lat": 23.6808732, "lng": 120.4714949}, {"name": "小輝俠手工愛玉", "town": "斗南鎮", "addr": "斗南鎮延平路二段161號", "cat2": "咖啡甜點", "emoji": "🟢", "main": "1、野生愛玉子，2、DIY互動教學，3、單品手充沖咖啡", "hours": "早上九點到晚上十點", "promo": "參與DIY洗愛玉者，將贈送免費新鮮果汁調味（例如：檸檬汁、百香果汁、鳳梨汁……等）", "tags": "台灣野生愛玉子", "lat": 23.6800748, "lng": 120.4809946}, {"name": "草莓小護士手作の屋", "town": "虎尾鎮", "addr": "虎尾鎮正義路74號", "cat2": "伴手禮", "emoji": "🍓", "main": "🍰提拉米蘇|層層堆疊的療癒 🍪手工餅乾 | 像日常關心一樣不張揚 🧁小蛋糕 | 替平凡日子加點甜 🍬牛軋糖|慢慢咀嚼的幸福帶 🥮Q餅 | 扎實又安心的存在  每一份甜點， 都像護理交班時的叮嚀 只希望你吃得安心、甜得剛好。|", "hours": "採預定制", "promo": "鐵蛋、鳥蛋、豆干、米血、甜點…櫃上消費滿200、贈手工Q餅", "tags": "草莓小護士手作屋、虎尾伴手禮", "lat": null, "lng": null}, {"name": "吉品杏鮑菇", "town": "二崙鄉", "addr": "二崙鄉隆興路1-9號", "cat2": "農漁特產", "emoji": "🍄", "main": "新鮮各式菇類、有機黑木耳露、杏鮑菇虱目魚丸、黃金杏鮑菇", "hours": "上午8:00-下午5:00", "promo": "", "tags": "", "lat": 23.7758094, "lng": 120.3654718}, {"name": "勻凱農場", "town": "大埤鄉", "addr": "大埤鄉尚義村尚義7號", "cat2": "農漁特產", "emoji": "🌱", "main": "黑糙米、雙色胚芽米、白米、爆米香", "hours": "", "promo": "黑米買5送1，買5包送一包同包裝的", "tags": "沒有", "lat": 23.6305859, "lng": 120.4640041}, {"name": "森活手作日和", "town": "斗六市", "addr": "斗六市久安東路", "cat2": "文創手作", "emoji": "🌿", "main": "1. 扭扭棒手作花束 2. 扭扭棒療癒小盆栽 3. 節慶主題手作商品 4. 手作吊飾及髮飾 5. DIY手作體驗活動", "hours": "", "promo": "攤位消費滿 300 元，即隨機贈送精美手作毛根小吊飾乙個（數量有限，送完為止）。", "tags": "毛根手作、雲林手作、客製禮品、扭扭棒花束", "lat": null, "lng": null}, {"name": "童趣手作", "town": "古坑鄉", "addr": "古坑鄉永光村大湖口56號", "cat2": "文創手作", "emoji": "🧸", "main": "木竹組裝玩具：組裝玩具步槍 ，玩具摩天輪，玩具音樂盒，竹製小玩具", "hours": "", "promo": "", "tags": "手作玩具，DIY手作，童玩", "lat": null, "lng": null}, {"name": "阿德的家地瓜瑞士捲", "town": "水林鄉", "addr": "水林鄉山腳村尖山腳45-18號", "cat2": "伴手禮", "emoji": "🍠", "main": "採用在地台農57號地瓜，一直以來堅持，無任何添加防腐劑，天然健康  *阿德的產品特色 地瓜瑞士捲完全不添加防腐劑、香精，卡士達瑞士捲的醬也是全程手工熬煮，給消費者天然健康的口感滋味", "hours": "週一-週五：10:00-12:00，14:00-18:00  週六（日）10:00-18:00", "promo": "", "tags": "", "lat": null, "lng": null}, {"name": "北京王餡餅", "town": "西螺鎮", "addr": "西螺鎮延平路149號", "cat2": "餐飲美食", "emoji": "🥟", "main": "牛肉餡餅、豬肉餡餅、韭菜餡餅、紅豆餡餅", "hours": "14:00-18:00", "promo": "餡餅滿200送20，冷凍餡餅滿500送保冷袋。", "tags": "雲林百大美食，雲林老店，排隊美食", "lat": null, "lng": null}, {"name": "HUNGHUNG 甜點工作室", "town": "斗南鎮", "addr": "斗南鎮中山路120號", "cat2": "餐飲美食", "emoji": "🍰", "main": "1. 雲林100碗・巴斯克乳酪蛋糕 2. 法式手工餅乾與常溫甜點 3. 節慶限定伴手禮盒 4. 可麗露、費南雪等法式點心 5. 客製化蛋糕與企業送禮", "hours": "", "promo": "消費巴斯克一顆送常溫小蛋糕1入", "tags": "雲林100碗 法式甜點 巴斯克蛋糕", "lat": null, "lng": null}, {"name": "芳如小舖", "town": "無店面", "addr": "無", "cat2": "餐飲美食", "emoji": "🍱", "main": "魯味·油飯.茶葉蛋.红茶", "hours": "無", "promo": "", "tags": "", "lat": null, "lng": null}, {"name": "塔吉特千層蛋糕大使館", "town": "斗六市", "addr": "斗六市工業路118號", "cat2": "體驗觀光", "emoji": "🎂", "main": "千層蛋糕、年輪蛋糕、果凍布丁類商品、手作DIY課程", "hours": "09:30-17:30", "promo": "", "tags": "雲林良品、在地品牌、千層蛋糕專賣", "lat": 23.722564, "lng": 120.597466}, {"name": "愛思咖啡", "town": "斗六市", "addr": "斗六市永安路71號", "cat2": "咖啡甜點", "emoji": "☕", "main": "手沖咖啡 50-250元 咖啡豆 400-1500元 手工餅乾 100-200元 手工馬林糖 30-200  元 手工歐式麵包 50-200 元", "hours": "08:00~17:00", "promo": "愛思咖啡響應活動，活動期間憑相關參與證明，購買精品濾掛咖啡或浸泡式咖啡享 95折優惠；單筆消費滿 500 元，加贈精選濾掛咖啡 1 包。邀請大家用一杯好咖啡，支持台灣在地烘焙品牌。", "tags": "愛思咖啡 咖啡豆 濾掛咖啡 手沖咖啡", "lat": 23.7091625, "lng": 120.5480475}, {"name": "玉山碾米", "town": "斗南鎮", "addr": "斗南鎮新興街33號", "cat2": "伴手禮", "emoji": "🌾", "main": "粉好糠、醬好糠禮盒、寶寶米餅、溫度米2.0、三麗鷗禮盒", "hours": "08:00～18:00", "promo": "指定商品買五送一", "tags": "雲林良品、寶寶米餅、雲林伴手禮", "lat": 23.6750563, "lng": 120.4812002}, {"name": "雲饗豬", "town": "虎尾鎮", "addr": "虎尾鎮延平里下南100號", "cat2": "農漁特產", "emoji": "🐖", "main": "豬肉鬆、肉乾、肉絲、肉角、冷凍生鮮及調理商品", "hours": "週一~週五10:00-17:00、週六10:00-16:00", "promo": "", "tags": "", "lat": 23.6819814, "lng": 120.414039}, {"name": "金燕子奶茶西螺店", "town": "西螺鎮", "addr": "西螺鎮福來路42號 （果菜市場正對面）", "cat2": "咖啡甜點", "emoji": "🧋", "main": "招牌奶茶 經典紅茶 高山青茶  芋香奶茶 冬瓜茶 冬瓜檸檬  金燕子飲品主打 手工熬煮 用最天然的砂糖 蔗糖 冬瓜 新鮮的檸檬汁 不加任何的果糖 喝的也放心！", "hours": "9:00-7:30", "promo": "", "tags": "", "lat": 23.7834436, "lng": 120.4462745}, {"name": "中華麵そば", "town": "虎尾鎮", "addr": "虎尾鎮西平路64號", "cat2": "餐飲美食", "emoji": "🍜", "main": "特濃豚骨 昆布 味噌 麻辣豚骨 養生素食", "hours": "平日11:00-14:00 17:00-21:00 假日11:00-14:30 17:00-21:00", "promo": "消費滿999元送豬排一份", "tags": "雲林100碗、中華拉麵、必吃美食", "lat": 23.711608, "lng": 120.4292473}, {"name": "食伍手作", "town": "褒忠鄉", "addr": "褒忠", "cat2": "文創手作", "emoji": "🍬", "main": "造型馬林糖/蛋塔/布朗尼/餅乾", "hours": "", "promo": "明星商品買一送一、民眾參與相關活動即可換馬路糖罐", "tags": "#雲林食伍手作 #雲林手作馬林糖 #雲林造型馬林糖", "lat": null, "lng": null}, {"name": "渲益（漁產）", "town": "口湖鄉", "addr": "口湖鄉埔南村外埔72-88號（養殖場域地點）", "cat2": "農漁特產", "emoji": "🦐", "main": "蒲燒鰻魚、鮮鰻魚", "hours": "平日週一至週五8:00-17:00，假日可預約", "promo": "蒲燒鰻魚3片/1公斤+鮮鰻片1片/330克$1500", "tags": "送禮最佳選擇 、最強懶人料理 、產地直送餐桌", "lat": null, "lng": null}, {"name": "福祿壽酒廠", "town": "古坑鄉", "addr": "64650古坑鄉中山路11號", "cat2": "體驗觀光", "emoji": "🍶", "main": "福牌高粱酒、好樂達咖啡香甜酒、米酒料酒、酒類再製品、伴手禮", "hours": "展售中心／門市：週二至週日 08:30 – 17:00（週一休館）", "promo": "", "tags": "雲林良品、免費試喝、釀酒", "lat": 23.640383, "lng": 120.560074}, {"name": "魷魚興魷魚嘴焿", "town": "斗六市", "addr": "斗六市中正路56號", "cat2": "餐飲美食", "emoji": "🦑", "main": "魷魚嘴焿/ 魷魚羹/ 肉羹/ 肉燥飯/ 肉燥乾麵", "hours": "08：30-18：30", "promo": "", "tags": "雲林美食 雲林100碗  斗六小吃", "lat": 23.7089364, "lng": 120.5444045}, {"name": "東和泡芙", "town": "古坑鄉", "addr": "古坑鄉東和村文化路118號", "cat2": "餐飲美食", "emoji": "🧁", "main": "泡芙、蛋塔、蛋黃酥", "hours": "每日15:00～18:00", "promo": "單筆消費結帳金額滿200元，贈送手工泡芙一顆(供應之口味，視現場情況而定)", "tags": "雲林100碗、排隊名店、國際競賽三金得主、全國比賽冠軍、所有的東西都能做成泡芙", "lat": 23.6840121, "lng": 120.5687117}, {"name": "庭口金工", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83-7號 丁棟", "cat2": "文創手作", "emoji": "💍", "main": "金工DIY體驗、飾品與婚戒訂製、眷村麵食", "hours": "10:30-18:30", "promo": "", "tags": "", "lat": 23.7131902, "lng": 120.4220839}, {"name": "傳發之家", "town": "北港鎮", "addr": "北港鎮公民路12號", "cat2": "伴手禮", "emoji": "🎁", "main": "糯米麥芽膏、麥芽花生糖、麥芽芝麻糖、糯米麥芽餅", "hours": "8:30-20:30", "promo": "", "tags": "", "lat": 23.5685634, "lng": 120.305906}, {"name": "鄭凱元手作", "town": "林內鄉", "addr": "林內鄉林中村中正路202號", "cat2": "文創手作", "emoji": "🎨", "main": "Tree to Bar台灣可可巧克力 雲林風土特色巧克力 可可茶 巧克力食農教育與DIY體驗 企業客製巧克力與地方特色禮贈", "hours": "早上10點~晚上8點(週一公休)", "promo": "", "tags": "", "lat": null, "lng": null}, {"name": "來呷粿", "town": "西螺鎮", "addr": "西螺鎮建興路260號", "cat2": "伴手禮", "emoji": "🍡", "main": "原味蘿蔔糕/芋頭蘿蔔糕/港式蘿蔔糕/各式早午餐（滷肉飯/麵）/炸年糕", "hours": "05:00-13:30", "promo": "消費滿百送古早味蘿蔔糕（小份）1份", "tags": "雲林小吃、在地老店、評價最高、雲林伴手禮、早午餐、蘿蔔糕", "lat": 23.8007017, "lng": 120.4594044}, {"name": "干嘛喝茶", "town": "斗六市", "addr": "週六:斗六觀光夜市 週日:斗六觀光夜市", "cat2": "餐飲美食", "emoji": "🍵", "main": "仙草干茶  仙干奶茶   牛奶嫩仙草........", "hours": "16:00-23:00", "promo": "仙草干茶與原味茶飲系列第二杯半價", "tags": "自創文創仙草飲品", "lat": null, "lng": null}, {"name": "生機廚房", "town": "虎尾鎮", "addr": "虎尾鎮民主路1號", "cat2": "餐飲美食", "emoji": "🥗", "main": "1.有機蔬食餐廳 2.全米麵包、全米饅頭 3食農教育實踐及推廣者", "hours": "10:：00-18:30", "promo": "", "tags": "", "lat": 23.7038422, "lng": 120.4359694}, {"name": "佛美神仙故事館", "town": "西螺鎮", "addr": "648西螺鎮新豐里福來路8巷19號", "cat2": "體驗觀光", "emoji": "⛩️", "main": "1. 神仙故事館導覽 2.蔬食好食堂 3.佛美牛蒡茶 4.佛美罐頭禮盒 5.宗教文物", "hours": "星期一 / 星期三 ~ 星期日 (星期二公休)", "promo": "", "tags": "", "lat": 23.776831, "lng": 120.448323}, {"name": "有點小物工作室", "town": "虎尾鎮", "addr": "虎尾鎮建國一村83-5號", "cat2": "文創手作", "emoji": "🧵", "main": "文創商品、海外選物、寫生租借、不定期辦理英語活動", "hours": "平日 12:00-18:00，假日 10:00-18:00", "promo": "小物限定寫生租借服務-【幸福的提筆畫室】免費體驗乙次 #預約制 #無現場教學 #自由寫生 #畫具租借 請於報名表單上備註「集點樂兌換」", "tags": "療癒選物、文創商品、在地小店", "lat": 23.7131843, "lng": 120.4219869}, {"name": "月光下友善農場", "town": "麥寮鄉", "addr": "麥寮鄉西濱路三段80號", "cat2": "農漁特產", "emoji": "🌾", "main": "小麥粒、小麥餅乾、小麥茶、小麥酒", "hours": "", "promo": "活動期間所有品項九五折", "tags": "台灣小麥、食農教育、地產地銷", "lat": 23.7412405, "lng": 120.252097}, {"name": "披薩老爹虎篤店", "town": "虎尾鎮", "addr": "虎尾鎮立德路129號", "cat2": "餐飲美食", "emoji": "🍕", "main": "瑪格麗特披薩/任性小孩披薩/主廚特製披薩/培根蛋黃麵/提拉米蘇", "hours": "週三-週五 17:00-21:00 週六,週日 11:00-14:00 17:00-21:00", "promo": "", "tags": "", "lat": 23.7067904, "lng": 120.423677}, {"name": "坔田渡鳥文化工作室", "town": "口湖鄉", "addr": "口湖鄉成龍村82號", "cat2": "農漁特產", "emoji": "🦆", "main": "成龍溼地環境教育／生態旅遊／在地特色手作茶點／友善環境農漁產", "hours": "例假日10:30-18:00", "promo": "來店消費一份飲品加點心，送成龍溼地鑰匙圈一個", "tags": "成龍溼地、烏魚子司康、洛神花冰沙", "lat": null, "lng": null}];
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const listEl=$('#list'), detail=$('#detail'), empty=$('#empty'), mapSvg=$('#map');
+const pinsGroup=$('#pins'), labelsGroup=$('#labels'), townnavEl=$('#townnav');
 let catFilter='全部';
 let townFilter='全部';
+let STORES = [];   // 填入資料載入完成後才會有內容
 
-const FULL_VB = [0, 0, 900, 730];
+const FULL_VB = [0,0,TOWN_GEO.W,TOWN_GEO.H];
 
-STORES.forEach((s,i)=>{
-  const li=document.createElement('button');
-  li.className='li'; li.type='button'; li.dataset.i=i; li.dataset.cat=s.cat2; li.dataset.town=s.town;
-  li.innerHTML=`
-    <span class="ic" style="border-color:${CATCOLOR[s.cat2]}">${s.emoji}</span>
-    <span class="txt">
-      <span class="n">${s.disp}</span>
-      <span class="m">📍 ${s.town} · <b style="color:${CATCOLOR[s.cat2]}">${s.cat2}</b></span>
-    </span>
-    ${s.promo?'<span class="gift" title="有可兌換的優惠（需 2 金幣）">🎁</span>':''}
-    <span class="ar">›</span>`;
-  li.onclick=()=>select(i);
-  listEl.appendChild(li);
-});
+// ══════════════════ CSV 解析（支援欄位內有逗號、換行、雙引號的情況）══════════════════
+function parseCSV(text){
+  const rows=[]; let row=[]; let field=''; let inQuotes=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inQuotes){
+      if(c==='"'){
+        if(text[i+1]==='"'){ field+='"'; i++; } else { inQuotes=false; }
+      } else field+=c;
+    } else {
+      if(c==='"') inQuotes=true;
+      else if(c===','){ row.push(field); field=''; }
+      else if(c==='\n'){ row.push(field); rows.push(row); row=[]; field=''; }
+      else if(c==='\r'){ /* skip */ }
+      else field+=c;
+    }
+  }
+  if(field.length || row.length){ row.push(field); rows.push(row); }
+  if(!rows.length) return [];
+  const header = rows[0].map(h=>h.trim());
+  return rows.slice(1).filter(r=>r.some(v=>v.trim()!=='')).map(r=>{
+    const o={};
+    header.forEach((h,i)=> o[h]=(r[i]!==undefined?r[i]:'').trim());
+    return o;
+  });
+}
 
-$$('.pin').forEach(p=>{
-  p.setAttribute('tabindex','0'); p.setAttribute('role','button');
-  const i=+p.dataset.i;
-  p.setAttribute('aria-label',STORES[i].disp);
-  p.onclick=()=>select(i);
-  p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(i);}};
-});
+// ══════════════════ 幾何工具（座標投影／點是否在多邊形內／最小間距排列）══════════════════
+function project(lat, lng){
+  const x=(lng-PROJ.minx)*PROJ.coslat, y=(PROJ.maxy-lat);
+  return [x*PROJ.scale+PROJ.offx, y*PROJ.scale+PROJ.offy];
+}
+function pointInPolygon(pt, ring){
+  const [x,y]=pt; let inside=false;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const [xi,yi]=ring[i], [xj,yj]=ring[j];
+    if(((yi>y)!==(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi+1e-12)+xi)) inside=!inside;
+  }
+  return inside;
+}
+function distToSegment(p,a,b){
+  const [px,py]=p,[ax,ay]=a,[bx,by]=b, dx=bx-ax, dy=by-ay;
+  if(dx===0 && dy===0) return Math.hypot(px-ax,py-ay);
+  let t=((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy); t=Math.max(0,Math.min(1,t));
+  return Math.hypot(px-(ax+t*dx), py-(ay+t*dy));
+}
+function minDistToPolygon(pt, ring){
+  let m=Infinity;
+  for(let i=0;i<ring.length;i++) m=Math.min(m, distToSegment(pt, ring[i], ring[(i+1)%ring.length]));
+  return m;
+}
+function ensureMargin(pt, ring, centroid, margin){
+  const inside=pointInPolygon(pt,ring), d=minDistToPolygon(pt,ring);
+  if(inside && d>=margin) return pt;
+  const [x0,y0]=pt,[cx,cy]=centroid;
+  if(!pointInPolygon([cx,cy],ring)) return pt;
+  const ok=t=>{ const test=[x0+(cx-x0)*t, y0+(cy-y0)*t]; return pointInPolygon(test,ring) && minDistToPolygon(test,ring)>=margin; };
+  if(!ok(1)) return [cx,cy];
+  let lo=0, hi=1;
+  for(let k=0;k<40;k++){ const mid=(lo+hi)/2; if(ok(mid)) hi=mid; else lo=mid; }
+  return [x0+(cx-x0)*hi, y0+(cy-y0)*hi];
+}
+function packOffsets(n, minGap){
+  if(n===1) return [[0,0]];
+  if(n===2){ const r=minGap/2+3; return [[-r,0],[r,0]]; }
+  const offs=[]; let remaining=n, ring=0, prevR=0;
+  while(remaining>0){
+    ring++;
+    const capTarget=Math.min(remaining, 6+(ring-1)*2);
+    let cnt=Math.min(capTarget, remaining);
+    if(cnt<3 && remaining>cnt) cnt=Math.min(3,remaining);
+    let rChord = cnt>=2 ? (minGap/2)/Math.sin(Math.PI/Math.max(cnt,3)) : 0;
+    let r=Math.max(rChord, prevR? prevR+minGap : minGap*0.75);
+    for(let k=0;k<cnt;k++){
+      const a=2*Math.PI*k/cnt - Math.PI/2 + (ring%2===0?0.3:0);
+      offs.push([r*Math.cos(a), r*Math.sin(a)]);
+    }
+    prevR=r; remaining-=cnt;
+  }
+  return offs;
+}
 
+// 把整批店家（含已投影座標／待群聚兩種）排列成最終不重疊、不出界的位置
+function layoutPins(rows){
+  const MIN_GAP=24, INLOOP_MARGIN=7;
+  const byTown={};
+  rows.forEach(r=>{ (byTown[r.town]=byTown[r.town]||[]).push(r); });
+
+  const pins=[];
+  Object.keys(byTown).forEach(town=>{
+    const items=byTown[town];
+    const poly = TOWN_GEO.polys[town];
+    const centroid = TOWN_GEO.centroids[town] || [450,360];
+
+    const precise=[], fallback=[];
+    items.forEach(r=>{
+      if(r.lat!=null && r.lng!=null && !isNaN(r.lat) && !isNaN(r.lng)){
+        let [x,y]=project(r.lat, r.lng);
+        if(poly){
+          if(!pointInPolygon([x,y],poly)){ fallback.push(r); return; } // 座標落在別的鄉鎮，改用群聚保底
+          [x,y]=ensureMargin([x,y],poly,centroid,16);
+        }
+        precise.push({...r, x, y, geocoded:true});
+      } else fallback.push(r);
+    });
+    precise.forEach(p=>pins.push(p));
+    if(fallback.length){
+      const offs=packOffsets(fallback.length, MIN_GAP);
+      fallback.forEach((r,i)=>{
+        const [dx,dy]=offs[i];
+        pins.push({...r, x:centroid[0]+dx, y:centroid[1]+dy, geocoded:false});
+      });
+    }
+  });
+
+  // 反覆「推開間距」與「收邊界內」直到兩者都滿足，避免圖釘重疊或跑出鄉鎮
+  for(let round=0; round<400; round++){
+    let movedAny=false;
+    for(let i=0;i<pins.length;i++){
+      for(let j=i+1;j<pins.length;j++){
+        const a=pins[i], b=pins[j];
+        let dx=b.x-a.x, dy=b.y-a.y, dd=Math.hypot(dx,dy);
+        if(dd>=MIN_GAP) continue;
+        movedAny=true;
+        if(dd<1e-6){ dx=1; dy=0; dd=1; }
+        const ux=dx/dd, uy=dy/dd, deficit=MIN_GAP-dd;
+        const wa=a.geocoded?0.15:0.5, wb=b.geocoded?0.15:0.5;
+        a.x-=ux*deficit*wa; a.y-=uy*deficit*wa;
+        b.x+=ux*deficit*wb; b.y+=uy*deficit*wb;
+      }
+    }
+    pins.forEach(p=>{
+      const poly=TOWN_GEO.polys[p.town]; if(!poly) return;
+      const centroid=TOWN_GEO.centroids[p.town]||[450,360];
+      const [nx,ny]=ensureMargin([p.x,p.y], poly, centroid, INLOOP_MARGIN);
+      if(nx!==p.x || ny!==p.y){ movedAny=true; p.x=nx; p.y=ny; }
+    });
+    if(!movedAny) break;
+  }
+  pins.forEach(p=>{ p.x=Math.round(p.x*10)/10; p.y=Math.round(p.y*10)/10; });
+  return pins;
+}
+
+// ══════════════════ 把 CSV / 備援資料 轉成內部用的店家物件 ══════════════════
+function normalizeRow(r){
+  const cat2 = r['類型'] || r.cat2 || '餐飲美食';
+  const photos=[];
+  for(let i=1;i<=4;i++){
+    const src=r[`照片${i}連結`] || r[`photo${i}`];
+    if(src) photos.push({src, cap:r[`照片${i}說明`]||r[`photo${i}cap`]||''});
+  }
+  const lat = parseFloat(r['緯度']!=null?r['緯度']:r.lat);
+  const lng = parseFloat(r['經度']!=null?r['經度']:r.lng);
+  return {
+    disp: r['店家名稱']||r.name||'',
+    town: r['鄉鎮']||r.town||'',
+    addr: r['地址']||r.addr||'',
+    cat2,
+    emoji: (r['圖示']||r.emoji||'').trim() || CAT_EMOJI[cat2] || '📍',
+    main: r['主要商品']||r.main||'',
+    hours: r['營業時間']||r.hours||'',
+    promo: r['優惠內容']||r.promo||'',
+    tags: r['標籤']||r.tags||'',
+    logo: r['LOGO連結']||r.logo||'',
+    photos,
+    lat: isNaN(lat)?null:lat,
+    lng: isNaN(lng)?null:lng,
+  };
+}
+
+// ══════════════════ 動態建立地圖圖釘 / 鄉鎮標籤 / 鄉鎮選單 ══════════════════
+const SVGNS='http://www.w3.org/2000/svg';
+function el(tag, attrs){
+  const e=document.createElementNS(SVGNS, tag);
+  Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));
+  return e;
+}
+
+function buildPins(pins){
+  pinsGroup.innerHTML='';
+  pins.forEach((p,i)=>{
+    const c=CATCOLOR[p.cat2]||'#888';
+    const g=el('g',{class:'pin', 'data-i':i, 'data-cat':p.cat2, transform:`translate(${p.x},${p.y})`});
+    g.appendChild(el('ellipse',{class:'pin-shadow',cx:0,cy:13,rx:7.5,ry:2.6,fill:'#7A6A86',opacity:.18}));
+    g.appendChild(el('circle',{class:'pin-halo',cy:-1.7,r:15.5,fill:c,opacity:0}));
+    g.appendChild(el('path',{class:'pin-bg',
+      d:'M0,13 C-2.6,7.8 -12,4.3 -12,-2.6 A12,12 0 1,1 12,-2.6 C12,4.3 2.6,7.8 0,13 Z',
+      fill:'#fff', stroke:c, 'stroke-width':2.4, 'stroke-linejoin':'round'}));
+    const t=el('text',{class:'pin-emoji', y:-2.6, 'font-size':12, 'text-anchor':'middle', 'dominant-baseline':'central'});
+    t.textContent=p.emoji; g.appendChild(t);
+    g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',p.disp);
+    g.addEventListener('click', ()=>select(i));
+    g.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); select(i);} });
+    pinsGroup.appendChild(g);
+  });
+}
+
+function buildLabels(pins){
+  labelsGroup.innerHTML='';
+  const byTown={};
+  pins.forEach(p=>{ (byTown[p.town]=byTown[p.town]||[]).push(p); });
+  Object.keys(TOWN_GEO.centroids).forEach(name=>{
+    if(name==='無店面' && !byTown[name]) return; // 無店面沒有店家時不畫這個標籤
+    const has = !!byTown[name];
+    const short = name.length>2 ? name.slice(0,-1) : name;
+    let lx, ly;
+    if(has){
+      const xs=byTown[name].map(p=>p.x), ys=byTown[name].map(p=>p.y);
+      lx=(Math.min(...xs)+Math.max(...xs))/2;
+      ly=Math.min(...ys)-20;
+    } else {
+      [lx,ly]=TOWN_GEO.centroids[name];
+    }
+    const cls = has ? 'twlabel big' : 'twlabel';
+    const halo=el('text',{class:cls+' halo','data-town':name,x:lx,y:ly,'text-anchor':'middle'});
+    halo.textContent=short;
+    const fill=el('text',{class:cls,'data-town':name,x:lx,y:ly,'text-anchor':'middle'});
+    fill.textContent=short;
+    labelsGroup.appendChild(halo); labelsGroup.appendChild(fill);
+  });
+}
+
+function buildTownChips(pins){
+  townnavEl.querySelectorAll('.tchip:not(.reset)').forEach(n=>n.remove());
+  const counts={};
+  pins.forEach(p=>{ counts[p.town]=(counts[p.town]||0)+1; });
+  const order=['虎尾鎮','斗六市','斗南鎮','西螺鎮','古坑鄉','口湖鄉','土庫鎮','水林鄉',
+    '崙背鄉','二崙鄉','大埤鄉','褒忠鄉','北港鎮','林內鄉','麥寮鄉','莿桐鄉','臺西鄉',
+    '東勢鄉','四湖鄉','元長鄉','無店面'];
+  order.forEach(name=>{
+    const n=counts[name]||0;
+    if(n===0) return; // 沒有店家的鄉鎮不特別放按鈕，但地圖上仍可直接點色塊查看
+    const btn=document.createElement('button');
+    btn.className='tchip'; btn.dataset.t=name;
+    btn.innerHTML=`${name} <span class="n">${n}</span>`;
+    btn.onclick=()=>selectTown(name);
+    townnavEl.appendChild(btn);
+  });
+}
+
+// ══════════════════ 店家清單（側邊列表）══════════════════
+function buildList(){
+  listEl.innerHTML='';
+  STORES.forEach((s,i)=>{
+    const li=document.createElement('button');
+    li.className='li'; li.type='button'; li.dataset.i=i; li.dataset.cat=s.cat2; li.dataset.town=s.town;
+    li.innerHTML=`
+      <span class="ic" style="border-color:${CATCOLOR[s.cat2]}">${s.emoji}</span>
+      <span class="txt">
+        <span class="n">${s.disp}</span>
+        <span class="m">📍 ${s.town} · <b style="color:${CATCOLOR[s.cat2]}">${s.cat2}</b></span>
+      </span>
+      ${s.promo?'<span class="gift" title="有可兌換的優惠（需 2 金幣）">🎁</span>':''}
+      <span class="ar">›</span>`;
+    li.onclick=()=>select(i);
+    listEl.appendChild(li);
+  });
+}
+
+// ══════════════════ 店家詳情卡 ══════════════════
 function mapsUrl(s){
   if(!s.addr || s.addr.indexOf('無')===0) return null;
   const a = s.addr.indexOf('雲林縣')===0 ? s.addr : '雲林縣'+s.addr;
@@ -995,102 +874,61 @@ $('#dclose').onclick=()=>{
   $$('.li').forEach(l=>l.classList.remove('sel'));
 };
 
-// ── photo gallery（左右滑動看照片；每家店的 photos 陣列可自行擴充）──
-// photos: [{src:'圖片網址或 data URI', cap:'選填說明，例如「店面」「招牌商品」'}]
+// ── 照片輪播（左右滑動看照片）──
 function renderGallery(s){
   const gal=$('#gallery'), track=$('#gallery-track'), dots=$('#gdots');
   const photos = s.photos || [];
-  if(!photos.length){
-    gal.hidden = true; track.innerHTML=''; dots.innerHTML=''; return;
-  }
-  gal.hidden = false;
+  if(!photos.length){ gal.hidden=true; track.innerHTML=''; dots.innerHTML=''; return; }
+  gal.hidden=false;
   track.innerHTML = photos.map(p => `
     <div class="gallery-slide">
-      <img src="${p.src}" alt="${s.disp}${p.cap ? '－'+p.cap : ''}" loading="lazy">
-      ${p.cap ? `<div class="gallery-cap">${p.cap}</div>` : ''}
+      <img src="${p.src}" alt="${s.disp}${p.cap?'－'+p.cap:''}" loading="lazy">
+      ${p.cap?`<div class="gallery-cap">${p.cap}</div>`:''}
     </div>`).join('');
-  dots.innerHTML = photos.map((_,i) =>
+  dots.innerHTML = photos.map((_,i)=>
     `<button class="gallery-dot${i===0?' on':''}" data-i="${i}" aria-label="第 ${i+1} 張"></button>`
   ).join('');
-  const multi = photos.length > 1;
-  $('#gprev').style.display = multi ? 'grid' : 'none';
-  $('#gnext').style.display = multi ? 'grid' : 'none';
-  dots.style.display = multi ? 'flex' : 'none';
+  const multi = photos.length>1;
+  $('#gprev').style.display = multi?'grid':'none';
+  $('#gnext').style.display = multi?'grid':'none';
+  dots.style.display = multi?'flex':'none';
   track.scrollLeft = 0;
 }
-
-function scrollGallery(dir){
-  const track = $('#gallery-track');
-  track.scrollBy({left: dir*track.clientWidth, behavior:'smooth'});
-}
-$('#gprev').onclick = () => scrollGallery(-1);
-$('#gnext').onclick = () => scrollGallery(1);
-
-$('#gallery-track').addEventListener('scroll', () => {
-  const track = $('#gallery-track');
-  if(!track.clientWidth) return;
-  const idx = Math.round(track.scrollLeft / track.clientWidth);
+function scrollGallery(dir){ const t=$('#gallery-track'); t.scrollBy({left:dir*t.clientWidth, behavior:'smooth'}); }
+$('#gprev').onclick=()=>scrollGallery(-1);
+$('#gnext').onclick=()=>scrollGallery(1);
+$('#gallery-track').addEventListener('scroll', ()=>{
+  const t=$('#gallery-track'); if(!t.clientWidth) return;
+  const idx=Math.round(t.scrollLeft/t.clientWidth);
   $$('.gallery-dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
 }, {passive:true});
-
 $('#gdots').addEventListener('click', e=>{
-  const dot = e.target.closest('.gallery-dot');
-  if(!dot) return;
-  const track = $('#gallery-track');
-  track.scrollTo({left:+dot.dataset.i*track.clientWidth, behavior:'smooth'});
+  const dot=e.target.closest('.gallery-dot'); if(!dot) return;
+  const t=$('#gallery-track'); t.scrollTo({left:+dot.dataset.i*t.clientWidth, behavior:'smooth'});
 });
-
-// mouse-drag support for desktop (touch already works natively via scroll-snap)
 (function(){
-  const track = $('#gallery-track');
-  let down=false, startX=0, startScroll=0, moved=false;
-  track.addEventListener('mousedown', e=>{
-    down=true; moved=false; startX=e.pageX; startScroll=track.scrollLeft;
-    track.style.scrollSnapType='none';
-  });
-  window.addEventListener('mousemove', e=>{
-    if(!down) return;
-    const dx = e.pageX-startX;
-    if(Math.abs(dx)>4) moved=true;
-    track.scrollLeft = startScroll - dx;
-  });
-  window.addEventListener('mouseup', ()=>{
-    if(!down) return;
-    down=false;
-    track.style.scrollSnapType='x mandatory';
-    const idx = Math.round(track.scrollLeft/track.clientWidth);
-    track.scrollTo({left:idx*track.clientWidth, behavior:'smooth'});
-  });
-  // suppress the click-through on slide images right after a drag
+  const track=$('#gallery-track');
+  let down=false,startX=0,startScroll=0,moved=false;
+  track.addEventListener('mousedown', e=>{ down=true; moved=false; startX=e.pageX; startScroll=track.scrollLeft; track.style.scrollSnapType='none'; });
+  window.addEventListener('mousemove', e=>{ if(!down) return; const dx=e.pageX-startX; if(Math.abs(dx)>4) moved=true; track.scrollLeft=startScroll-dx; });
+  window.addEventListener('mouseup', ()=>{ if(!down) return; down=false; track.style.scrollSnapType='x mandatory';
+    const idx=Math.round(track.scrollLeft/track.clientWidth); track.scrollTo({left:idx*track.clientWidth, behavior:'smooth'}); });
   track.addEventListener('click', e=>{ if(moved){ e.preventDefault(); e.stopPropagation(); } }, true);
 })();
 
-// ── category chips ──
-$$('.chip').forEach(ch=>{
-  ch.onclick=()=>{
-    $$('.chip').forEach(c=>c.classList.remove('on'));
-    ch.classList.add('on'); catFilter=ch.dataset.c; apply();
-  };
-});
-
-// ── township chips + map zoom ──
+// ══════════════════ 篩選：分類 chips ／ 鄉鎮 chips ／ 地圖區域點擊 ══════════════════
 let vbTween=null;
 function setViewBox(vb, animate){
   if(vbTween) cancelAnimationFrame(vbTween);
-  if(!animate){
-    mapSvg.setAttribute('viewBox', vb.join(' '));
-    return;
-  }
-  const cur = mapSvg.getAttribute('viewBox').split(' ').map(Number);
-  const dur = 480, t0 = performance.now();
+  if(!animate){ mapSvg.setAttribute('viewBox', vb.join(' ')); return; }
+  const cur=mapSvg.getAttribute('viewBox').split(' ').map(Number);
+  const dur=480, t0=performance.now();
   function step(t){
-    const p = Math.min(1,(t-t0)/dur);
-    const e = 1-Math.pow(1-p,3);           // ease-out cubic
-    const now = cur.map((v,idx)=>v+(vb[idx]-v)*e);
-    mapSvg.setAttribute('viewBox', now.join(' '));
-    if(p<1) vbTween = requestAnimationFrame(step);
+    const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+    mapSvg.setAttribute('viewBox', cur.map((v,idx)=>v+(vb[idx]-v)*e).join(' '));
+    if(p<1) vbTween=requestAnimationFrame(step);
   }
-  vbTween = requestAnimationFrame(step);
+  vbTween=requestAnimationFrame(step);
 }
 
 function zoomToTown(name){
@@ -1099,70 +937,121 @@ function zoomToTown(name){
     $$('.tw').forEach(p=>p.classList.remove('dim','active'));
     $$('.twlabel').forEach(l=>l.classList.remove('dim'));
     $('#backbtn').classList.remove('show');
-    $('#hint-text').textContent='👆 點地圖上的圖釘，看店家資訊與可兌換的優惠';
     return;
   }
-  const b = TOWN_BBOX[name];
-  if(!b) return;
-  const [minx,maxx,miny,maxy] = b;
-  const w = maxx-minx, h = maxy-miny;
-  const padX = Math.max(w*0.35, 40), padY = Math.max(h*0.35, 40);
-  let vw = w+padX*2, vh = h+padY*2;
-  // keep aspect close to container to avoid extreme letterboxing
-  const targetRatio = 900/730;
-  if(vw/vh > targetRatio) vh = vw/targetRatio; else vw = vh*targetRatio;
+  const target = autoBBox(name);
+  if(!target) return;
+  const [minx,maxx,miny,maxy]=target;
+  const w=maxx-minx, h=maxy-miny;
+  const padX=Math.max(w*0.35,40), padY=Math.max(h*0.35,40);
+  let vw=w+padX*2, vh=h+padY*2;
+  const ratio=TOWN_GEO.W/TOWN_GEO.H;
+  if(vw/vh>ratio) vh=vw/ratio; else vw=vh*ratio;
   const cx=(minx+maxx)/2, cy=(miny+maxy)/2;
   setViewBox([cx-vw/2, cy-vh/2, vw, vh], true);
-
   $$('.tw').forEach(p=>p.classList.toggle('dim', p.dataset.town!==name));
   $$('.tw').forEach(p=>p.classList.toggle('active', p.dataset.town===name));
   $$('.twlabel').forEach(l=>l.classList.toggle('dim', l.dataset.town!==name));
   $('#backbtn').classList.add('show');
-  $('#hint-text').textContent = '🔍 '+name+'　·　點圖釘看店家資訊';
+}
+// 沒有店家、也沒有預先算好 bbox 的鄉鎮：用該鄉鎮邊界頂點自己算縮放範圍
+function autoBBox(name){
+  const poly=TOWN_GEO.polys[name]; if(!poly) return null;
+  const xs=poly.map(p=>p[0]), ys=poly.map(p=>p[1]);
+  return [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
 }
 
-$$('.tchip').forEach(ch=>{
-  ch.onclick=()=>{
-    $$('.tchip').forEach(c=>c.classList.remove('on'));
-    ch.classList.add('on');
-    townFilter = ch.dataset.t;
-    zoomToTown(townFilter);
-    apply();
-  };
-});
-$('#backbtn').onclick=()=>{
+function selectTown(name){
+  townFilter=name;
+  const chip=$(`.tchip[data-t="${CSS.escape(name)}"]`);
   $$('.tchip').forEach(c=>c.classList.remove('on'));
-  $('.tchip.reset').classList.add('on');
-  townFilter='全部';
-  zoomToTown('全部');
+  if(chip) chip.classList.add('on');
+  zoomToTown(name);
   apply();
-};
+}
+$('#backbtn').onclick=()=>{ $$('.tchip').forEach(c=>c.classList.remove('on')); $('.tchip.reset').classList.add('on'); selectTown('全部'); };
+
+$$('.chip').forEach(ch=>{
+  ch.onclick=()=>{ $$('.chip').forEach(c=>c.classList.remove('on')); ch.classList.add('on'); catFilter=ch.dataset.c; apply(); };
+});
+
+function wireTownShapes(){
+  $$('.tw').forEach(p=>{
+    p.setAttribute('tabindex','0'); p.setAttribute('role','button'); p.setAttribute('aria-label',p.dataset.town);
+    p.addEventListener('click', ()=>selectTown(p.dataset.town));
+    p.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); selectTown(p.dataset.town);} });
+  });
+}
 
 function apply(){
   let n=0;
   $$('.pin').forEach(p=>{
     const i=+p.dataset.i, s=STORES[i];
-    const ok = (catFilter==='全部'||s.cat2===catFilter) && (townFilter==='全部'||s.town===townFilter);
+    const ok=(catFilter==='全部'||s.cat2===catFilter) && (townFilter==='全部'||s.town===townFilter);
     p.classList.toggle('off', !ok);
   });
   $$('.li').forEach(l=>{
-    const ok = (catFilter==='全部'||l.dataset.cat===catFilter) && (townFilter==='全部'||l.dataset.town===townFilter);
+    const ok=(catFilter==='全部'||l.dataset.cat===catFilter) && (townFilter==='全部'||l.dataset.town===townFilter);
     l.hidden=!ok; if(ok)n++;
   });
   listEl.classList.toggle('zoomed', townFilter!=='全部');
-
+  const countEl=$('#count');
+  countEl.classList.remove('empty-town');
   if(catFilter==='全部' && townFilter==='全部'){
-    $('#count').textContent = `顯示全部 ${n} 家店`;
+    countEl.textContent=`顯示全部 ${n} 家店`;
+  } else if(n===0 && townFilter!=='全部'){
+    countEl.textContent=`😶 ${townFilter} 目前沒有合作店家，歡迎關注未來合作機會！`;
+    countEl.classList.add('empty-town');
   } else {
-    const parts=[];
-    if(townFilter!=='全部') parts.push(townFilter);
-    if(catFilter!=='全部') parts.push(catFilter);
-    $('#count').textContent = `${parts.join(' · ')} · 共 ${n} 家店`;
+    const parts=[]; if(townFilter!=='全部') parts.push(townFilter); if(catFilter!=='全部') parts.push(catFilter);
+    countEl.textContent=`${parts.join(' · ')} · 共 ${n} 家店`;
   }
-  $('#lcount').textContent = n+' 家';
+  $('#hint-text').textContent = townFilter==='全部'
+    ? '👆 點地圖上的鄉鎮或圖釘，看店家資訊與可兌換的優惠'
+    : (n===0 ? '🔍 '+townFilter+'　·　目前沒有合作店家' : '🔍 '+townFilter+'　·　點圖釘看店家資訊');
+  $('#lcount').textContent=n+' 家';
   $('#dclose').click();
 }
-apply();
+
+// ══════════════════ 載入資料並組裝整個地圖 ══════════════════
+function renderAll(rows){
+  const normalized = rows.map(normalizeRow).filter(r=>r.disp && TOWN_GEO.centroids[r.town]!==undefined);
+  const pins = layoutPins(normalized);
+  STORES = pins; // select()/apply() 都用 index 對應 STORES 與 .pin / .li
+  buildPins(pins);
+  buildLabels(pins);
+  buildTownChips(pins);
+  wireTownShapes();
+  buildList();
+  $('#total').textContent = pins.length;
+  apply();
+}
+
+function showLoadError(){
+  $('#hint-text').textContent = '⚠️ 無法載入最新店家資料，顯示最後已知的清單';
+  $('#hint-text').style.color = '#B33456';
+}
+
+async function boot(){
+  if(!CSV_URL || CSV_URL.indexOf('PASTE_YOUR')===0){
+    renderAll(FALLBACK_ROWS);
+    return;
+  }
+  try{
+    const res = await fetch(CSV_URL, {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    if(!rows.length) throw new Error('empty sheet');
+    renderAll(rows);
+  } catch(err){
+    console.warn('讀取 Google Sheet 失敗，改用內建備援資料：', err);
+    renderAll(FALLBACK_ROWS);
+    showLoadError();
+  }
+}
+boot();
+
 </script>
 </body>
 </html>
