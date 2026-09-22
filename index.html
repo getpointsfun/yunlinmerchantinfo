@@ -592,8 +592,11 @@ function parseCSV(text){
   }
   if(field.length || row.length){ row.push(field); rows.push(row); }
   if(!rows.length) return [];
-  const header = rows[0].map(h=>h.trim());
-  return rows.slice(1).filter(r=>r.some(v=>v.trim()!=='')).map(r=>{
+  // Google Sheet 最上面可能有說明列，自動找出含「店家名稱」的那一列當作真正表頭
+  let headerIdx = rows.findIndex(r => r.some(c => c.trim()==='店家名稱'));
+  if(headerIdx === -1) headerIdx = 0;
+  const header = rows[headerIdx].map(h=>h.trim());
+  return rows.slice(headerIdx+1).filter(r=>r.some(v=>v.trim()!=='')).map(r=>{
     const o={};
     header.forEach((h,i)=> o[h]=(r[i]!==undefined?r[i]:'').trim());
     return o;
